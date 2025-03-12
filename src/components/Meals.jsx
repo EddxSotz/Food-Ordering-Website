@@ -16,12 +16,12 @@ function Meals() {
     , []);
 
   return (
-    <div>
-      <h1>Meals</h1>
+    <div>      
       <ul id="meals">
         {isLoading && <p>Loading...</p>}
         {!isLoading && meals.map((meal) => (
-          <li key={meal.id}>
+          <li key={meal.id} className="meal-item">
+            <img src={`http://localhost:3000/${meal.image}`} alt={meal.name} />
             <h3>{meal.name}</h3>
             <p>{meal.description}</p>
             <p>{meal.price}</p>
