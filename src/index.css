@@ -27,7 +27,7 @@ body {
   align-items: center;
 }
 
-#main-header #title img {
+#header-img {
   width: 4rem;
   height: 4rem;
   object-fit: contain;
@@ -35,9 +35,22 @@ body {
   border: 2px solid #ffc404;
 }
 
-#main-header button {
-  font-size: 1.5rem;
-  font-family: 'Lato', sans-serif;
+#navbar {
+  display: flex;
+  gap: 1rem;
+}
+#nav-list {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  list-style: none;
+}
+
+.nav-item a {
+  font-size: 1.2rem;
+  font-weight: semi-bold;  
+  color: #ffc404;
+  text-decoration: none;
 }
 
 h1 {
