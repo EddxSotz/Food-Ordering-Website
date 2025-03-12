@@ -6,14 +6,11 @@ function Meals() {
  
     useEffect(() => {
         async function fetchMeals() {
-            const response = await fetch('http://localhost:5173/meals');
+            const response = await fetch('http://localhost:3000/meals');
             const mealsData = await response.json();
             setMeals(mealsData);
             setIsLoading(false);
-           }
-        if(!response.ok) {
-            throw new Error('Something went wrong!');
-        }
+           }        
     fetchMeals();
     }
     , []);
