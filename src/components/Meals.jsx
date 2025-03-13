@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import currencyFormatting from "../utils/currency-formatting";
+import CartContext from "../store/CartContext.jsx";
 
 function Meals() {
     const [isLoading, setIsLoading] = useState(true);
-    const [meals, setMeals] = useState([]);      
+    const [meals, setMeals] = useState([]);  
+    const cartContext = useContext(CartContext);  
  
     useEffect(() => {
         async function fetchMeals() {
@@ -15,6 +17,12 @@ function Meals() {
     fetchMeals();
     }
     , []);
+
+
+  const handleAddToCart = (meal) => {
+    console.log(meal);
+    cartContext.addItem(meal);  
+  }
 
   return (
     <div>      
@@ -28,7 +36,7 @@ function Meals() {
               <p className="meal-item-description">{meal.description}</p>
               <p className="meal-item-price">{currencyFormatting.format(meal.price)}</p>
               <p className="meal-item-actions">
-                <button>Add to Cart</button>
+                <button onClick={()=> handleAddToCart(meal)}>Add to Cart</button>
               </p>
             </article>            
           </li>
