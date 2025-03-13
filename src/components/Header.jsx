@@ -11,7 +11,8 @@ function Header() {
             <li className='nav-item'><a href="#">About</a></li>
             <li className='nav-item'><a href="#">Contact</a></li>
           </ul>
-      </nav>       
+          <button>Cart</button>
+      </nav>      
     </header>
   );
 }
