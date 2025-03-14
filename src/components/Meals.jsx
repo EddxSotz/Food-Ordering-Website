@@ -36,7 +36,7 @@ function Meals() {
               <p className="meal-item-description">{meal.description}</p>
               <p className="meal-item-price">{currencyFormatting.format(meal.price)}</p>
               <p className="meal-item-actions">
-                <button onClick={()=> handleAddToCart(meal)}>Add to Cart</button>
+                <button onClick={()=> handleAddToCart(meal)} className='cart-button'>Add to Cart</button>
               </p>
             </article>            
           </li>

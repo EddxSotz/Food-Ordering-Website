@@ -3,7 +3,7 @@ import { useContext } from "react";
 import CartContext from "../store/CartContext.jsx";
 
 
-function Header() {
+function Header({onCartButtonClick}) {
 
   const cartCtx = useContext(CartContext);
   const totalCartItems = cartCtx.cartItems.reduce((total, item) => {
@@ -20,7 +20,7 @@ function Header() {
             <li className='nav-item'><a href="#">About</a></li>
             <li className='nav-item'><a href="#">Contact</a></li>
           </ul>
-          <button>Cart <span>{totalCartItems}</span></button>
+          <button onClick={onCartButtonClick} className='cart-button'>Cart <span>{totalCartItems}</span></button>
       </nav>      
     </header>
   );

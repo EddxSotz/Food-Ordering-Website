@@ -1,7 +1,6 @@
-import Modal from '../UI/Modal.jsx';
 import {useContext} from 'react';
 import CartContext from '../store/CartContext.jsx';
-import {currencyFormatting} from '../utils/currency-formatting.js';
+import currencyFormatting from '../utils/currency-formatting.js';
 
 export default function CartContents() {
     const cartCtx = useContext(CartContext);
@@ -14,20 +13,20 @@ export default function CartContents() {
         cartCtx.removeItem(id);
     }
     return (
-        <Modal>
+        <>
             <h2>Cart Contents</h2>
             <ul>
                 {cartCtx.cartItems.map((item) => (
-                    <li key={item.id}>
+                    <li key={item.id} className="cart-item">
+                        <img src={`http://localhost:3000/${item.image}`} alt={item.name}/>
                         <span>{item.name}</span>
                         <span>{item.quantity}</span>
-                        <span>{item.price}</span>
-                        <button onClick={()=> handleRemoveItem(item.id)}>Remove Item</button>
+                        <span>{currencyFormatting.format(item.price)}</span>
+                        <button onClick={()=> handleRemoveItem(item.id)} className='cart-button'>Remove Item</button>
                     </li>                    
                 ))}
-                <p>Total: {currencyFormatting(cartTotal)}</p>
-                <p><button>Close</button></p>      
+                <p>Total: <strong>{currencyFormatting.format(cartTotal)}</strong></p>                     
             </ul>
-        </Modal>
+        </>
     );
 }
