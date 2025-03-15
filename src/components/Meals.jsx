@@ -1,17 +1,27 @@
 import { useState, useEffect, useContext } from "react";
 import currencyFormatting from "../utils/currency-formatting";
 import CartContext from "../store/CartContext.jsx";
+import Error from "./Error.jsx";
 
 function Meals() {
     const [isLoading, setIsLoading] = useState(true);
-    const [meals, setMeals] = useState([]);  
+    const [meals, setMeals] = useState([]);
+    const [error, setError] = useState(null);
     const cartContext = useContext(CartContext);  
  
-    useEffect(() => {
+    useEffect(() => {      
         async function fetchMeals() {
-            const response = await fetch('http://localhost:3000/meals');
-            const mealsData = await response.json();
-            setMeals(mealsData);
+            setIsLoading(true);
+            try {
+              const response = await fetch('http://localhost:3000/meals');
+              const mealsData = await response.json();
+              if (!response.ok) {
+                throw new Error('Something went wrong!');                
+              }
+              setMeals(mealsData);
+            } catch (error) {
+              setError(error);
+            }            
             setIsLoading(false);
            }        
     fetchMeals();
@@ -28,6 +38,7 @@ function Meals() {
     <div>      
       <ul id="meals">
         {isLoading && <p>Loading...</p>}
+        {error && <Error/>}
         {!isLoading && meals.map((meal) => (
           <li key={meal.id} className="meal-item">
             <article>
