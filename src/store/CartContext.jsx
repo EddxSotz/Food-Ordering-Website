@@ -9,7 +9,7 @@ const CartContext = createContext({
 function cartReducer(state, action) {
     if (action.type === 'ADD') {
         const existingCartItemIndex = state.cartItems.findIndex((item) => item.id === action.item.id);
-        const updatedItems = [...state.cartItems];
+        const updatedItems = [...state.cartItems]; //Copying existing array unmutably 
 
         if(existingCartItemIndex !== -1) {
             const existingCartItem = state.cartItems[existingCartItemIndex];
@@ -17,9 +17,9 @@ function cartReducer(state, action) {
                 ...existingCartItem,
                 quantity: existingCartItem.quantity + 1,
             };
-            updatedItems[existingCartItemIndex] = updatedCartItem;            
+            updatedItems[existingCartItemIndex] = updatedCartItem;  //If same item is being added to cart again then it will add 1 to current quantity
         } else {
-            updatedItems.push({...action.item, quantity: 1});
+            updatedItems.push({...action.item, quantity: 1});  //Adds a new item with quantity of 1 as default
         }
         return {...state, cartItems: updatedItems};        
     }
@@ -27,7 +27,30 @@ function cartReducer(state, action) {
         const updatedItems = state.cartItems.filter((item) => item.id !== action.id);
         return {...state, cartItems: updatedItems};
     }
+    if (action.type === 'REDUCE') {
+        const existingCartItemIndex = state.cartItems.findIndex((item) => item.id === action.item.id);
+        const existingCartItem = state.cartItems[existingCartItemIndex];
+        const existingCartItemQty = existingCartItem.quantity
+        const updatedItems = [...state.cartItems];
+
+        if (existingCartItemQty >1 ){
+            const updatedCartItem = {
+                ...existingCartItem,
+                quantity: existingCartItemQty - 1,
+            };            
+            updatedItems[existingCartItemIndex] = updatedCartItem;
+        } else {
+            const updatedCartItem = {
+                ...existingCartItem,
+                quantity: 1,
+            };
+            updatedItems[existingCartItemIndex] = updatedCartItem;
+        }
+        return {...state, cartItems: updatedItems};        
+    }
+
     return { cartItems: [] };
+    
 }
 
 export function CartContextProvider({children}) {
@@ -43,10 +66,15 @@ export function CartContextProvider({children}) {
         dispatchCartAction({ type: 'REMOVE', id });
     }
 
+    function reduceQuantity(id) {
+        dispatchCartAction({ type: 'REDUCE', id });
+    }
+
     const cartContext = {
         cartItems: cartState.cartItems,
         addItem,
         removeItem,
+        reduceQuantity
     };
 
     return (
