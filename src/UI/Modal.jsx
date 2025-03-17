@@ -17,7 +17,7 @@ export default function Modal({children, openStatus, onClose}) {
     return createPortal(
         <dialog ref={modalRef} className="modal">
          {children}
-         <button onClick={onClose} className="cart-button">Close</button>
+         <button onClick={onClose} id="close-modal-btn">Close</button>         
         </dialog>,
         document.getElementById('modal')
     );
