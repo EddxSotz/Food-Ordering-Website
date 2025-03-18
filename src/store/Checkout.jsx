@@ -1,10 +1,12 @@
-import {useContext} from 'react';
+import {useContext, useState} from 'react';
 import CartContext from '../store/CartContext.jsx';
 import currencyFormatting from '../utils/currency-formatting.js';
+import Forms from '../components/Forms.jsx';
 
 export default function Checkout ({isCheckoutClosed}) {
     const cartCtx = useContext(CartContext);
     const cartTotal = cartCtx.cartItems.reduce((total, item) => {return total + item.price * item.quantity;}, 0);
+    const [isFormVisible, setIsFormVisible] = useState(false);
 
     const handleRemoveItem = (id) => {
         cartCtx.removeItem(id);
@@ -18,9 +20,17 @@ export default function Checkout ({isCheckoutClosed}) {
         cartCtx.increaseQuantity(id);
     }
 
+    const handleFormSubmit = (formData) => {
+        console.log('Form Data:', formData);        
+    }
+
+    const handleOpenForm = ()=> {
+        setIsFormVisible(true);
+    }
+
     return (
         <>
-            <div id='Checkout-page'>
+            <div id='Checkout-page' className={`${isFormVisible} ? "hidden" : "null"`}>                
                 <h2>Your Shopping cart</h2>
                 {cartCtx.cartItems.length > 0 ? (
                 <>
@@ -44,8 +54,12 @@ export default function Checkout ({isCheckoutClosed}) {
                 )}
                 <div id='checkout-actions-btns'>
                   <button onClick={isCheckoutClosed} className='cart-button'>Back to Shopping Meals</button>
-                  <button className='cart-button'>Next: Shipping Information</button>
-                </div>
+                  <button onClick={handleOpenForm}className='cart-button'>Next: Shipping Information</button>
+                </div>                
+            </div>
+            <div>
+                <h1>Your Shipping information</h1>
+                {isFormVisible && <Forms onSubmit={handleFormSubmit} />}
             </div>                       
         </>
     );
