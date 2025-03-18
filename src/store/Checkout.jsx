@@ -1,7 +1,7 @@
-import {useContext} from 'react';
+import {useContext, useState} from 'react';
 import CartContext from '../store/CartContext.jsx';
 import currencyFormatting from '../utils/currency-formatting.js';
-import Forms from '..components/Forms.jsx';
+import Forms from '../components/Forms.jsx';
 
 export default function Checkout ({isCheckoutClosed}) {
     const cartCtx = useContext(CartContext);
