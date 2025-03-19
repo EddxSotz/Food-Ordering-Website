@@ -300,6 +300,14 @@ h1 {
   padding: 1rem;
 }
 
+.input-field{
+  margin: 1rem 0;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.25rem;
+}
+
 @keyframes fade-slide-up {
   from {
     opacity: 0;
