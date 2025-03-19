@@ -19,7 +19,7 @@ function App() {
       <CartContextProvider>        
         <Header onCartButtonClick={() => setIsModalOpen(true)}/>
         {!isCheckoutOpen ? (
-          <Meals />
+          <Meals onAddToCart={() => setIsModalOpen(true)}/>
         ): (
           <Checkout isCheckoutClosed={()=> setIsCheckoutOpen(false)}/>
         )}          

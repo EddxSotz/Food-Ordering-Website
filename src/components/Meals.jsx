@@ -3,7 +3,7 @@ import currencyFormatting from "../utils/currency-formatting";
 import CartContext from "../store/CartContext.jsx";
 import Error from "./Error.jsx";
 
-function Meals() {
+function Meals({onAddToCart}) {
     const [isLoading, setIsLoading] = useState(true);
     const [meals, setMeals] = useState([]);
     const [error, setError] = useState(null);
@@ -31,7 +31,8 @@ function Meals() {
 
   const handleAddToCart = (meal) => {
     console.log(meal);
-    cartContext.addItem(meal);  
+    cartContext.addItem(meal);
+    onAddToCart();
   }
 
   return (
