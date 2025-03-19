@@ -23,14 +23,17 @@ export default function Checkout ({isCheckoutClosed}) {
     const handleFormSubmit = (formData) => {
         console.log('Form Data:', formData);        
     }
-
-    const handleOpenForm = ()=> {
-        setIsFormVisible(true);
-    }
-
+    
     return (
-        <>
-            <div id='Checkout-page' className={`${isFormVisible} ? "hidden" : "null"`}>                
+        <div id='Checkout-page' >                                       
+            {isFormVisible ? (
+                <>
+                <h1>Your Shipping information</h1>
+                <Forms onSubmit={handleFormSubmit} />
+                <button onClick={()=> setIsFormVisible(false)}className='cart-button'>Back to: Shopping cart</button>
+                </>
+            ): (
+                <div className={`${isFormVisible} ? hidden : null`}>                
                 <h2>Your Shopping cart</h2>
                 {cartCtx.cartItems.length > 0 ? (
                 <>
@@ -54,13 +57,10 @@ export default function Checkout ({isCheckoutClosed}) {
                 )}
                 <div id='checkout-actions-btns'>
                   <button onClick={isCheckoutClosed} className='cart-button'>Back to Shopping Meals</button>
-                  <button onClick={handleOpenForm}className='cart-button'>Next: Shipping Information</button>
+                  <button onClick={()=> setIsFormVisible(true)}className='cart-button'>Next: Shipping Information</button>
                 </div>                
             </div>
-            <div>
-                <h1>Your Shipping information</h1>
-                {isFormVisible && <Forms onSubmit={handleFormSubmit} />}
-            </div>                       
-        </>
+            )}                                  
+        </div>
     );
 }
