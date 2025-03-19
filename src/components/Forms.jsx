@@ -23,7 +23,7 @@ export default function Forms({ onSubmit }) {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} id='shipping-form'>
             <div>
                 <label htmlFor="name">Name:</label>
                 <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />

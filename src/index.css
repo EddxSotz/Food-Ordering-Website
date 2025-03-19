@@ -289,11 +289,17 @@ h1 {
   max-width: 720px;
   margin-inline: auto;
 }
+
 #checkout-actions-btns {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
+#shipping-form {
+  margin: 4rem 0rem;
+  padding: 1rem;
+}
+
 @keyframes fade-slide-up {
   from {
     opacity: 0;

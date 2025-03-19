@@ -25,7 +25,7 @@ export default function Checkout ({isCheckoutClosed}) {
     }
     
     return (
-        <>                                       
+        <div id='Checkout-page' >                                       
             {isFormVisible ? (
                 <>
                 <h1>Your Shipping information</h1>
@@ -33,7 +33,7 @@ export default function Checkout ({isCheckoutClosed}) {
                 <button onClick={()=> setIsFormVisible(false)}className='cart-button'>Back to: Shopping cart</button>
                 </>
             ): (
-                <div id='Checkout-page' className={`${isFormVisible} ? hidden : null`}>                
+                <div className={`${isFormVisible} ? hidden : null`}>                
                 <h2>Your Shopping cart</h2>
                 {cartCtx.cartItems.length > 0 ? (
                 <>
@@ -61,6 +61,6 @@ export default function Checkout ({isCheckoutClosed}) {
                 </div>                
             </div>
             )}                                  
-        </>
+        </div>
     );
 }
