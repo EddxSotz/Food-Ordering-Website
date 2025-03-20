@@ -1,15 +1,19 @@
-import {} from 'react';
+import Modal from '../UI/Modal.jsx';
+import { useState } from 'react';
 
-export default function Forms({ onSubmit }) {    
+export default function Forms({ onSubmit }) {
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
         const inputData = Object.fromEntries(formData.entries());
-        onSubmit(inputData);        
+        onSubmit(inputData);
+        setIsModalOpen(true);
     };
 
     return (
+        <>
         <form onSubmit={handleSubmit} id='shipping-form'>
             <div className='input-field'>
                 <label htmlFor="name">Name:</label>
@@ -33,5 +37,11 @@ export default function Forms({ onSubmit }) {
             </div>
             <button type="submit" className='cart-button'>Submit</button>
         </form>
+        {isModalOpen && (
+            <Modal onClose={() => setIsModalOpen(false)} openStatus={isModalOpen}>
+             <p>Submitted Successfully!</p>
+            </Modal>
+        )}
+        </>
     );
 }
