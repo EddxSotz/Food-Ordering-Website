@@ -295,9 +295,12 @@ h1 {
   flex-direction: row;
   justify-content: space-between;
 }
-#shipping-form {
-  margin: 4rem 0rem;
-  padding: 1rem;
+#shipping-form {  
+  margin: 3rem auto;
+  padding: 2rem;
+  background: linear-gradient(180deg, #3c3525, #4d4023);
+  border-radius: 8px;
+  box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.5);
 }
 
 .input-field{
@@ -305,9 +308,31 @@ h1 {
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
 }
 
+.input-field label {
+  display: block;  
+  margin-bottom: 0.2rem;
+  color: #9bafaf;
+}
+
+.input-field input {
+  display: block;
+  width: 100%;  
+  padding: 0.5rem;  
+  border: none;  
+  font-size: 1.5rem;
+  border-bottom: 1px solid #ffc14e;
+  background-color: transparent;
+  color: #ffc404;
+}
+.input-field input:focus-visible {
+  outline: none;
+  border: none;
+  border-bottom: 2px solid #ffc14e;
+  box-shadow: 0 1px 20px 2px #ffc14e
+}
 @keyframes fade-slide-up {
   from {
     opacity: 0;
