@@ -33,33 +33,31 @@ export default function Checkout ({isCheckoutClosed}) {
                 <button onClick={()=> setIsFormVisible(false)}className='cart-button'>Back to: Shopping cart</button>
                 </>
             ): (
-                <div className={`${isFormVisible} ? hidden : null`}>                
-                <h2>Your Shopping cart</h2>
-                {cartCtx.cartItems.length > 0 ? (
-                <>
-                <ul>
-                    {cartCtx.cartItems.map((item) => (
-                        <li key={item.id} className="cart-item">
-                            <img src={`http://localhost:3000/${item.image}`} alt={item.name}/>
-                            <span>{item.name}</span>
-                            <button onClick={()=> handleDecreaseItem(item.id)} className='cart-button'> - </button>
-                            <span>{item.quantity}</span>
-                            <button onClick={()=> handleIncreaseItem(item.id)} className='cart-button'> + </button>
-                            <span>{currencyFormatting.format(item.price)}</span>
-                            <button onClick={()=> handleRemoveItem(item.id)} className='cart-button'>Remove Item</button>
-                        </li>               
-                    ))}                                   
-                </ul>
-                <p>Total: <strong>{currencyFormatting.format(cartTotal)}</strong></p>              
-                </>
-                ) : (
-                <p>You have no items on your Cart</p>
-                )}
-                <div id='checkout-actions-btns'>
-                  <button onClick={isCheckoutClosed} className='cart-button'>Back to Shopping Meals</button>
-                  <button onClick={()=> setIsFormVisible(true)}className='cart-button'>Next: Shipping Information</button>
-                </div>                
-            </div>
+                <div>                
+                    <h2>Your Shopping cart</h2>
+                    {cartCtx.cartItems.length > 0 ? (
+                    <>
+                    <ul>
+                        {cartCtx.cartItems.map((item) => (
+                            <li key={item.id} className="cart-item">
+                                <img src={`http://localhost:3000/${item.image}`} alt={item.name}/>
+                                <span>{item.name}</span>
+                                <button onClick={()=> handleDecreaseItem(item.id)} className='cart-button'> - </button>
+                                <span>{item.quantity}</span>
+                                <button onClick={()=> handleIncreaseItem(item.id)} className='cart-button'> + </button>
+                                <span>{currencyFormatting.format(item.price)}</span>
+                                <button onClick={()=> handleRemoveItem(item.id)} className='cart-button'>Remove Item</button>
+                            </li>               
+                        ))}                                   
+                    </ul>
+                    <p>Total: <strong>{currencyFormatting.format(cartTotal)}</strong></p>     
+                    <button onClick={()=> setIsFormVisible(true)} className='cart-button'>Next: Shipping Information</button>         
+                    </>
+                    ) : (
+                    <p>You have no items on your Cart</p>
+                    )}                    
+                    <button onClick={isCheckoutClosed} className='cart-button' id='back-btn'>Back to Shopping Meals</button>                                    
+                </div>
             )}                                  
         </div>
     );
