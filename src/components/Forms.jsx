@@ -55,8 +55,11 @@ export default function Forms({ onSubmit }) {
                 <label htmlFor="country">Country:</label>
                 <input type="text" id="country" name="country" required />
             </div>
-            <button type="submit" className='cart-button'>Submit</button>
-            <button type='reset' className='cart-button'>Reset</button>
+            <div className='btn-group'>
+                <button type='reset' className='cart-button'>Reset</button>
+                <button type="submit" className='cart-button'>Submit</button>                
+            </div>
+            
         </form>
         {isModalOpen && (
             <Modal onClose={() => setIsModalOpen(false)} openStatus={isModalOpen}>
