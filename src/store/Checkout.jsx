@@ -30,7 +30,7 @@ export default function Checkout ({isCheckoutClosed}) {
                 <>
                 <h1>Your Shipping information</h1>
                 <Forms onSubmit={handleFormSubmit} />
-                <button onClick={()=> setIsFormVisible(false)}className='cart-button'>Back to: Shopping cart</button>
+                <button onClick={()=> setIsFormVisible(false)}className='cart-button btn-back'>Back to: Shopping cart</button>
                 </>
             ): (
                 <div>                
@@ -56,7 +56,7 @@ export default function Checkout ({isCheckoutClosed}) {
                     ) : (
                     <p>You have no items on your Cart</p>
                     )}                    
-                    <button onClick={isCheckoutClosed} className='cart-button' id='back-btn'>Back to Shopping Meals</button>                                    
+                    <button onClick={isCheckoutClosed} className='cart-button btn-back'>Back to Shopping Meals</button>                                    
                 </div>
             )}                                  
         </div>
