@@ -51,12 +51,12 @@ export default function Checkout ({isCheckoutClosed}) {
                         ))}                                   
                     </ul>
                     <p>Total: <strong>{currencyFormatting.format(cartTotal)}</strong></p>     
-                    <button onClick={()=> setIsFormVisible(true)} className='cart-button btn-back'>Next: Shipping Information</button>         
+                    <button onClick={()=> setIsFormVisible(true)} className='cart-button'>Next: Shipping Information</button>         
                     </>
                     ) : (
                     <p>You have no items on your Cart</p>
                     )}                    
-                    <button onClick={isCheckoutClosed} className='cart-button-back'>Back to Shopping Meals</button>                                    
+                    <button onClick={isCheckoutClosed} className='cart-button btn-back'>Back to Shopping Meals</button>                                    
                 </div>
             )}                                  
         </div>
