@@ -22,7 +22,7 @@ export default function Checkout ({isCheckoutClosed}) {
 
     const handleFormSubmit = (formData) => {
         console.log('Form Data:', formData);        
-    }
+    }   
     
     return (
         <div id='Checkout-page' >                                       
@@ -51,7 +51,7 @@ export default function Checkout ({isCheckoutClosed}) {
                         ))}                                   
                     </ul>
                     <p>Total: <strong>{currencyFormatting.format(cartTotal)}</strong></p>     
-                    <button onClick={()=> setIsFormVisible(true)} className='cart-button'>Next: Shipping Information</button>         
+                    <button onClick={()=> setIsFormVisible(true)} className='cart-button'>Next: Shipping Information</button>                          
                     </>
                     ) : (
                     <p>You have no items on your Cart</p>

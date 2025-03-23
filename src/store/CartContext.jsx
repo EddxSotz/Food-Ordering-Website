@@ -64,7 +64,7 @@ function cartReducer(state, action) {
         }
 
         case 'CLEAR':{
-            return {...state, items:[]}
+            return {...state, cartItems:[]}
         }
 
         default: {
@@ -96,7 +96,7 @@ export function CartContextProvider({children}) {
     }
 
     function clearCart () {
-        dispatchCartAction({type: 'CLEAR'})
+        dispatchCartAction({type: 'CLEAR'});
     }
 
     const cartContext = {

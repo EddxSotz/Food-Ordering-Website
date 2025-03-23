@@ -13,12 +13,12 @@ export default function Forms({ onSubmit }) {
         onSubmit(inputData);
         setIsModalOpen(true);
         sendOrderToBackend(inputData); 
-        event.target.reset();
-        handleClearCart();
+        event.target.reset();        
     };
-
-    function handleClearCart () {
-        cartCtx.clearCart();
+  
+    const handleCloseModal = () => {        
+        setIsModalOpen(false)        
+        cartCtx.clearCart();        
     }
 
     async function sendOrderToBackend(inputData) {        
@@ -67,7 +67,7 @@ export default function Forms({ onSubmit }) {
             
         </form>
         {isModalOpen && (
-            <Modal onClose={() => setIsModalOpen(false)} openStatus={isModalOpen}>
+            <Modal onClose={handleCloseModal} openStatus={isModalOpen}>
              <p>Submitted Successfully!</p>
             </Modal>
         )}
