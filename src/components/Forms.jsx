@@ -14,7 +14,12 @@ export default function Forms({ onSubmit }) {
         setIsModalOpen(true);
         sendOrderToBackend(inputData); 
         event.target.reset();
+        handleClearCart();
     };
+
+    function handleClearCart () {
+        cartCtx.clearCart();
+    }
 
     async function sendOrderToBackend(inputData) {        
         const response = await fetch('http://localhost:3000/orders', {
