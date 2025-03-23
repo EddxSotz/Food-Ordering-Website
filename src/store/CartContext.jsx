@@ -5,7 +5,8 @@ const CartContext = createContext({
     addItem: (item) => {},
     removeItem: (id) => {},
     reduceQuantity: (id) =>{},
-    increaseQuantity:(id) => {}
+    increaseQuantity:(id) => {},
+    clearCart: ()=> {}
 });
 
 function cartReducer(state, action) {
@@ -62,6 +63,10 @@ function cartReducer(state, action) {
             return {...state, cartItems: updatedItems};
         }
 
+        case 'CLEAR':{
+            return {...state, cartItems:[]}
+        }
+
         default: {
             return { cartItems: [] };
         }
@@ -90,12 +95,17 @@ export function CartContextProvider({children}) {
         dispatchCartAction({ type: 'INCREASE', id });
     }
 
+    function clearCart () {
+        dispatchCartAction({type: 'CLEAR'});
+    }
+
     const cartContext = {
         cartItems: cartState.cartItems,
         addItem,
         removeItem,
         reduceQuantity,
-        increaseQuantity
+        increaseQuantity,
+        clearCart
     };
 
     return (
