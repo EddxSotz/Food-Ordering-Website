@@ -1,34 +1,29 @@
-import Header from './components/Header';
-import Meals from './components/Meals';
-import Modal from './UI/Modal.jsx';
-import CartContents from './components/CartContents.jsx';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import Home from "./pages/Home"
+import About from "./pages/About"
+import Contact from "./pages/Contact"
 import Checkout from './store/Checkout.jsx';
-import { CartContextProvider } from './store/CartContext.jsx';
-import { useState } from 'react';
+
+const routerPages = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },{
+    path: "/about",
+    element: <About/>
+  },{
+    path:"/contact",
+    element:<Contact/>
+  },{
+    path:"/checkout",
+    element:<Checkout/>
+  }
+]);
 
 function App() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false)
-
-  const handleCheckoutOpen = ()=> {
-    setIsCheckoutOpen(true)
-    setIsModalOpen(false)
-  }
+ 
   return (
-    <>
-      <CartContextProvider>        
-        <Header onCartButtonClick={() => setIsModalOpen(true)}/>
-        {!isCheckoutOpen ? (
-          <Meals onAddToCart={() => setIsModalOpen(true)}/>
-        ): (
-          <Checkout isCheckoutClosed={()=> setIsCheckoutOpen(false)}/>
-        )}          
-        {isModalOpen && 
-        <Modal onClose={() => setIsModalOpen(false)} openStatus={isModalOpen}>
-          <CartContents isCheckoutClicked={handleCheckoutOpen}/>
-        </Modal>}
-      </CartContextProvider>       
-    </>
+    <RouterProvider router={routerPages}/>
   );
 }
 
