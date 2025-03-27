@@ -1,5 +1,6 @@
 import logo from '../assets/logo.jpg';
 import { useContext } from "react";
+import { Link } from "react-router-dom"
 import CartContext from "../store/CartContext.jsx";
 
 
@@ -16,9 +17,9 @@ function Header({onCartButtonClick}) {
       <img src={logo} alt="Logo" id='header-img'/> 
       <nav id="navbar">           
           <ul id="nav-list">
-            <li className='nav-item'><a href="#">Home</a></li>
-            <li className='nav-item'><a href="#">About</a></li>
-            <li className='nav-item'><a href="#">Contact</a></li>
+            <li className='nav-item'><Link to="/">Home</Link></li>
+            <li className='nav-item'><Link to="/about">About</Link></li>
+            <li className='nav-item'><Link to="/contact">Contact</Link></li>
           </ul>
           <button onClick={onCartButtonClick} className='cart-button'>Cart <span>{totalCartItems}</span></button>
       </nav>      
