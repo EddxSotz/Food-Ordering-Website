@@ -1,30 +1,28 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Home from "./pages/Home"
-import About from "./pages/About"
-import Contact from "./pages/Contact"
-import Checkout from './store/Checkout.jsx';
+import { lazy, Suspense } from 'react';
+import { Routes, Route } from "react-router-dom";
 
-const routerPages = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },{
-    path: "/about",
-    element: <About/>
-  },{
-    path:"/contact",
-    element:<Contact/>
-  },{
-    path:"/checkout",
-    element:<Checkout/>
-  }
-]);
+
+import Header from "./components/Header.jsx";
+const Home = lazy(() => import('./pages/Home.jsx'));
+const About = lazy(() => import('./pages/About.jsx'));
+const Contact = lazy(() => import('./pages/Contact.jsx'));
+const Checkout = lazy(() => import('./store/Checkout.jsx'));
 
 function App() {
  
   return (
-    <RouterProvider router={routerPages}/>
-  );
+    <>
+    <Header/>
+    <Suspense fallback={<div className="container">Loading...</div>}>
+      <Routes>    
+          <Route exact path="/" element={<Home />} />
+          <Route path="/about" element={<About />}/>
+          <Route path="/contact" element={<Contact />}/>
+          <Route path="/checkout" element={<Checkout />}/>      
+      </Routes>
+    </Suspense>
+    </>
+  );  
 }
 
 export default App;
