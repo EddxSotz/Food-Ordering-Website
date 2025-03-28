@@ -1,8 +1,10 @@
 import Modal from '../UI/Modal.jsx';
 import CartContext from '../store/CartContext.jsx';
 import { useState, useContext } from 'react';
+import { useNavigate } from "react-router-dom";
 
 export default function Forms({ onSubmit }) {
+    const navigate = useNavigate();
     const cartCtx = useContext(CartContext);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -18,7 +20,8 @@ export default function Forms({ onSubmit }) {
   
     const handleCloseModal = () => {        
         setIsModalOpen(false)        
-        cartCtx.clearCart();        
+        cartCtx.clearCart();
+        navigate("/");     
     }
 
     async function sendOrderToBackend(inputData) {        

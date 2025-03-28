@@ -1,8 +1,11 @@
 import {useContext} from 'react';
+import { useNavigate } from "react-router-dom";
 import CartContext from '../store/CartContext.jsx';
 import currencyFormatting from '../utils/currency-formatting.js';
 
-export default function CartContents({isCheckoutClicked}) {
+export default function CartContents({onCloseModal}) {
+    const navigate = useNavigate();
+
     const cartCtx = useContext(CartContext);
     const cartTotal = cartCtx.cartItems.reduce((total, item) => {
         return total + item.price * item.quantity;
@@ -19,6 +22,11 @@ export default function CartContents({isCheckoutClicked}) {
 
     const handleIncreaseItem = (id) => {
         cartCtx.increaseQuantity(id);
+    }
+
+    const handleIsCheckoutClicked = () => {
+        navigate("/checkout");
+        onCloseModal();
     }
 
     return (
@@ -40,7 +48,7 @@ export default function CartContents({isCheckoutClicked}) {
                 ))}                                   
               </ul>
               <p>Total: <strong>{currencyFormatting.format(cartTotal)}</strong></p>
-              <button onClick={isCheckoutClicked} className='cart-button'>Checkout</button>
+              <button onClick={handleIsCheckoutClicked} className='cart-button'>Checkout</button>
               </>
             ) : (
                 <p>You have no items on your Cart</p>
