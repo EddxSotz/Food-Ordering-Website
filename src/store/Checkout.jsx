@@ -1,9 +1,12 @@
 import {useContext, useState} from 'react';
+import { useNavigate } from "react-router-dom";
 import CartContext from '../store/CartContext.jsx';
 import currencyFormatting from '../utils/currency-formatting.js';
 import Forms from '../components/Forms.jsx';
 
-export default function Checkout ({isCheckoutClosed}) {
+export default function Checkout () {
+    const navigate = useNavigate();
+
     const cartCtx = useContext(CartContext);
     const cartTotal = cartCtx.cartItems.reduce((total, item) => {return total + item.price * item.quantity;}, 0);
     const [isFormVisible, setIsFormVisible] = useState(false);
@@ -24,6 +27,9 @@ export default function Checkout ({isCheckoutClosed}) {
         console.log('Form Data:', formData);        
     }   
     
+    const handleGoBack = ()=>{
+        navigate("/");
+    }
     return (
         <div id='Checkout-page' >                                       
             {isFormVisible ? (
@@ -56,7 +62,7 @@ export default function Checkout ({isCheckoutClosed}) {
                     ) : (
                     <p>You have no items on your Cart</p>
                     )}                    
-                    <button onClick={isCheckoutClosed} className='cart-button btn-back'>Back to Shopping Meals</button>                                    
+                    <button onClick={handleGoBack} className='cart-button btn-back'>Back to Shopping Meals</button>                                    
                 </div>
             )}                                  
         </div>
