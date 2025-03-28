@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Header from '../components/Header';
 import Meals from '../components/Meals';
 import Modal from '../UI/Modal.jsx';
 import Checkout from '../store/Checkout.jsx';
@@ -17,8 +16,7 @@ function Home()  {
     }
     return (
         <>
-          <CartContextProvider>        
-            <Header onCartButtonClick={() => setIsModalOpen(true)}/>
+          <CartContextProvider>            
             {!isCheckoutOpen ? (
               <Meals onAddToCart={() => setIsModalOpen(true)}/>
             ): (

@@ -1,30 +1,26 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Home from "./pages/Home"
-import About from "./pages/About"
-import Contact from "./pages/Contact"
+import { Routes, Route } from "react-router-dom";
+
+import Header from "./components/Header.jsx";
+import Home from "./pages/Home.jsx"
+import About from "./pages/About.jsx"
+import Contact from "./pages/Contact.jsx"
 import Checkout from './store/Checkout.jsx';
 
-const routerPages = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },{
-    path: "/about",
-    element: <About/>
-  },{
-    path:"/contact",
-    element:<Contact/>
-  },{
-    path:"/checkout",
-    element:<Checkout/>
-  }
-]);
+
 
 function App() {
  
   return (
-    <RouterProvider router={routerPages}/>
-  );
+    <>
+    <Header/>
+    <Routes>      
+        <Route exact path="/" element={<Home />} />
+        <Route path="/about" element={<About />}/>
+        <Route path="/contact" element={<Contact />}/>
+        <Route path="/checkout" element={<Checkout />}/>      
+    </Routes>
+    </>
+  );  
 }
 
 export default App;
