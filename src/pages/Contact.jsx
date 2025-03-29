@@ -1,32 +1,32 @@
 
 const Contact = () => {
     return (
-        <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+        <div id="contact">
             <h1>Contact Us</h1>
             <p>We'd love to hear from you! Reach out to us using the information below:</p>
             
-            <div style={{ marginTop: '20px' }}>
+            <div className="contact-item">
                 <h3>Address</h3>
                 <p>123 Foodie Lane, Flavor Town, FT 56789</p>
             </div>
             
-            <div style={{ marginTop: '20px' }}>
-                <h3>Phone</h3>
-                <p>+1 (555) 123-4567</p>
+            <div className="contact-item">
+                <h3>Phone</h3>                
+                <a href="tel:+15551234567">+1 (555) 123-4567</a>
             </div>
             
-            <div style={{ marginTop: '20px' }}>
-                <h3>Email</h3>
-                <p>contact@foodorder.com</p>
+            <div className="contact-item">
+                <h3>Email</h3>                
+                <a href="mailto:contact@foodorder.com">contact@foodorder.com</a>                
             </div>
             
-            <div style={{ marginTop: '20px' }}>
+            <div className="contact-item">
                 <h3>Business Hours</h3>
                 <p>Monday - Friday: 9:00 AM - 9:00 PM</p>
                 <p>Saturday - Sunday: 10:00 AM - 10:00 PM</p>
             </div>
             
-            <div style={{ marginTop: '20px' }}>
+            <div className="contact-item">
                 <h3>Follow Us</h3>
                 <p>
                     <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a> | 

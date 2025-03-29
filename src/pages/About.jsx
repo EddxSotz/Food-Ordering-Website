@@ -1,7 +1,7 @@
 
 function About () {
     return (
-        <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+        <div id="about">
             <h1>About Us</h1>
             <p>
                 Welcome to our Food Ordering App! We are dedicated to bringing you the best dining experience
