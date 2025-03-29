@@ -18,13 +18,13 @@ function Header() {
   return (
     <>
     <header id="main-header">
-      <h1 id="title">Food Order</h1>
+      <h1 id="title">Le Fancy Restaurant</h1>
       <img src={logo} alt="Logo" id='header-img'/> 
       <nav id="navbar">           
           <ul id="nav-list">
-            <li className='nav-item'><NavLink to="/">Home</NavLink></li>
-            <li className='nav-item'><NavLink to="/about">About</NavLink></li>
-            <li className='nav-item'><NavLink to="/contact">Contact</NavLink></li>
+            <li><NavLink to="/" className={({ isActive }) => isActive ? "nav-item-active" : "nav-item"}>Home</NavLink></li>
+            <li><NavLink to="/about" className={({ isActive }) => isActive ? "nav-item-active" : "nav-item"}>About</NavLink></li>
+            <li><NavLink to="/contact" className={({ isActive }) => isActive ? "nav-item-active" : "nav-item"}>Contact</NavLink></li>
           </ul>
           <button onClick={() => setIsModalOpen(true)} className='cart-button'>Cart <span>{totalCartItems}</span></button>
       </nav>      
