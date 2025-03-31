@@ -13,7 +13,7 @@ function Meals() {
         async function fetchMeals() {
             setIsLoading(true);
             try {
-              const response = await fetch('http://localhost:3000/meals');
+              const response = await fetch('https://food-ordering-website-backend-3mwk.onrender.com/meals');
               const mealsData = await response.json();
               if (!response.ok) {
                 throw new Error('Something went wrong!');                
@@ -42,7 +42,7 @@ function Meals() {
         {!isLoading && meals.map((meal) => (
           <li key={meal.id} className="meal-item">
             <article>
-              <img src={`http://localhost:3000/${meal.image}`} alt={meal.name} />
+              <img src={`https://food-ordering-website-backend-3mwk.onrender.com/${meal.image}`} alt={meal.name} />
               <h3>{meal.name}</h3>
               <p className="meal-item-description">{meal.description}</p>
               <p className="meal-item-price">{currencyFormatting.format(meal.price)}</p>

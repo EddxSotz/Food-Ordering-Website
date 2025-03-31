@@ -37,7 +37,7 @@ export default function CartContents({onCloseModal}) {
               <ul>
                 {cartCtx.cartItems.map((item) => (
                     <li key={item.id} className="cart-item">
-                        <img src={`http://localhost:3000/${item.image}`} alt={item.name}/>
+                        <img src={`https://food-ordering-website-backend-3mwk.onrender.com/${item.image}`} alt={item.name}/>
                         <span>{item.name}</span>
                         <button onClick={()=> handleDecreaseItem(item.id)} className='cart-button'> - </button>
                         <span>{item.quantity}</span>

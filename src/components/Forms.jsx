@@ -25,7 +25,7 @@ export default function Forms({ onSubmit }) {
     }
 
     async function sendOrderToBackend(inputData) {        
-        const response = await fetch('http://localhost:3000/orders', {
+        const response = await fetch('https://food-ordering-website-backend-3mwk.onrender.com/orders', {
             method: 'POST', 
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({order: {items: cartCtx.cartItems, customer: inputData}})
