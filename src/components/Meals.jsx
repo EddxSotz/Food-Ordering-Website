@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import currencyFormatting from "../utils/currency-formatting";
 import CartContext from "../store/CartContext.jsx";
 import Error from "./Error.jsx";
+import preloader from "../assets/preloader.svg";
 
 function Meals() {
     const [isLoading, setIsLoading] = useState(true);
@@ -37,7 +38,7 @@ function Meals() {
   return (
     <div>      
       <ul id="meals">
-        {isLoading && <p>Loading...</p>}
+        {isLoading && <img src={preloader} alt="Loading..." id="preloader"></img>}
         {error && <Error/>}
         {!isLoading && meals.map((meal) => (
           <li key={meal.id} className="meal-item">
