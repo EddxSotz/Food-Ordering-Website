@@ -36,7 +36,8 @@ function Meals() {
   }
 
   return (
-    <div>      
+    <div>
+      <h2>All available Meals</h2>      
       <ul id="meals">
         {isLoading && <img src={preloader} alt="Loading..." id="preloader"></img>}
         {error && <Error/>}
