@@ -4,7 +4,7 @@ import CartContext from "../store/CartContext.jsx";
 import Error from "./Error.jsx";
 import preloader from "../assets/preloader.svg";
 
-function Meals() {
+function Meals({isFiltered}) {
     const [isLoading, setIsLoading] = useState(true);
     const [meals, setMeals] = useState([]);
     const [error, setError] = useState(null);
@@ -29,6 +29,20 @@ function Meals() {
     }
     , []);
 
+    switch (isFiltered) {                    
+        case "main":
+            meals.filter(meal => meal.category === "main");
+            break;
+        case "salads":
+            meals.filter(meal => meal.category === "salads");
+            break;
+        case "desserts":
+            meals.filter(meal => meal.category === "desserts");
+            break;
+        default:
+            break;
+    }
+
 
   const handleAddToCart = (meal) => {
     console.log(meal);
@@ -36,7 +50,8 @@ function Meals() {
   }
 
   return (
-    <div>      
+    <div>
+      <h2>All available Meals</h2>      
       <ul id="meals">
         {isLoading && <img src={preloader} alt="Loading..." id="preloader"></img>}
         {error && <Error/>}
