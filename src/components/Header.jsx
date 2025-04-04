@@ -17,17 +17,19 @@ function Header() {
 
   return (
     <>
-    <header id="main-header">
-      <h1 id="title">Le Fancy Restaurant</h1>
-      <img src={logo} alt="Logo" id='header-img'/> 
-      <nav id="navbar">           
-          <ul id="nav-list">
+    <header className='flex flex-row justify-between items-center w-full bg-amber-100 p-4'>
+      <div className='flex flex-row items-center w-1/2 gap-2'>
+       <img src={logo} alt="Logo" className='w-10 inline'/>
+       <h1 className='text-lg font-bold text-amber-700'>Le Fancy Restaurant</h1>
+      </div>             
+      <nav className='w-1/2 '>           
+          <ul className='flex flex-row justify-around items-center'>
             <li><NavLink to="/" className={({ isActive }) => isActive ? "nav-item-active" : "nav-item"}>Home</NavLink></li>
             <li><NavLink to="/shop" className={({ isActive }) => isActive ? "nav-item-active" : "nav-item"}>Shop</NavLink></li>
             <li><NavLink to="/about" className={({ isActive }) => isActive ? "nav-item-active" : "nav-item"}>About</NavLink></li>
             <li><NavLink to="/contact" className={({ isActive }) => isActive ? "nav-item-active" : "nav-item"}>Contact</NavLink></li>
-          </ul>
-          <button onClick={() => setIsModalOpen(true)} className='cart-button'>Cart <span>{totalCartItems}</span></button>
+            <button onClick={() => setIsModalOpen(true)} className='cart-button'>Cart <span>{totalCartItems}</span></button>
+          </ul>          
       </nav>      
     </header>
       {isModalOpen && 

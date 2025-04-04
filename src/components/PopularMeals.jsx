@@ -36,14 +36,14 @@ function PopularMeals() {
 
   return (
     <div>
-      <h2>Popular Meals</h2>
-      <ul id="favorite-meals">
+      <h2 className="text-3xl font-bold text-gray-700">Popular Meals</h2>
+      <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {isLoading && <p>Loading...</p>}
         {error && <Error/>}        
         {meals.map((meal) => (
           <li key={meal.id} className="meal-item">
             <article>
-              <img src={`https://food-ordering-website-backend-3mwk.onrender.com/${meal.image}`} alt={meal.name} />
+              <img src={`https://food-ordering-website-backend-3mwk.onrender.com/${meal.image}`} alt={meal.name} className="w-3xs"/>
               <h3>{meal.name}</h3>              
               <p className="meal-item-price">{currencyFormatting.format(meal.price)}</p>
               <p className="meal-item-actions">

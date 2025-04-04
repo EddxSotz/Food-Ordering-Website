@@ -51,8 +51,8 @@ function Meals({isFiltered}) {
 
   return (
     <div>
-      <h2>All available Meals</h2>      
-      <ul id="meals">
+      <h2 className="text-3xl font-bold text-gray-700">All available Meals</h2>      
+      <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {isLoading && <img src={preloader} alt="Loading..." id="preloader"></img>}
         {error && <Error/>}
         {!isLoading && meals.map((meal) => (
