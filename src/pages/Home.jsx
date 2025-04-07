@@ -4,11 +4,11 @@ import HeroSection from '../components/HeroSection';
 
 function Home()  {    
     return (
-        <>
+        <section className='bg-slate-200'>
           <HeroSection />
           <PopularMeals />
           <Meals />                          
-        </>
+        </section>
     );
 }
 

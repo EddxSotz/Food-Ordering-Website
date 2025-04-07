@@ -17,7 +17,7 @@ function Header() {
 
 
   return (
-    <section className='fixed top-0 flex flex-col items-center text-stone-50 w-full'>
+    <section className='fixed top-0 flex flex-col items-center text-stone-50 w-full py-2 bg-gray-600 bg-opacity-70 backdrop-blur-sm z-10'>
     <header className='w-4/5 mx-auto flex flex-row justify-between items-center'>
       <div>
         <img src={logo} alt="Logo" className='w-12 inline mr-2'/>
