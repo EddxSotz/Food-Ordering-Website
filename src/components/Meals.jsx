@@ -50,21 +50,19 @@ function Meals({isFiltered}) {
   }
 
   return (
-    <div>
-      <h2>All available Meals</h2>      
-      <ul id="meals">
-        {isLoading && <img src={preloader} alt="Loading..." id="preloader"></img>}
+    <div className="container mx-auto mt-12">
+      <h2 className="text-6xl font-bold text-center my-18">All available Meals</h2>      
+      <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {isLoading && <img src={preloader} alt="Loading..."></img>}
         {error && <Error/>}
         {!isLoading && meals.map((meal) => (
-          <li key={meal.id} className="meal-item">
-            <article>
-              <img src={`https://food-ordering-website-backend-3mwk.onrender.com/${meal.image}`} alt={meal.name} />
+          <li key={meal.id} className="text-center bg-gray-600 text-stone-50 rounded-md shadow-md">
+            <img src={`https://food-ordering-website-backend-3mwk.onrender.com/${meal.image}`} alt={meal.name} />
+            <article className="py-2">              
               <h3>{meal.name}</h3>
-              <p className="meal-item-description">{meal.description}</p>
-              <p className="meal-item-price">{currencyFormatting.format(meal.price)}</p>
-              <p className="meal-item-actions">
-                <button onClick={()=> handleAddToCart(meal)} className='cart-button'>Add to Cart</button>
-              </p>
+              <p>{meal.description}</p>
+              <p>{currencyFormatting.format(meal.price)}</p>              
+              <button onClick={()=> handleAddToCart(meal)} className='bg-lime-800 py-1 px-4'>Add to Cart</button>              
             </article>            
           </li>
         ))}

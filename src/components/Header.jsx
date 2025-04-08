@@ -7,7 +7,8 @@ import CartContents from '../components/CartContents.jsx';
 
 
 function Header() {
-  const [isModalOpen, setIsModalOpen] = useState(false);  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [navToggle, setNavToggle] = useState(false);
 
   const cartCtx = useContext(CartContext);
   const totalCartItems = cartCtx.cartItems.reduce((total, item) => {
@@ -16,18 +17,20 @@ function Header() {
 
 
   return (
-    <>
-    <header id="main-header">
-      <h1 id="title">Le Fancy Restaurant</h1>
-      <img src={logo} alt="Logo" id='header-img'/> 
+    <section className='fixed top-0 flex flex-col items-center text-stone-50 w-full py-2 bg-gray-600 bg-opacity-70 backdrop-blur-sm z-10'>
+    <header className='w-4/5 mx-auto flex flex-row justify-between items-center'>
+      <div>
+        <img src={logo} alt="Logo" className='w-12 inline mr-2'/>
+        <h1 className='inline text-lg font-semibold'>Le Fancy Restaurant</h1>        
+      </div>       
       <nav id="navbar">           
-          <ul id="nav-list">
+          <ul className='flex flex-col md:flex-row gap-4 font-semibold'>
             <li><NavLink to="/" className={({ isActive }) => isActive ? "nav-item-active" : "nav-item"}>Home</NavLink></li>
             <li><NavLink to="/shop" className={({ isActive }) => isActive ? "nav-item-active" : "nav-item"}>Shop</NavLink></li>
             <li><NavLink to="/about" className={({ isActive }) => isActive ? "nav-item-active" : "nav-item"}>About</NavLink></li>
             <li><NavLink to="/contact" className={({ isActive }) => isActive ? "nav-item-active" : "nav-item"}>Contact</NavLink></li>
-          </ul>
-          <button onClick={() => setIsModalOpen(true)} className='cart-button'>Cart <span>{totalCartItems}</span></button>
+            <button onClick={() => setIsModalOpen(true)} className='cart-button'>Cart <span>{totalCartItems}</span></button>
+          </ul>          
       </nav>      
     </header>
       {isModalOpen && 
@@ -35,7 +38,7 @@ function Header() {
           <CartContents onCloseModal={() => setIsModalOpen(false)}/>
         </Modal>
       }
-    </>
+    </section>
   );
 }
 export default Header;
