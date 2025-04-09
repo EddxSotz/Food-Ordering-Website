@@ -12,7 +12,7 @@ const Shop = lazy(() => import('./pages/Shop.jsx'));
 function App() {
  
   return (
-    <>
+    <main className='w-screen h-dvh relative'>
     <CartContextProvider>
       <Header/>
       <Suspense fallback={<div className="container">Loading...</div>}>
@@ -25,7 +25,7 @@ function App() {
         </Routes>
       </Suspense>
     </CartContextProvider>
-    </>
+    </main>
   );  
 }
 

@@ -7,7 +7,8 @@ import CartContents from '../components/CartContents.jsx';
 
 
 function Header() {
-  const [isModalOpen, setIsModalOpen] = useState(false);  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [navToggle, setNavToggle] = useState(false);
 
   const cartCtx = useContext(CartContext);
   const totalCartItems = cartCtx.cartItems.reduce((total, item) => {
@@ -16,26 +17,48 @@ function Header() {
 
 
   return (
-    <>
-    <header id="main-header">
-      <h1 id="title">Le Fancy Restaurant</h1>
-      <img src={logo} alt="Logo" id='header-img'/> 
-      <nav id="navbar">           
-          <ul id="nav-list">
-            <li><NavLink to="/" className={({ isActive }) => isActive ? "nav-item-active" : "nav-item"}>Home</NavLink></li>
-            <li><NavLink to="/shop" className={({ isActive }) => isActive ? "nav-item-active" : "nav-item"}>Shop</NavLink></li>
-            <li><NavLink to="/about" className={({ isActive }) => isActive ? "nav-item-active" : "nav-item"}>About</NavLink></li>
-            <li><NavLink to="/contact" className={({ isActive }) => isActive ? "nav-item-active" : "nav-item"}>Contact</NavLink></li>
-          </ul>
-          <button onClick={() => setIsModalOpen(true)} className='cart-button'>Cart <span>{totalCartItems}</span></button>
-      </nav>      
+    <section className='fixed top-0 flex flex-col items-center text-stone-50 w-full py-2 bg-linear-to-b from-emerald-950/85 to-emerald-950/45 z-10'>
+    <header className='w-4/5 mx-auto flex flex-row justify-between items-center'>
+      <div>
+        <li href="#" className='hover:cursor-pointer'>
+          <img src={logo} alt="Logo" className='w-12 inline mr-2'/>
+          <h1 className='inline text-lg font-semibold'>Le Fancy Restaurant</h1>
+        </li>                
+      </div>
+      <div className='md:hidden'>
+        {navToggle ?
+          <button onClick={() => setNavToggle(false)} className='absolute top-5 right-5 text-3xl'>X</button> :
+          <button onClick={() => setNavToggle(true)} className='absolute top-5 right-5 text-3xl'>☰</button>
+        }
+        {navToggle && (
+            <nav className='md:hidden'>           
+            <ul className='flex flex-col md:flex-row gap-4 font-semibold items-center'>
+              <li><NavLink to="/" className={({ isActive }) => isActive ? "underline" : "hover:cursor-pointer hover:bg-lime-800"}>Home</NavLink></li>
+              <li><NavLink to="/shop" className={({ isActive }) => isActive ? "underline" : "hover:cursor-pointer hover:text-lime-600"}>Shop</NavLink></li>
+              <li><NavLink to="/about" className={({ isActive }) => isActive ? "underline" : "hover:cursor-pointer hover:text-lime-600"}>About</NavLink></li>
+              <li><NavLink to="/contact" className={({ isActive }) => isActive ? "underline" : "hover:cursor-pointer hover:text-lime-600"}>Contact</NavLink></li>
+              <button onClick={() => setIsModalOpen(true)} className='bg-stone-50 text-gray-700 hover:bg-lime-800 hover:text-stone-50 hover:cursor-pointer rounded-md p-4'>Cart <span>{totalCartItems}</span></button>
+            </ul>          
+        </nav>
+        )}                
+      </div>      
+      <nav className='hidden md:block'>           
+          <ul className='flex flex-col md:flex-row gap-4 font-semibold items-center'>
+            <li><NavLink to="/" className={({ isActive }) => isActive ? "underline" : "hover:cursor-pointer hover:bg-lime-800"}>Home</NavLink></li>
+            <li><NavLink to="/shop" className={({ isActive }) => isActive ? "underline" : "hover:cursor-pointer hover:text-lime-600"}>Shop</NavLink></li>
+            <li><NavLink to="/about" className={({ isActive }) => isActive ? "underline" : "hover:cursor-pointer hover:text-lime-600"}>About</NavLink></li>
+            <li><NavLink to="/contact" className={({ isActive }) => isActive ? "underline" : "hover:cursor-pointer hover:text-lime-600"}>Contact</NavLink></li>
+            <button onClick={() => setIsModalOpen(true)} className='bg-stone-50 text-gray-700 hover:bg-lime-800 hover:text-stone-50 hover:cursor-pointer rounded-md p-4'>Cart <span>{totalCartItems}</span></button>
+          </ul>          
+      </nav>
+      
     </header>
       {isModalOpen && 
         <Modal onClose={() => setIsModalOpen(false)} openStatus={isModalOpen}>
           <CartContents onCloseModal={() => setIsModalOpen(false)}/>
         </Modal>
       }
-    </>
+    </section>
   );
 }
 export default Header;
