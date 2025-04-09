@@ -50,7 +50,7 @@ function Meals({isFiltered}) {
   }
 
   return (
-    <div className="container mx-auto mt-12">
+    <div className="container mx-auto mt-12 px-4">
       <h2 className="text-6xl font-bold text-center my-18">All available Meals</h2>      
       <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {isLoading && <img src={preloader} alt="Loading..."></img>}

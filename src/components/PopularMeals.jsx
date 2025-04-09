@@ -35,13 +35,13 @@ function PopularMeals() {
     
 
   return (
-    <div className="container mx-auto mt-12">
+    <div className="container mx-auto mt-12 px-4">
       <h2 className="text-6xl font-bold text-center my-18">Our Popular Meals</h2>
-      <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <ul className="snap-x overflow-x-scroll grid grid-flow-col grid-rows-1 gap-8 mx-auto py-4 px-2">
         {isLoading && <p>Loading...</p>}
         {error && <Error/>}        
         {meals.map((meal) => (
-          <li key={meal.id} className="text-center bg-gray-600 text-stone-50 rounded-md shadow-md">
+          <li key={meal.id} className="w-3xs sm:w-2xs md:w-xs lg:w-sm snap-start text-center bg-gray-600 text-stone-50 rounded-md shadow-md">
             <img src={`https://food-ordering-website-backend-3mwk.onrender.com/${meal.image}`} alt={meal.name} />
             <article className="py-2">              
               <h3>{meal.name}</h3>              
