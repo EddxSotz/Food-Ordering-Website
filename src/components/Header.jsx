@@ -20,18 +20,38 @@ function Header() {
     <section className='fixed top-0 flex flex-col items-center text-stone-50 w-full py-2 bg-linear-to-b from-emerald-950/85 to-emerald-950/45 z-10'>
     <header className='w-4/5 mx-auto flex flex-row justify-between items-center'>
       <div>
-        <img src={logo} alt="Logo" className='w-12 inline mr-2'/>
-        <h1 className='inline text-lg font-semibold'>Le Fancy Restaurant</h1>        
-      </div>       
-      <nav id="navbar">           
+        <li href="#" className='hover:cursor-pointer'>
+          <img src={logo} alt="Logo" className='w-12 inline mr-2'/>
+          <h1 className='inline text-lg font-semibold'>Le Fancy Restaurant</h1>
+        </li>                
+      </div>
+      <div className='md:hidden'>
+        {navToggle ?
+          <button onClick={() => setNavToggle(false)} className='absolute top-5 right-5 text-3xl'>X</button> :
+          <button onClick={() => setNavToggle(true)} className='absolute top-5 right-5 text-3xl'>☰</button>
+        }
+        {navToggle && (
+            <nav className='md:hidden'>           
+            <ul className='flex flex-col md:flex-row gap-4 font-semibold items-center'>
+              <li><NavLink to="/" className={({ isActive }) => isActive ? "underline" : "hover:cursor-pointer hover:bg-lime-800"}>Home</NavLink></li>
+              <li><NavLink to="/shop" className={({ isActive }) => isActive ? "underline" : "hover:cursor-pointer hover:text-lime-600"}>Shop</NavLink></li>
+              <li><NavLink to="/about" className={({ isActive }) => isActive ? "underline" : "hover:cursor-pointer hover:text-lime-600"}>About</NavLink></li>
+              <li><NavLink to="/contact" className={({ isActive }) => isActive ? "underline" : "hover:cursor-pointer hover:text-lime-600"}>Contact</NavLink></li>
+              <button onClick={() => setIsModalOpen(true)} className='bg-stone-50 text-gray-700 hover:bg-lime-800 hover:text-stone-50 hover:cursor-pointer rounded-md p-4'>Cart <span>{totalCartItems}</span></button>
+            </ul>          
+        </nav>
+        )}                
+      </div>      
+      <nav className='hidden md:block'>           
           <ul className='flex flex-col md:flex-row gap-4 font-semibold items-center'>
             <li><NavLink to="/" className={({ isActive }) => isActive ? "underline" : "hover:cursor-pointer hover:bg-lime-800"}>Home</NavLink></li>
-            <li><NavLink to="/shop" className={({ isActive }) => isActive ? "underline" : "hover:cursor-pointer hover:text-lime-800"}>Shop</NavLink></li>
-            <li><NavLink to="/about" className={({ isActive }) => isActive ? "underline" : "hover:cursor-pointer hover:text-lime-800"}>About</NavLink></li>
-            <li><NavLink to="/contact" className={({ isActive }) => isActive ? "underline" : "hover:cursor-pointer hover:text-lime-800"}>Contact</NavLink></li>
+            <li><NavLink to="/shop" className={({ isActive }) => isActive ? "underline" : "hover:cursor-pointer hover:text-lime-600"}>Shop</NavLink></li>
+            <li><NavLink to="/about" className={({ isActive }) => isActive ? "underline" : "hover:cursor-pointer hover:text-lime-600"}>About</NavLink></li>
+            <li><NavLink to="/contact" className={({ isActive }) => isActive ? "underline" : "hover:cursor-pointer hover:text-lime-600"}>Contact</NavLink></li>
             <button onClick={() => setIsModalOpen(true)} className='bg-stone-50 text-gray-700 hover:bg-lime-800 hover:text-stone-50 hover:cursor-pointer rounded-md p-4'>Cart <span>{totalCartItems}</span></button>
           </ul>          
-      </nav>      
+      </nav>
+      
     </header>
       {isModalOpen && 
         <Modal onClose={() => setIsModalOpen(false)} openStatus={isModalOpen}>
