@@ -21,7 +21,9 @@ function App() {
             <Route path="/shop" element={<Shop />}/>
             <Route path="/about" element={<About />}/>
             <Route path="/contact" element={<Contact />}/>
-            <Route path="/checkout" element={<Checkout />}/>      
+            <Route path="/checkout" element={<Checkout />}/>
+            <Route path="/login" element={<h1 className='text-3xl text-center'>Login</h1>}/>
+            <Route path="*" element={<h1 className='text-3xl text-center'>404 Not Found</h1>}/>     
         </Routes>
       </Suspense>
     </CartContextProvider>

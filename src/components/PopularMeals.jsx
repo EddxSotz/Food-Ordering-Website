@@ -41,13 +41,22 @@ function PopularMeals() {
         {isLoading && <p>Loading...</p>}
         {error && <Error/>}        
         {meals.map((meal) => (
-          <li key={meal.id} className="w-3xs sm:w-2xs md:w-xs lg:w-sm snap-start text-center bg-gray-600 text-stone-50 rounded-md shadow-md">
+          <li key={meal.id} className="relative w-3xs sm:w-2xs md:w-xs lg:w-sm snap-start text-center bg-stone-100 text-gray-700 rounded-md shadow-md">
             <img src={`https://food-ordering-website-backend-3mwk.onrender.com/${meal.image}`} alt={meal.name} />
-            <article className="py-2">              
-              <h3>{meal.name}</h3>              
-              <p >{currencyFormatting.format(meal.price)}</p>              
-              <button onClick={()=> handleAddToCart(meal)} className='bg-lime-800 py-1 px-4'>Add to Cart</button>              
-            </article>            
+            <article className="pt-2">              
+              <h3 className="font-semibold">{meal.name}</h3>              
+              <p className="font-bold text-xl text-lime-700 mb-4">{currencyFormatting.format(meal.price)}</p>
+              <div className="">
+                <button onClick={()=> handleAddToCart(meal)} className='block lg:hidden bg-lime-800 py-1 px-4 w-full text-white text-lg font-semibold hover:bg-lime-100 hover:text-lime-700 hover:cursor-pointer border-1 hover:border-lime-700'>Add to Cart</button>              
+              </div>              
+            </article>
+            <div className="hidden lg:block group absolute inset-0">
+              <div className="invisible group-hover:visible absolute inset-0 bg-gray-500/85">
+                <div className="flex items-center justify-center h-full">
+                  <button onClick={()=> handleAddToCart(meal)} className="bg-lime-700 py-4 px-8 text-white text-xl font-semibold hover:bg-stone-50 hover:text-lime-700 hover:cursor-pointer rounded-md">Add to Cart</button>
+                </div>
+              </div>              
+            </div>           
           </li>
         ))}
       </ul>     
