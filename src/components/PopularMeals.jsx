@@ -45,15 +45,15 @@ function PopularMeals() {
             <img src={`https://food-ordering-website-backend-3mwk.onrender.com/${meal.image}`} alt={meal.name} />
             <article className="pt-2">              
               <h3 className="font-semibold">{meal.name}</h3>              
-              <p className="font-bold text-lg text-lime-700">{currencyFormatting.format(meal.price)}</p>
+              <p className="font-bold text-xl text-lime-700 mb-4">{currencyFormatting.format(meal.price)}</p>
               <div className="">
-                <button onClick={()=> handleAddToCart(meal)} className='block lg:hidden bg-lime-800 py-1 px-4 w-full text-white text-lg font-semibold'>Add to Cart</button>              
+                <button onClick={()=> handleAddToCart(meal)} className='block lg:hidden bg-lime-800 py-1 px-4 w-full text-white text-lg font-semibold hover:bg-lime-100 hover:text-lime-700 hover:cursor-pointer border-1 hover:border-lime-700'>Add to Cart</button>              
               </div>              
             </article>
             <div className="hidden lg:block group absolute inset-0">
-              <div className="invisible group-hover:visible absolute inset-0 bg-gray-500/75">
+              <div className="invisible group-hover:visible absolute inset-0 bg-gray-500/85">
                 <div className="flex items-center justify-center h-full">
-                  <button onClick={()=> handleAddToCart(meal)} className="bg-lime-800 py-1 px-4 text-white text-lg font-semibold">Add to Cart</button>
+                  <button onClick={()=> handleAddToCart(meal)} className="bg-lime-700 py-4 px-8 text-white text-xl font-semibold hover:bg-stone-50 hover:text-lime-700 hover:cursor-pointer rounded-md">Add to Cart</button>
                 </div>
               </div>              
             </div>           
