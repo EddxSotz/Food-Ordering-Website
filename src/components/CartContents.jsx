@@ -32,8 +32,8 @@ export default function CartContents({onCloseModal}) {
     return (
         <>            
             {cartCtx.cartItems.length > 0 ? (
-              <section>
-                <h2 className='text-xl font-semibold text-left mb-8'>Cart</h2>                
+              <section className='px-2 py-4'>
+                <h2 className='text-xl font-semibold text-left mb-8'>Cart</h2>                         
                 <ul>
                     {cartCtx.cartItems.map((item) => (
                         <li key={item.id} className="flex flex-row justify-between items-center border-b-1 border-gray-400 text-gray-700 shadow-md p-4 my-2">
@@ -53,6 +53,7 @@ export default function CartContents({onCloseModal}) {
                 </ul>
                 <p>Subtotal: <strong>{currencyFormatting.format(cartTotal)}</strong></p>
                 <button onClick={handleIsCheckoutClicked} className='absolute bottom-20 left-0 right-0 bg-lime-800 py-2 px-4 text-xl text-stone-50 hover:bg-lime-600 hover:cursor-pointer'>Checkout</button>
+                <p className='text-md text-gray-700 absolute bottom-0 left-0 right-0 text-center'>Free Shipping on All Orders Over $100!</p>
               </section>
             ) : (
                 <p>You have no items on your Cart</p>
