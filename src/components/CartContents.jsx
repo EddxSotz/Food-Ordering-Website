@@ -32,7 +32,7 @@ export default function CartContents({onCloseModal}) {
     return (
         <>            
             {cartCtx.cartItems.length > 0 ? (
-              <section>
+              <section className='px-2 py-4'>
                 <h2 className='text-xl font-semibold text-left mb-8'>Cart</h2>                         
                 <ul>
                     {cartCtx.cartItems.map((item) => (
