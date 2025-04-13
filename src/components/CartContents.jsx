@@ -32,7 +32,7 @@ export default function CartContents({onCloseModal}) {
     return (
         <>            
             {cartCtx.cartItems.length > 0 ? (
-              <section className='px-2 py-4'>
+              <section className='px-2 py-4 w-full'>
                 <h2 className='text-xl font-semibold text-left mb-8'>Cart</h2>                         
                 <ul>
                     {cartCtx.cartItems.map((item) => (
@@ -56,7 +56,7 @@ export default function CartContents({onCloseModal}) {
                 <p className='text-md text-gray-700 text-wrap absolute bottom-0 left-0 right-0 text-center mb-4'>Free Shipping on All Orders Over $100!</p>
               </section>
             ) : (
-                <p>You have no items on your Cart</p>
+                <p className='mt-24'>You have no items on your Cart</p>
             )}            
         </>
     );
