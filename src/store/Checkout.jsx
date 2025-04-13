@@ -50,12 +50,12 @@ export default function Checkout () {
                                     <span className='text-wrap text-center font-semibold'>{item.name}</span>
                                     <span className='text-center'>{currencyFormatting.format(item.price)} x </span>                                    
                                     <div className='flex flex-row gap-2 justify-center items-center'>
-                                        <button onClick={()=> handleDecreaseItem(item.id)} className='text-lg text-gray-800 border border-gray-800 rounded-full py-1.5 px-4 hover:bg-lime-700 hover:text-white hover:border-lime-700 hover:cursor-pointer'> - </button>
+                                        <button onClick={()=> handleDecreaseItem(item.id)} className='text-lg text-gray-800 border border-gray-800 rounded-full py-1.5 px-4 hover:bg-lime-700 hover:text-stone-50 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:border-lime-800 active:text-stone-50'> - </button>
                                         <span>{item.quantity}</span>
-                                        <button onClick={()=> handleIncreaseItem(item.id)} className='text-lg text-gray-800 border border-gray-800 rounded-full py-1.5 px-4 hover:bg-lime-700 hover:text-white hover:border-lime-700 hover:cursor-pointer'> + </button>                                    
+                                        <button onClick={()=> handleIncreaseItem(item.id)} className='text-lg text-gray-800 border border-gray-800 rounded-full py-1.5 px-4 hover:bg-lime-700 hover:text-stone-50 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:border-lime-800 active:text-stone-50'> + </button>                                    
                                     </div>                                    
                                     <span className='text-center'><strong>{currencyFormatting.format(item.price * item.quantity)}</strong></span>
-                                    <button onClick={()=> handleRemoveItem(item.id)} className='col-span-3 md:col-span-1 text-lg font-semibold rounded-full border border-gray-400 py-1.5 px-4 hover:bg-red-400 hover:border-red-400 hover:cursor-pointer'>Remove</button>
+                                    <button onClick={()=> handleRemoveItem(item.id)} className='col-span-3 md:col-span-1 text-lg font-semibold rounded-full text-gray-800 border border-gray-400 py-1.5 px-4 hover:bg-red-400 hover:border-red-400 hover:text-stone-50 hover:cursor-pointer active:text-stone-50 active:border-red-500 active:bg-red-500'>Remove</button>
                                 </li>               
                             ))}                                   
                         </ul>                        
@@ -71,8 +71,8 @@ export default function Checkout () {
                         <p className='text-md text-gray-700 text-center'>Free Shipping on All Orders Over $100!</p>                    
                     </aside>
                     <div className='col-span-2 flex flex-row justify-between items-center'>
-                        <button onClick={handleGoBack} className='w-1/3 bg-lime-800 text-stone-50 hover:bg-stone-50 hover:text-lime-800 hover:cursor-pointer rounded-md py-2 px-4'>Back to Shopping Meals</button>                                    
-                        <button onClick={()=> setIsFormVisible(true)} className='w-1/3 bg-lime-800 text-stone-50 hover:bg-stone-50 hover:text-lime-800 hover:cursor-pointer rounded-md py-2 px-4'>Next: Shipping Information</button>
+                        <button onClick={handleGoBack} className='w-1/3 font-semibold bg-lime-700 border-2 border-transparent text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 active:border-lime-800 rounded-md py-2 px-4'>Back to Shopping Meals</button>                                    
+                        <button onClick={()=> setIsFormVisible(true)} className='w-1/3 font-semibold bg-lime-700 border-2 border-transparent text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 active:border-lime-800  rounded-md py-2 px-4'>Next: Shipping Information</button>
                     </div>                                              
                 </div>
             )}                                  
