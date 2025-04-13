@@ -33,7 +33,7 @@ export default function CartContents({onCloseModal}) {
         <>            
             {cartCtx.cartItems.length > 0 ? (
               <section className='px-2 py-4 w-full'>
-                <h2 className='text-xl font-semibold text-left mb-8'>Cart</h2>                         
+                <h2 className='text-2xl font-semibold text-center mb-8'>Your Cart</h2>                         
                 <ul>
                     {cartCtx.cartItems.map((item) => (
                         <li key={item.id} className="flex flex-row justify-between items-center border-b-1 border-gray-400 text-gray-700 shadow-md p-4 my-2">
@@ -47,7 +47,7 @@ export default function CartContents({onCloseModal}) {
                                     <span>{currencyFormatting.format(item.price)}</span>
                                 </div>
                             </div>                                                
-                            <button onClick={()=> handleRemoveItem(item.id)} className='text-lg font-semibold rounded-full border border-gray-400 py-1.5 px-4 hover:bg-red-400 hover:border-none hover:cursor-pointer active:bg-red-500 active:border-none'>X</button>
+                            <button onClick={()=> handleRemoveItem(item.id)} className='text-lg font-semibold rounded-full border border-gray-400 py-1.5 px-4 hover:bg-red-400 hover:border-red-400 hover:cursor-pointer active:bg-red-500 active:border-none'>X</button>
                         </li>               
                     ))}                                   
                 </ul>
@@ -56,7 +56,7 @@ export default function CartContents({onCloseModal}) {
                 <p className='text-md text-gray-700 text-wrap absolute bottom-0 left-0 right-0 text-center mb-4'>Free Shipping on All Orders Over $100!</p>
               </section>
             ) : (
-                <p className='mt-24'>You have no items on your Cart</p>
+                <p className='mt-24 text-lg'>You have no items on your Cart</p>
             )}            
         </>
     );
