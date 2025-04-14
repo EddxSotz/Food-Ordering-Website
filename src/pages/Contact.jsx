@@ -2,7 +2,7 @@
 const Contact = () => {
     return (
         <div className="container mx-auto p-4 mt-18 text-gray-800 text-center">
-            <h1 className="text-3xl mb-6">Contact Us</h1>
+            <h1 className="text-6xl mb-6 font-Charm">Contact Us</h1>
             <p className="text-xl mb-6">We'd love to hear from you! Reach out to us using the information below:</p>
             
             <div className="bg-gray-200 p-4 rounded-md shadow-md mb-6">

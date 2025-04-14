@@ -33,10 +33,11 @@ function Header() {
     <section className='fixed top-0 flex flex-col items-center text-stone-50 w-full py-2 bg-emerald-950/85 z-10' >
       <header className='w-4/5 mx-auto flex flex-row justify-between items-center'>
         <div>
-          <a href="#" className='hover:cursor-pointer'>
-            <img src={logo} alt="Logo" className='w-12 inline mr-2'/>
-            <h1 className='inline text-lg font-semibold'>Broccolinni</h1>
-          </a>                
+            <NavLink to="/" className='flex flex-row items-center'>
+              <img src={logo} alt="Logo" className='w-12 inline mr-2'/>
+              <h1 className='inline text-xl font-semibold font-Charm'>Broccolinni</h1>
+            </NavLink>            
+                          
         </div>
         <div className='md:hidden'>
           {navToggle ?
