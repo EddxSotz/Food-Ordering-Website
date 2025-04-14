@@ -31,7 +31,7 @@ function Header() {
   }
 
   return (
-    <section className='fixed top-0 flex flex-col items-center text-stone-50 w-full py-2 bg-emerald-950/85 z-10' >
+    <section className='fixed top-0 flex flex-col items-center text-stone-50 w-full py-2 bg-emerald-950/85 z-40' >
       <header className='w-4/5 mx-auto flex flex-row justify-between items-center'>
         <div>
             <NavLink to="/" className='flex flex-row items-center'>
