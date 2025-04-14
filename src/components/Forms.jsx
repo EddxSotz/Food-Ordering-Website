@@ -3,7 +3,7 @@ import CartContext from '../store/CartContext.jsx';
 import { useState, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 
-export default function Forms({ onSubmit }) {
+export default function ShippingForm({ onSubmit }) {
     const navigate = useNavigate();
     const cartCtx = useContext(CartContext);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,37 +38,51 @@ export default function Forms({ onSubmit }) {
     }
     return (
         <>
-        <form onSubmit={handleSubmit} id='shipping-form'>
-            <div className='input-field'>
-                <label htmlFor="name">Name:</label>
-                <input type="text" id="name" name="name" required />
-            </div>
-            <div className='input-field'>
-                <label htmlFor="email">Email:</label>
-                <input type="email" id="email" name="email" required />
-            </div>
-            <div className='input-field'>
-                <label htmlFor="address">Address:</label>
-                <input type="text" id="address" name="address" required />
-            </div>
-            <div className='input-field'>
-                <label htmlFor="city">City:</label>
-                <input type="text" id="city" name="city" required />
-            </div>
-            <div className='input-field'>
-                <label htmlFor="postalCode">Postal Code:</label>
-                <input type="text" id="postalCode" name="postalCode" required />
-            </div>
-            <div className='input-field'>
-                <label htmlFor="country">Country:</label>
-                <input type="text" id="country" name="country" required />
-            </div>
-            <div className='btn-group'>
-                <button type='reset' className='cart-button'>Reset</button>
-                <button type="submit" className='cart-button'>Submit</button>                
-            </div>
-            
-        </form>
+        <section className='text-gray-700 '>
+            <h1 className='text-6xl mb-8 font-Charm font-semibold'>Your Shipping information</h1>
+            <form onSubmit={handleSubmit} >
+                <div className='border border-gray-300 p-4 rounded-md shadow-md mb-6'>
+                    <h2 className='font-Zain text-2xl font-semibold'>Personal Information</h2>
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                        <div>
+                            <label htmlFor="name">Name:</label>
+                            <input type="text" id="name" name="name" placeholder='Name' required className='border border-gray-200 py-2 px-4 ml-2'/>
+                        </div>
+                        <div >
+                            <label htmlFor="email">Email:</label>
+                            <input type="email" id="email" name="email" placeholder='Email Address' required className='border border-gray-200 py-2 px-4 ml-2'/>
+                        </div>
+                    </div>
+                </div>
+                
+                <div className='border border-gray-300 p-4 rounded-md shadow-md mb-6'>
+                    <h2 className='font-Zain text-2xl font-semibold'>Shipping Information</h2>
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                        <div>
+                            <label htmlFor="address">Address:</label>
+                            <input type="text" id="address" name="address" placeholder='shipping address' required className='border border-gray-200 py-2 px-4 ml-2'/>
+                        </div>
+                        <div >
+                            <label htmlFor="city">City:</label>
+                            <input type="text" id="city" name="city" placeholder='city' required className='border border-gray-200 py-2 px-4 ml-2'/>
+                        </div>
+                        <div >
+                            <label htmlFor="postalCode">Postal Code:</label>
+                            <input type="text" id="postalCode" name="postalCode" placeholder='zip code' required className='border border-gray-200 py-2 px-4 ml-2'/>
+                        </div>
+                        <div>
+                            <label htmlFor="country">Country:</label>
+                            <input type="text" id="country" name="country" placeholder='country' required className='border border-gray-200 py-2 px-4 ml-2'/>
+                        </div>
+                    </div>
+                </div>               
+               
+                <div className='flex flex-row justify-between items-center'>
+                    <button type='reset' className='w-1/3 font-semibold border-2 border-gray-800 text-gray-800 hover:bg-red-400 hover:border-red-400 hover:cursor-pointer active:bg-red-500 active:text-stone-50 active:border-red-500 rounded-md py-2 px-4'>Reset</button>
+                    <button type="submit" className='w-1/3 font-semibold bg-lime-700 border-2 border-transparent text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 active:border-lime-800 rounded-md py-2 px-4'>Submit</button>                
+                </div>                
+            </form>        
+        </section>
         {isModalOpen && (
             <Modal onClose={handleCloseModal} openStatus={isModalOpen}>
              <p>Submitted Successfully!</p>

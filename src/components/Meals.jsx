@@ -51,7 +51,7 @@ function Meals({isFiltered}) {
 
   return (
     <div className="container mx-auto mt-12 px-4">
-      <h2 className="text-6xl font-bold text-center my-18">All available Meals</h2>      
+      <h2 className="text-6xl font-bold text-center my-18 font-Zain text-gray-800">All available Meals</h2>      
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mx-auto py-4 px-2">
         {isLoading && <img src={preloader} alt="Loading..."></img>}
         {error && <Error/>}

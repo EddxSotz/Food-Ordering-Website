@@ -36,7 +36,7 @@ function PopularMeals() {
 
   return (
     <div className="container mx-auto mt-12 px-4">
-      <h2 className="text-6xl font-bold text-center my-18">Our Popular Meals</h2>
+      <h2 className="text-6xl font-bold text-center my-18 font-Zain text-gray-800">Our Popular Meals</h2>
       <ul className="snap-x overflow-x-scroll grid grid-flow-col grid-rows-1 gap-8 mx-auto py-4 px-2">
         {isLoading && <p>Loading...</p>}
         {error && <Error/>}        

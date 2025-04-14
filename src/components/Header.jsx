@@ -1,4 +1,5 @@
 import logo from '../assets/logo.png';
+import { FaCartShopping, FaUser } from "react-icons/fa6";
 import { useState, useRef, useContext } from "react";
 import { NavLink } from "react-router-dom"
 import CartContext from "../store/CartContext.jsx";
@@ -30,13 +31,14 @@ function Header() {
   }
 
   return (
-    <section className='fixed top-0 flex flex-col items-center text-stone-50 w-full py-2 bg-emerald-950/85 z-10' >
+    <section className='fixed top-0 flex flex-col items-center text-stone-50 w-full py-2 bg-emerald-950/85 z-40' >
       <header className='w-4/5 mx-auto flex flex-row justify-between items-center'>
         <div>
-          <a href="#" className='hover:cursor-pointer'>
-            <img src={logo} alt="Logo" className='w-12 inline mr-2'/>
-            <h1 className='inline text-lg font-semibold'>Broccolinni</h1>
-          </a>                
+            <NavLink to="/" className='flex flex-row items-center'>
+              <img src={logo} alt="Logo" className='w-12 inline mr-2'/>
+              <h1 className='inline text-xl font-semibold font-Charm'>Broccolinni</h1>
+            </NavLink>            
+                          
         </div>
         <div className='md:hidden'>
           {navToggle ?
@@ -51,8 +53,8 @@ function Header() {
                   <NavLink to="/shop" onClick={() => setNavToggle(false)} className={({ isActive }) => isActive ? "underline block w-full py-1.5" : " active:text-lime-800 block w-full py-1.5"}>Shop</NavLink>
                   <NavLink to="/about" onClick={() => setNavToggle(false)} className={({ isActive }) => isActive ? "underline block w-full py-1.5" : "  active:text-lime-800 block w-full py-1.5"}>About</NavLink>
                   <NavLink to="/contact" onClick={() => setNavToggle(false)} className={({ isActive }) => isActive ? "underlineblock w-full py-1.5" : "  active:text-lime-800 block w-full py-1.5"}>Contact</NavLink>
-                  <NavLink to="/login" onClick={() => setNavToggle(false)} className={({ isActive }) => isActive ? "bg-lime-800 text-stone-50 block w-full py-1.5 " : "block w-full py-1.5 bg-stone-50 text-gray-700 active:bg-lime-800 active:text-stone-50 px-2"}>Login</NavLink>
-                  <button onClick={handleOpenCart} className='bg-lime-800 text-stone-50  active:text-lime-800 active:bg-stone-50 block w-full py-1.5'>Cart <span>{totalCartItems}</span></button>
+                  <NavLink to="/login" onClick={() => setNavToggle(false)} className={({ isActive }) => isActive ? "bg-lime-800 text-stone-50 block w-full py-1.5 " : "block w-full py-1.5 bg-stone-50 text-gray-700 active:bg-lime-800 active:text-stone-50 px-2"}><FaUser className='inline text-lg mr-1'/>Login</NavLink>
+                  <button onClick={handleOpenCart} className='bg-lime-800 text-stone-50  active:text-lime-800 active:bg-stone-50 block w-full py-1.5'><FaCartShopping className='inline text-lg mr-1'/><span>{totalCartItems}</span></button>
                 </ul>          
               </nav>
             </div>
@@ -64,8 +66,8 @@ function Header() {
               <NavLink to="/shop" className={({ isActive }) => isActive ? "underline px-1.5 py-1" : "hover:cursor-pointer hover:text-lime-600 active:text-lime-800 px-1.5 py-1"}>Shop</NavLink>
               <NavLink to="/about" className={({ isActive }) => isActive ? "underline px-1.5 py-1" : "hover:cursor-pointer hover:text-lime-600 active:text-lime-800 px-1.5 py-1"}>About</NavLink>
               <NavLink to="/contact" className={({ isActive }) => isActive ? "underline px-1.5 py-1" : "hover:cursor-pointer hover:text-lime-600 active:text-lime-800 px-1.5 py-1"}>Contact</NavLink>
-              <NavLink to="/login" className={({ isActive }) => isActive ? "bg-lime-800 text-stone-50 rounded-md py-1 px-2" : "bg-stone-50 text-gray-700 hover:bg-lime-700 hover:text-stone-50 active:text-stone-50 active:bg-lime-800 hover:cursor-pointer rounded-md py-1 px-2"}>Login</NavLink>
-              <button onClick={() => setIsModalOpen(true)} className='bg-lime-700 text-stone-50 hover:bg-stone-50 hover:text-gray-700 hover:cursor-pointer active:text-stone-50 active:bg-lime-800 rounded-md py-2 px-4 ml-4'>Cart <span>{totalCartItems}</span></button>
+              <NavLink to="/login" className={({ isActive }) => isActive ? "bg-lime-800 text-stone-50 rounded-md py-1 px-2" : "bg-stone-50 text-gray-700 hover:bg-lime-700 hover:text-stone-50 active:text-stone-50 active:bg-lime-800 hover:cursor-pointer rounded-md py-1 px-2"}><FaUser className='inline text-lg mr-1'/>Login</NavLink>
+              <button onClick={() => setIsModalOpen(true)} className='bg-lime-700 text-stone-50 hover:bg-stone-50 hover:text-gray-700 hover:cursor-pointer active:text-stone-50 active:bg-lime-800 rounded-md py-2 px-4 ml-4'><FaCartShopping className='inline text-lg mr-1'/><span>{totalCartItems}</span></button>
             </ul>          
         </nav>
         
