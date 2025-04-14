@@ -33,7 +33,7 @@ export default function CartContents({onCloseModal}) {
         <>            
             {cartCtx.cartItems.length > 0 ? (
               <section className='px-2 py-4 w-full'>
-                <h2 className='text-2xl font-semibold text-center mb-8'>Your Cart</h2>                         
+                <h2 className='text-4xl font-semibold text-center mb-8 font-Zain'>Your Cart</h2>                         
                 <ul>
                     {cartCtx.cartItems.map((item) => (
                         <li key={item.id} className="flex flex-row justify-between items-center border-b-1 border-gray-400 text-gray-700 shadow-md p-4 my-2">
