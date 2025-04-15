@@ -4,7 +4,7 @@ import CartContext from "../store/CartContext.jsx";
 import Error from "./Error.jsx";
 import preloader from "../assets/preloader.svg";
 
-function Meals({isFiltered}) {
+function Meals({isFiltered="", categoryTitle="All available Meals"}) {
     const [isLoading, setIsLoading] = useState(true);
     const [meals, setMeals] = useState([]);
     const [error, setError] = useState(null);
@@ -19,7 +19,22 @@ function Meals({isFiltered}) {
               if (!response.ok) {
                 throw new Error('Something went wrong!');                
               }
-              setMeals(mealsData);
+              switch (isFiltered) {                    
+                case "main":
+                    setMeals(mealsData.filter(meal => meal.category === "Main"));
+                    break;
+                case "salads":
+                    setMeals(mealsData.filter(meal => meal.category === "Salad"));
+                    break;
+                case "desserts":
+                    setMeals(mealsData.filter(meal => meal.category === "Dessert"));
+                    break;
+                case "favorites":
+                    setMeals(mealsData.filter(meal => meal.isFavorite === true));
+                    break;
+                default:
+                    break;
+            }
             } catch (error) {
               setError(error);
             }            
@@ -27,21 +42,7 @@ function Meals({isFiltered}) {
            }        
     fetchMeals();
     }
-    , []);
-
-    switch (isFiltered) {                    
-        case "main":
-            meals.filter(meal => meal.category === "main");
-            break;
-        case "salads":
-            meals.filter(meal => meal.category === "salads");
-            break;
-        case "desserts":
-            meals.filter(meal => meal.category === "desserts");
-            break;
-        default:
-            break;
-    }
+    , []);    
 
 
   const handleAddToCart = (meal) => {
@@ -51,12 +52,12 @@ function Meals({isFiltered}) {
 
   return (
     <div className="container mx-auto mt-12 px-4">
-      <h2 className="text-6xl font-bold text-center my-18 font-Zain text-gray-800">All available Meals</h2>      
-      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mx-auto py-4 px-2">
+      <h2 className="text-6xl font-bold text-center my-18 font-Zain text-gray-800">{categoryTitle}</h2>      
+      <ul className={`gap-8 mx-auto py-4 px-2 ${isFiltered != "" ? "grid grid-flow-col grid-rows-1 snap-x overflow-x-scroll" : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"}`}>
         {isLoading && <img src={preloader} alt="Loading..."></img>}
         {error && <Error/>}
         {!isLoading && meals.map((meal) => (
-          <li key={meal.id} className="relative text-center bg-stone-100 text-gray-700 rounded-md shadow-md">
+          <li key={meal.id} className={`relative ${isFiltered != "" ? "w-3xs sm:w-2xs md:w-xs lg:w-sm snap-start" : "w-full"} text-center bg-stone-100 text-gray-700 rounded-md shadow-md`}>
             <img src={`https://food-ordering-website-backend-3mwk.onrender.com/${meal.image}`} alt={meal.name} />
             <article className="pt-2 px-1">              
               <h3 className="font-semibold text-xl">{meal.name}</h3>
