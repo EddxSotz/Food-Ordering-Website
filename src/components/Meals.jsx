@@ -3,12 +3,22 @@ import currencyFormatting from "../utils/currency-formatting";
 import CartContext from "../store/CartContext.jsx";
 import Error from "./Error.jsx";
 import preloader from "../assets/preloader.svg";
+import Popup from "./Popup.jsx";
 
 function Meals({isFiltered="", categoryTitle="All available Meals"}) {
     const [isLoading, setIsLoading] = useState(true);
     const [meals, setMeals] = useState([]);
     const [error, setError] = useState(null);
-    const cartContext = useContext(CartContext);  
+    const cartContext = useContext(CartContext);
+    const [showPopup, setShowPopup] = useState(false);
+
+useEffect(() => {
+    const timer = setTimeout(() => {
+        setShowPopup(false);
+    }, 3000); 
+    return () => clearTimeout(timer);
+}
+, [ showPopup]);  
  
     useEffect(() => {      
         async function fetchMeals() {
@@ -47,7 +57,8 @@ function Meals({isFiltered="", categoryTitle="All available Meals"}) {
 
   const handleAddToCart = (meal) => {
     console.log(meal);
-    cartContext.addItem(meal);    
+    cartContext.addItem(meal);
+    setShowPopup(true);   
   }
 
   return (
@@ -75,6 +86,7 @@ function Meals({isFiltered="", categoryTitle="All available Meals"}) {
           </li>
         ))}
       </ul>
+      {showPopup && <Popup message="Item added to cart!" />}
     </div>
   );
 }
