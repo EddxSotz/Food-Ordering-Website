@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route } from "react-router-dom";
 import { CartContextProvider } from './store/CartContext.jsx';
+import Footer from './components/Footer.jsx';
 
 import Header from "./components/Header.jsx";
 const Home = lazy(() => import('./pages/Home.jsx'));
@@ -27,6 +28,7 @@ function App() {
         </Routes>
       </Suspense>
     </CartContextProvider>
+    <Footer/>
     </main>
   );  
 }
