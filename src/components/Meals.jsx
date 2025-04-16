@@ -42,7 +42,11 @@ useEffect(() => {
                 case "favorites":
                     setMeals(mealsData.filter(meal => meal.isFavorite === true));
                     break;
+                case "":
+                    setMeals(mealsData);
+                    break;
                 default:
+                    setMeals(mealsData);
                     break;
             }
             } catch (error) {
@@ -64,8 +68,8 @@ useEffect(() => {
   return (
     <div className="container mx-auto mt-12 px-4">
       <h2 className="text-6xl font-bold text-center my-18 font-Zain text-gray-800">{categoryTitle}</h2>      
-      <ul className={`gap-8 mx-auto py-4 px-2 ${isFiltered != "" ? "grid grid-flow-col grid-rows-1 snap-x overflow-x-scroll" : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"}`}>
-        {isLoading && <img src={preloader} alt="Loading..."></img>}
+      <ul className={`gap-8 mx-auto py-4 px-2 ${isFiltered != "" ? "grid grid-flow-col grid-rows-1 snap-x overflow-x-scroll" : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4"}`}>
+        {isLoading && <img src={preloader} alt="Loading..." className="w-2xl"></img>}
         {error && <Error/>}
         {!isLoading && meals.map((meal) => (
           <li key={meal.id} className={`relative ${isFiltered != "" ? "w-3xs sm:w-2xs md:w-xs lg:w-sm snap-start" : "w-full"} text-center bg-stone-100 text-gray-700 rounded-md shadow-md`}>

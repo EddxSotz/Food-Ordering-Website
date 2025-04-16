@@ -2,7 +2,7 @@ import Meals from '../components/Meals';
 
 function Shop() {
   return (
-    <div>      
+    <div className='h-auto'>      
       <Meals />
     </div>
   );
