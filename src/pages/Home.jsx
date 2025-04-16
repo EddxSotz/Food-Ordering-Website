@@ -3,7 +3,7 @@ import HeroSection from '../components/HeroSection';
 
 function Home()  {    
     return (
-        <section className='bg-slate-200'>
+        <section className='h-auto bg-slate-200'>
           <HeroSection />          
           <Meals isFiltered={"favorites"} categoryTitle="Popular Meals"/>
           <Meals isFiltered={"main"} categoryTitle="Main Dishes"/>

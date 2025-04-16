@@ -36,7 +36,7 @@ function Header() {
         <div>
             <NavLink to="/" className='flex flex-row items-center'>
               <img src={logo} alt="Logo" className='w-12 inline mr-2'/>
-              <h1 className='inline text-xl font-semibold font-Charm'>Broccolinni</h1>
+              <h1 className='inline text-2xl font-semibold font-Charm'>Broccolinni</h1>
             </NavLink>            
                           
         </div>
