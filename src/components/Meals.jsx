@@ -66,7 +66,7 @@ useEffect(() => {
   }
 
   return (
-    <div className="container mx-auto mt-12 px-4">
+    <div className="container mx-auto pt-12 px-4">
       <h2 className="text-6xl font-bold text-center my-18 font-Zain text-gray-800">{categoryTitle}</h2>      
       <ul className={`gap-8 mx-auto py-4 px-2 ${isFiltered != "" ? "grid grid-flow-col grid-rows-1 snap-x overflow-x-scroll" : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4"}`}>
         {isLoading && <img src={preloader} alt="Loading..." className="w-2xl"></img>}

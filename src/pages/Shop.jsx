@@ -2,7 +2,7 @@ import Meals from '../components/Meals';
 
 function Shop() {
   return (
-    <div className='h-auto'>      
+    <div className='h-auto pb-24'>      
       <Meals />
     </div>
   );
