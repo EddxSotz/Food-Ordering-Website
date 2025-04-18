@@ -9,11 +9,12 @@ const About = lazy(() => import('./pages/About.jsx'));
 const Contact = lazy(() => import('./pages/Contact.jsx'));
 const Checkout = lazy(() => import('./store/Checkout.jsx'));
 const Shop = lazy(() => import('./pages/Shop.jsx'));
+const Login = lazy(() => import('./pages/Login.jsx'));
 
 function App() {
  
   return (
-    <main className='w-screen h-dvh relative'>
+    <main className='w-screen h-dvh relative bg-slate-200 '>
     <CartContextProvider>
       <Header/>
       <Suspense fallback={<div className="container">Loading...</div>}>
@@ -23,7 +24,7 @@ function App() {
             <Route path="/about" element={<About />}/>
             <Route path="/contact" element={<Contact />}/>
             <Route path="/checkout" element={<Checkout />}/>
-            <Route path="/login" element={<h1 className='text-3xl text-center'>Login</h1>}/>
+            <Route path="/login" element={<Login/>}/>
             <Route path="*" element={<h1 className='text-3xl text-center'>404 Not Found</h1>}/>     
         </Routes>
       </Suspense>
