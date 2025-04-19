@@ -47,7 +47,7 @@ function Header() {
           }
           {navToggle && (
             <div className='fixed inset-0 w-screen h-screenz-20' onClick={handleTapOutside}>
-              <nav className='absolute top-16 right-0 bg-emerald-950/85 w-3/4 sm:w-1/2 h-screen' ref={mobileNavRef}>           
+              <nav className='absolute top-16 right-0 bg-emerald-950/85 w-1/2 sm:w-1/3 h-screen' ref={mobileNavRef}>           
                 <ul className='flex flex-col md:flex-row gap-4 font-semibold items-center py-4 text-center text-lg'>
                   <NavLink to="/" onClick={() => setNavToggle(false)} className={({ isActive }) => isActive ? "underline block w-full py-1.5" : "active:text-lime-800 block w-full py-1.5"}>Home</NavLink>
                   <NavLink to="/shop" onClick={() => setNavToggle(false)} className={({ isActive }) => isActive ? "underline block w-full py-1.5" : " active:text-lime-800 block w-full py-1.5"}>Shop</NavLink>
