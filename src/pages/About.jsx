@@ -1,7 +1,7 @@
 
 function About () {
     return (<>
-        <div className="container h-svh mx-auto px-4 py-8 pt-18 text-gray-800 text-center">
+        <div className="container h-auto mx-auto px-4 py-8 pt-18 text-gray-800 text-center">
             <h1 className="text-6xl font-bold text-center mb-4 mt-12 font-Charm">About Us</h1>
             <p className="text-lg text-center mb-8">
                 Welcome to our Food Ordering App! We are dedicated to bringing you the best dining experience
@@ -16,7 +16,7 @@ function About () {
                 Thank you for choosing us for your food ordering needs. We look forward to serving you!
             </p>
 
-            <div className="bg-gray-200 p-4 rounded-md shadow-md mb-6 text-center">
+            <div className="p-4 rounded-md shadow-md mb-6 text-center">
                 <h1 className="text-4xl font-bold mb-4 font-Zain">Our Mission</h1>
                 <p className="text-lg mb-4">
                     Our mission is to provide a seamless and enjoyable food ordering experience for our customers.
