@@ -97,7 +97,9 @@ export default function ShippingForm({ onSubmit }) {
         </section>
         {isModalOpen && (
             <Modal onClose={handleCloseModal} openStatus={isModalOpen}>
-             <p>Submitted Successfully!</p>
+             <h3>Order Submitted Successfully!</h3>            
+            <p>Your Order Number: </p>
+            <p>Thank you for your order!</p>
             </Modal>
         )}
         {showPopup && <Popup message="Order placed successfully!" />}

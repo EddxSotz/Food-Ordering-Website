@@ -32,14 +32,14 @@ export default function Checkout () {
         navigate("/");
     }
     return (
-        <section className='container h-full mx-auto py-28 px-4 relative'>                                       
+        <section className='container lg:h-full h-auto mx-auto py-28 px-4 relative'>                                       
             {isFormVisible ? (
                 <>                
                 <button onClick={()=> setIsFormVisible(false)} className='text-lime-800 hover:cursor-pointer active:text-gray-800 rounded-md  text-xl py-2 px-4 mb-8'><FaArrowLeft className='inline text-lg mr-1'/>Back to Shopping cart</button>
                 <ShippingForm onSubmit={handleFormSubmit} />
                 </>
             ): (
-                <div className='grid grid-cols-1 lg:grid-cols-3 gap-4'>
+                <div className='grid grid-cols-1 lg:grid-cols-3 lg:gap-4'>
                     <div className='col-span-2'>
                         <h1 className='text-6xl text-gray-700 mb-8 font-Charm font-semibold'>Checkout</h1>                         
                         {cartCtx.cartItems.length > 0 ? (                        
@@ -63,7 +63,7 @@ export default function Checkout () {
                         <p>You have no items on your Cart</p>
                         )}
                     </div>
-                    <aside className='flex flex-col shadow-md p-4 rounded-md border border-gray-300'>
+                    <aside className='flex flex-col shadow-md p-4 mb-8 rounded-md border border-gray-300'>
                         <h2 className='text-2xl text-gray-700'>Order Totals</h2>
                         <p>Subtotal: <strong>{currencyFormatting.format(cartTotal)}</strong></p>
                         <p>Shipping and Handing: <strong>Free</strong></p> 
