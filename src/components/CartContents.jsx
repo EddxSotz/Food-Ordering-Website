@@ -32,9 +32,9 @@ export default function CartContents({onCloseModal}) {
     return (
         <>            
             {cartCtx.cartItems.length > 0 ? (
-              <section className='px-2 py-4 w-full'>
+              <section className='px-2 py-4 w-full h-full relative'>
                 <h2 className='text-4xl font-semibold text-center mb-8 font-Zain'>Your Cart</h2>                         
-                <ul>
+                <ul className='overflow-y-scroll h-170'>
                     {cartCtx.cartItems.map((item) => (
                         <li key={item.id} className="flex flex-row justify-between items-center border-b-1 border-gray-400 text-gray-700 shadow-md p-4 my-2">
                             <img src={`https://food-ordering-website-backend-3mwk.onrender.com/${item.image}`} alt={item.name} className='w-14'/>   
@@ -51,9 +51,11 @@ export default function CartContents({onCloseModal}) {
                         </li>               
                     ))}                                   
                 </ul>
-                <p>Subtotal: <strong>{currencyFormatting.format(cartTotal)}</strong></p>
-                <button onClick={handleIsCheckoutClicked} className='absolute bottom-20 left-0 right-0 py-2 px-4 text-xl font-semibold bg-lime-700 text-stone-50 border-2 border-transparent hover:bg-stone-50 hover:text-lime-800 hover:border-lime-800 hover:cursor-pointer active:text-stone-50 active:bg-lime-800 active:border-lime-800'>Checkout</button>
-                <p className='text-md text-gray-700 text-wrap absolute bottom-0 left-0 right-0 text-center mb-4'>Free Shipping on All Orders Over $100!</p>
+                <div className='absolute bottom-0 left-0 right-0 py-4 bg-gray-300/45'>
+                    <p className='text-lg px-4 mb-2'>Subtotal: <strong>{currencyFormatting.format(cartTotal)}</strong></p>
+                    <button onClick={handleIsCheckoutClicked} className='w-full py-2 px-4 mb-2 text-xl font-semibold bg-lime-700 text-stone-50 border-2 border-transparent hover:bg-stone-50 hover:text-lime-800 hover:border-lime-800 hover:cursor-pointer active:text-stone-50 active:bg-lime-800 active:border-lime-800'>Checkout</button>
+                    <p className='text-md text-gray-700 text-wrap text-center mb-4'>Free Shipping on All Orders Over $100!</p>
+                </div>                
               </section>
             ) : (
                 <p className='mt-24 text-lg'>You have no items on your Cart</p>
