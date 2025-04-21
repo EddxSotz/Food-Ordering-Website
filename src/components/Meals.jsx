@@ -12,13 +12,13 @@ function Meals({isFiltered="", categoryTitle="All available Meals"}) {
     const cartContext = useContext(CartContext);
     const [showPopup, setShowPopup] = useState(false);
 
-useEffect(() => {
-    const timer = setTimeout(() => {
-        setShowPopup(false);
-    }, 3000); 
-    return () => clearTimeout(timer);
-}
-, [ showPopup]);  
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowPopup(false);
+        }, 3000); 
+        return () => clearTimeout(timer);
+    }
+    , [showPopup]);  
  
     useEffect(() => {      
         async function fetchMeals() {
@@ -54,7 +54,7 @@ useEffect(() => {
             }            
             setIsLoading(false);
            }        
-    fetchMeals();
+    fetchMeals();    
     }
     , []);    
 

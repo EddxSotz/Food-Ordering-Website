@@ -1,5 +1,13 @@
+import { useEffect } from 'react';
 
 const Contact = () => {
+    
+    useEffect(() => {
+        document.title = "Contact Us - Broccolinni Restaurant";
+        window.scrollTo(0, 0);
+    }
+    , []);
+    
     return (
         <div className="container h-full mx-auto p-4 pt-18 text-gray-800 text-center">
             <h1 className="text-6xl mb-6 mt-12 font-Charm">Contact Us</h1>

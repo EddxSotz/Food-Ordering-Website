@@ -1,5 +1,13 @@
+import { useEffect } from 'react';
 
 function About () {
+
+    useEffect(() => {
+            document.title = "About Us - Broccolinni Restaurant";
+            window.scrollTo(0, 0);
+        }
+        , []);
+
     return (<>
         <div className="container h-auto mx-auto px-4 py-8 pt-18 text-gray-800 text-center">
             <h1 className="text-6xl font-bold text-center mb-4 mt-12 font-Charm">About Us</h1>
