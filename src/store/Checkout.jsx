@@ -1,4 +1,4 @@
-import {useContext, useState} from 'react';
+import {useContext, useState, useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaArrowRight, FaTrashCan } from "react-icons/fa6";
 import CartContext from '../store/CartContext.jsx';
@@ -31,6 +31,13 @@ export default function Checkout () {
     const handleGoBack = ()=>{
         navigate("/");
     }
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        document.title = "Checkout - Broccolinni Restaurant";
+    }
+    , []);
+
     return (
         <section className='container lg:h-full h-auto mx-auto py-28 px-4 relative'>                                       
             {isFormVisible ? (
