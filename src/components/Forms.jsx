@@ -1,12 +1,14 @@
 import Modal from '../UI/Modal.jsx';
+import Popup from '../components/Popup.jsx';
 import CartContext from '../store/CartContext.jsx';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
 export default function ShippingForm({ onSubmit }) {
     const navigate = useNavigate();
     const cartCtx = useContext(CartContext);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [showPopup, setShowPopup] = useState(false);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -15,7 +17,8 @@ export default function ShippingForm({ onSubmit }) {
         onSubmit(inputData);
         setIsModalOpen(true);
         sendOrderToBackend(inputData); 
-        event.target.reset();        
+        event.target.reset();
+        setShowPopup(true);        
     };
   
     const handleCloseModal = () => {        
@@ -36,6 +39,15 @@ export default function ShippingForm({ onSubmit }) {
         }
         return responseData.message;
     }
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowPopup(false);
+        }, 3000); 
+        return () => clearTimeout(timer);
+    }
+    , [ showPopup]);
+
     return (
         <>
         <section className='text-gray-700 '>
@@ -88,6 +100,7 @@ export default function ShippingForm({ onSubmit }) {
              <p>Submitted Successfully!</p>
             </Modal>
         )}
+        {showPopup && <Popup message="Order placed successfully!" />}
         </>
     );
 }
