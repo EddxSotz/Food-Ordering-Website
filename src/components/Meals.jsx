@@ -4,7 +4,7 @@ import CartContext from "../store/CartContext.jsx";
 import Error from "./Error.jsx";
 import preloader from "../assets/preloader.svg";
 import Popup from "./Popup.jsx";
-import { FaCartShopping } from "react-icons/fa6";
+import { FaCartShopping, FaEye } from "react-icons/fa6";
 
 function Meals({isFiltered="", categoryTitle="All available Meals"}) {
     const [isLoading, setIsLoading] = useState(true);
@@ -79,13 +79,13 @@ function Meals({isFiltered="", categoryTitle="All available Meals"}) {
               <h3 className="font-semibold text-xl">{meal.name}</h3>
               <p className="line-clamp-2">{meal.description}</p>
               <p className="font-bold text-xl text-lime-700 mb-4">{currencyFormatting.format(meal.price)}</p>        
-              <button className='block md:hidden py-1 px-4 mb-4 w-full text-lg font-semibold bg-lime-700 text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50'>See Details</button>                   
+              <button className='block md:hidden py-1 px-4 mb-4 w-full text-lg font-semibold bg-lime-700 text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50'><FaEye className='inline text-lg mr-1'/>See Details</button>                   
               <button onClick={()=> handleAddToCart(meal)} className='block md:hidden py-1 px-4 w-full text-lg font-semibold bg-lime-700 text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50'><FaCartShopping className='inline text-lg mr-1'/>Add to Cart</button>               
             </article>
             <div className="hidden md:block group absolute inset-0">
               <div className="invisible group-hover:visible absolute inset-0 bg-gray-500/85">
                 <div className="flex flex-col items-center justify-center h-full gap-4">
-                  <button className="py-4 px-8 text-xl font-semibold bg-lime-700  text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 rounded-md">See Details</button>             
+                  <button className="py-4 px-8 text-xl font-semibold bg-lime-700  text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 rounded-md"><FaEye className='inline text-lg mr-1'/>See Details</button>             
                   <button onClick={()=> handleAddToCart(meal)} className="py-4 px-8 text-xl font-semibold bg-lime-700  text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 rounded-md"><FaCartShopping className='inline text-lg mr-1'/>Add to Cart</button>
                 </div>
               </div>              
