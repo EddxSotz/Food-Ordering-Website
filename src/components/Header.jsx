@@ -1,5 +1,5 @@
 import logo from '../assets/logo.png';
-import { FaCartShopping, FaUser } from "react-icons/fa6";
+import { FaCartShopping, FaUser, FaBurger } from "react-icons/fa6";
 import { useState, useRef, useContext } from "react";
 import { NavLink } from "react-router-dom"
 import CartContext from "../store/CartContext.jsx";
@@ -43,7 +43,7 @@ function Header() {
         <div className='md:hidden'>
           {navToggle ?
             <button onClick={() => setNavToggle(false)} className='text-stone-50 text-3xl p-1  active:text-lime-800'>X</button> :
-            <button onClick={() => setNavToggle(true)} className='text-stone-50 text-3xl p-1  active:text-lime-800'>☰</button>
+            <button onClick={() => setNavToggle(true)} className='text-stone-50 text-3xl p-1  active:text-lime-800'><FaBurger className='text-xl'/></button>
           }
           {navToggle && (
             <div className='fixed inset-0 w-screen h-screenz-20' onClick={handleTapOutside}>

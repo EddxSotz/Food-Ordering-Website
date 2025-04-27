@@ -76,7 +76,7 @@ function Meals({isFiltered="", categoryTitle="All available Meals"}) {
           <li key={meal.id} className={`relative ${isFiltered != "" ? "w-3xs sm:w-2xs md:w-xs lg:w-sm snap-start" : "w-full"} text-center bg-stone-100 text-gray-700 rounded-md shadow-md`}>
             <img src={`https://food-ordering-website-backend-3mwk.onrender.com/${meal.image}`} alt={meal.name} />
             <article className="pt-2 px-1">              
-              <h3 className="font-semibold text-xl">{meal.name}</h3>
+              <h3 className="font-semibold text-xl line-clamp-1">{meal.name}</h3>
               <p className="line-clamp-2">{meal.description}</p>
               <p className="font-bold text-xl text-lime-700 mb-4">{currencyFormatting.format(meal.price)}</p>        
               <button className='block md:hidden py-1 px-4 mb-4 w-full text-lg font-semibold bg-lime-700 text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50'><FaEye className='inline text-lg mr-1'/>See Details</button>                   

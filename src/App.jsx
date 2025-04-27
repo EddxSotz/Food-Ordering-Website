@@ -14,7 +14,7 @@ const Login = lazy(() => import('./pages/Login.jsx'));
 function App() {
  
   return (
-    <main className='w-screen h-dvh relative bg-slate-200 '>
+    <main className='w-screen h-dvh relative'>
     <CartContextProvider>
       <Header/>
       <Suspense fallback={<div className="container">Loading...</div>}>

@@ -32,12 +32,12 @@ export default function CartContents({onCloseModal}) {
     return (
         <>            
             {cartCtx.cartItems.length > 0 ? (
-              <section className='px-2 py-4 w-full h-full relative'>
-                <h2 className='text-4xl font-semibold text-center mb-8 font-Zain'>Your Cart</h2>                         
-                <ul className='overflow-y-scroll h-170'>
+              <section className='w-full h-full relative bg-emerald-950/85'>
+                <h2 className='text-4xl text-stone-50 font-semibold text-center pb-1 font-Zain'>Your Cart</h2>                         
+                <ul className='overflow-y-scroll overscroll-contain h-130 bg-stone-50'>
                     {cartCtx.cartItems.map((item) => (
                         <li key={item.id} className="flex flex-row justify-between items-center border-b-1 border-gray-400 text-gray-700 shadow-md p-4 my-2">
-                            <img src={`https://food-ordering-website-backend-3mwk.onrender.com/${item.image}`} alt={item.name} className='w-14'/>   
+                            <img src={`https://food-ordering-website-backend-3mwk.onrender.com/${item.image}`} alt={item.name} className='w-14 mr-1'/>   
                             <div className='flex flex-col justify-center'>
                                 <span className='text-lg mb-2'>{item.name}</span>                     
                                 <div className='flex flex-row gap-4 justify-center items-center'>                            
@@ -51,10 +51,10 @@ export default function CartContents({onCloseModal}) {
                         </li>               
                     ))}                                   
                 </ul>
-                <div className='absolute bottom-0 left-0 right-0 py-4 bg-gray-300/45'>
+                <div className='absolute bottom-0 left-0 right-0 py-4 text-stone-50'>
                     <p className='text-lg px-4 mb-2'>Subtotal: <strong>{currencyFormatting.format(cartTotal)}</strong></p>
                     <button onClick={handleIsCheckoutClicked} className='w-full py-2 px-4 mb-2 text-xl font-semibold bg-lime-700 text-stone-50 border-2 border-transparent hover:bg-stone-50 hover:text-lime-800 hover:border-lime-800 hover:cursor-pointer active:text-stone-50 active:bg-lime-800 active:border-lime-800'>Checkout</button>
-                    <p className='text-md text-gray-700 text-wrap text-center mb-4'>Free Shipping on All Orders Over $100!</p>
+                    <p className='text-md text-wrap text-center mb-4'>Free Shipping on All Orders Over $100!</p>
                 </div>                
               </section>
             ) : (
