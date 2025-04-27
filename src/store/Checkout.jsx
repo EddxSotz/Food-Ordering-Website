@@ -9,6 +9,7 @@ export default function Checkout () {
     const navigate = useNavigate();
 
     const cartCtx = useContext(CartContext);
+    const [isCartEmpty, setIsCartEmpty] = useState(false);
     const cartTotal = cartCtx.cartItems.reduce((total, item) => {return total + item.price * item.quantity;}, 0);
     const [isFormVisible, setIsFormVisible] = useState(false);
 
@@ -38,6 +39,15 @@ export default function Checkout () {
     }
     , []);
 
+    useEffect(() => {
+        if (cartCtx.cartItems.length === 0) {
+            setIsCartEmpty(true);
+        } else {
+            setIsCartEmpty(false);
+        }
+    }
+    , [cartCtx.cartItems]);
+
     return (
         <section className='container lg:h-full h-auto mx-auto py-28 px-4 relative'>                                       
             {isFormVisible ? (
@@ -49,7 +59,7 @@ export default function Checkout () {
                 <div className='grid grid-cols-1 lg:grid-cols-3 lg:gap-4'>
                     <div className='col-span-2'>
                         <h1 className='text-6xl text-gray-700 mb-8 font-Charm font-semibold'>Checkout</h1>                         
-                        {cartCtx.cartItems.length > 0 ? (                        
+                        { !isCartEmpty ? (                        
                         <ul className='mb-12 overflow-y-scroll h-124 shadow-md'>
                             {cartCtx.cartItems.map((item) => (
                                 <li key={item.id} className="grid grid-cols-3 md:grid-cols-6 gap-4 items-center border-b-1 border-gray-300 text-gray-700 shadow-md py-4 px-2">
@@ -79,7 +89,7 @@ export default function Checkout () {
                     </aside>
                     <div className='col-span-2 flex flex-row justify-between items-center'>
                         <button onClick={handleGoBack} className='w-1/3 font-semibold bg-lime-700 border-2 border-transparent text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 active:border-lime-800 rounded-md py-2 px-4'><FaArrowLeft className='inline text-lg mr-1'/>Back to Shopping Meals</button>                                    
-                        <button onClick={()=> setIsFormVisible(true)} className='w-1/3 font-semibold bg-lime-700 border-2 border-transparent text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 active:border-lime-800  rounded-md py-2 px-4'>Shipping Information <FaArrowRight className='inline text-lg ml-1'/></button>
+                        <button onClick={()=> setIsFormVisible(true)} className={`${isCartEmpty ? "hidden" : 'w-1/3 font-semibold bg-lime-700 border-2 border-transparent text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 active:border-lime-800  rounded-md py-2 px-4'}`}>Shipping Information <FaArrowRight className='inline text-lg ml-1'/></button>
                     </div>                                              
                 </div>
             )}                                  
