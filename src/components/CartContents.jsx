@@ -32,9 +32,9 @@ export default function CartContents({onCloseModal}) {
     return (
         <>            
             {cartCtx.cartItems.length > 0 ? (
-              <section className='w-full h-full relative bg-emerald-950/85'>
+              <section className='w-full h-full overflow-hidden relative grid grid-cols-1 grid-rows-12 gap-2 bg-emerald-950/90'>
                 <h2 className='text-4xl text-stone-50 font-semibold text-center pb-1 font-Zain'>Your Cart</h2>                         
-                <ul className='overflow-y-scroll overscroll-contain h-130 bg-stone-50'>
+                <ul className='row-span-8 overflow-y-scroll overscroll-contain bg-stone-50'>
                     {cartCtx.cartItems.map((item) => (
                         <li key={item.id} className="flex flex-row justify-between items-center border-b-1 border-gray-400 text-gray-700 shadow-md p-4 my-2">
                             <img src={`https://food-ordering-website-backend-3mwk.onrender.com/${item.image}`} alt={item.name} className='w-14 mr-1'/>   
@@ -51,7 +51,7 @@ export default function CartContents({onCloseModal}) {
                         </li>               
                     ))}                                   
                 </ul>
-                <div className='absolute bottom-0 left-0 right-0 py-4 text-stone-50'>
+                <div className='w-full py-4 text-stone-50'>
                     <p className='text-lg px-4 mb-2'>Subtotal: <strong>{currencyFormatting.format(cartTotal)}</strong></p>
                     <button onClick={handleIsCheckoutClicked} className='w-full py-2 px-4 mb-2 text-xl font-semibold bg-lime-700 text-stone-50 border-2 border-transparent hover:bg-stone-50 hover:text-lime-800 hover:border-lime-800 hover:cursor-pointer active:text-stone-50 active:bg-lime-800 active:border-lime-800'>Checkout</button>
                     <p className='text-md text-wrap text-center mb-4'>Free Shipping on All Orders Over $100!</p>
