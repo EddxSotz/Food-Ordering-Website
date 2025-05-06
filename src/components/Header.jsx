@@ -61,10 +61,22 @@ function Header() {
           )}                
         </div>      
         <nav className='hidden md:block'>           
-            <ul className='flex flex-col md:flex-row gap-4 font-semibold items-center'>
+            <ul className='flex flex-col md:flex-row gap-6 font-semibold items-center'>
               <NavLink to="/" className={({ isActive }) => isActive ? "underline px-1.5 py-1" : "hover:cursor-pointer hover:text-lime-600 active:text-lime-800 px-1.5 py-1"}>Home</NavLink>
-              <NavLink to="/shop" className={({ isActive }) => isActive ? "underline px-1.5 py-1" : "hover:cursor-pointer hover:text-lime-600 active:text-lime-800 px-1.5 py-1"}>Shop</NavLink>
-              <NavLink to="/about" className={({ isActive }) => isActive ? "underline px-1.5 py-1" : "hover:cursor-pointer hover:text-lime-600 active:text-lime-800 px-1.5 py-1"}>About</NavLink>
+              <div className='group'>
+                <NavLink to="/shop" className={({ isActive }) => isActive ? "underline py-6 px-4" : "hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-6 px-4"}>Shop</NavLink>
+                <div className='absolute hidden group-hover:flex flex-col bg-emerald-950/85 text-stone-50 gap-2 top-16'>                  
+                  <a className="hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-1 px-2">Book an Event</a>
+                  <a className="hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-1 px-2">Gift Cards</a>                  
+                </div>                
+              </div>
+              <div className='group'>
+              <NavLink to="/about" className={({ isActive }) => isActive ? "underline py-6 px-4" : "hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-6 px-4"}>About</NavLink>                
+                  <div className='absolute hidden group-hover:flex flex-col bg-emerald-950/85 text-stone-50 gap-2 top-16'>
+                    <a className="hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-1 px-2">Blog</a>
+                    <a className="hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-1 px-2">FAQs</a>                  
+                </div>
+              </div>              
               <NavLink to="/contact" className={({ isActive }) => isActive ? "underline px-1.5 py-1" : "hover:cursor-pointer hover:text-lime-600 active:text-lime-800 px-1.5 py-1"}>Contact</NavLink>
               <NavLink to="/login" className={({ isActive }) => isActive ? "bg-lime-800 text-stone-50 rounded-md py-1 px-2" : "bg-stone-50 text-gray-700 hover:bg-lime-700 hover:text-stone-50 active:text-stone-50 active:bg-lime-800 hover:cursor-pointer rounded-md py-1 px-2"}><FaUser className='inline text-lg mr-1'/>Login</NavLink>
               <button onClick={() => setIsModalOpen(true)} className='bg-lime-700 text-stone-50 hover:bg-stone-50 hover:text-gray-700 hover:cursor-pointer active:text-stone-50 active:bg-lime-800 rounded-md py-2 px-4 ml-4'><FaCartShopping className='inline text-lg mr-1'/><span>{totalCartItems}</span></button>
