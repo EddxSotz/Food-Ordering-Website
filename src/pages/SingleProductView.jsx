@@ -1,18 +1,37 @@
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import currencyFormatting from "../utils/currency-formatting";
 import { NavLink } from 'react-router-dom';
+import preloader from "../assets/preloader.svg";
+import Error from "../components/Error.jsx";
+import Popup from "../components/Popup.jsx";
+import { FaCartShopping } from "react-icons/fa6";
+import CartContext from "../store/CartContext.jsx";
+
+
 
 export default function SingleProductView() {
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const cartContext = useContext(CartContext);
+    const [error, setError] = useState(null);
+    const [showPopup, setShowPopup] = useState(false);
     
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowPopup(false);
+        }, 3000); 
+        return () => clearTimeout(timer);
+    }
+    , [showPopup]); 
 
     useEffect(() => {
         window.scrollTo(0, 0);
         document.title = "Product Details - Broccolinni Restaurant";
     }
     , []);
+
     useEffect(() => {
         async function fetchProduct() {
             try {
@@ -28,10 +47,19 @@ export default function SingleProductView() {
                 }                
             } catch (error) {
                 console.error(error);
+                setError(error);
             }
+            setIsLoading(false);
         }
         fetchProduct();
     }, [productId]);
+
+    const handleAddToCart = (product) => {
+    console.log(product);
+    cartContext.addItem(product);
+    setShowPopup(true);   
+  }
+    
 
     return (
         <section className='h-auto pb-24'>
@@ -49,6 +77,12 @@ export default function SingleProductView() {
                 </div>                               
             </div>
             <div className="container mx-auto pt-16 px-4">
+            {isLoading && (
+                <div className="flex justify-center items-center h-screen">
+                    <img src={preloader} alt="Loading..." className="w-2xl" />
+                </div>
+            )}
+            {error && <Error/>}
              {product ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white shadow-lg rounded-lg p-4">
                     <div>
@@ -59,13 +93,14 @@ export default function SingleProductView() {
                         <p className="text-6xl font-bold text-lime-700">{currencyFormatting.format(product.price)}</p>
                         <p className='text-lg text-gray-600'><span>Categories: </span>{product.category}</p>
                         <p className="text-lg text-gray-600">{product.description}</p>                        
-                        <button className='py-2 px-4 mt-4 text-lg font-semibold bg-lime-700 text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50'>Add to Cart</button>                    
+                        <button onClick={()=> handleAddToCart(product)} className='py-2 px-4 mt-4 text-lg font-semibold bg-lime-700 text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50'><FaCartShopping className='inline text-lg mr-1'/>Add to Cart</button>                    
                     </div>                    
                 </div>
              ) : (
                 <p className="text-xl text-red-500">Product not found!</p>
              )}
             </div>
+            {showPopup && <Popup message="Product added to cart!" />}
         </section>
     );
 }
