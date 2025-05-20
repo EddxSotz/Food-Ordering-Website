@@ -14,8 +14,7 @@ export default function SingleProductView() {
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const cartContext = useContext(CartContext);
-    const [error, setError] = useState(null);
+    const cartContext = useContext(CartContext);    
     const [showPopup, setShowPopup] = useState(false);
     
     useEffect(() => {
@@ -46,8 +45,7 @@ export default function SingleProductView() {
                     throw new Error('Product not found!');
                 }                
             } catch (error) {
-                console.error(error);
-                setError(error);
+                console.error(error);                
             }
             setIsLoading(false);
         }
@@ -81,8 +79,7 @@ export default function SingleProductView() {
                 <div className="flex justify-center items-center h-screen">
                     <img src={preloader} alt="Loading..." className="w-2xl" />
                 </div>
-            )}
-            {error && <Error/>}
+            )}            
              {product ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white shadow-lg rounded-lg p-4">
                     <div>
