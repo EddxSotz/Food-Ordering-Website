@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "motion/react"
 import currencyFormatting from "../utils/currency-formatting";
 import CartContext from "../store/CartContext.jsx";
 import Error from "./Error.jsx";
@@ -92,8 +93,8 @@ function Meals({isFiltered="", categoryTitle="All available Meals"}) {
             <div className="hidden md:block group absolute inset-0">
               <div className="invisible group-hover:visible absolute inset-0 bg-gray-500/85">
                 <div className="flex flex-col items-center justify-center h-full gap-4">
-                  <button onClick={()=> handleSeeDetails(meal.id)} className="py-4 px-8 text-xl font-semibold bg-lime-700  text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 rounded-md"><FaEye className='inline text-lg mr-1'/>See Details</button>             
-                  <button onClick={()=> handleAddToCart(meal)} className="py-4 px-8 text-xl font-semibold bg-lime-700  text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 rounded-md"><FaCartShopping className='inline text-lg mr-1'/>Add to Cart</button>
+                  <motion.button onClick={()=> handleSeeDetails(meal.id)} whileHover={{ scale: 1.1 }} className="py-4 px-8 text-xl font-semibold bg-lime-700  text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 rounded-md"><FaEye className='inline text-lg mr-1'/>See Details</motion.button>             
+                  <motion.button onClick={()=> handleAddToCart(meal)} whileHover={{ scale: 1.1 }} className="py-4 px-8 text-xl font-semibold bg-lime-700  text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 rounded-md"><FaCartShopping className='inline text-lg mr-1'/>Add to Cart</motion.button>
                 </div>
               </div>              
             </div>            
