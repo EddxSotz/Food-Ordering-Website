@@ -87,8 +87,8 @@ function Meals({isFiltered="", categoryTitle="All available Meals"}) {
               <h3 className="font-semibold text-xl line-clamp-1">{meal.name}</h3>
               <p className="line-clamp-2">{meal.description}</p>
               <p className="font-bold text-xl text-lime-700 mb-4">{currencyFormatting.format(meal.price)}</p>        
-              <button onClick={()=> handleSeeDetails(meal.id)} className='block md:hidden py-1 px-4 mb-4 w-full text-lg font-semibold bg-lime-700 text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50'><FaEye className='inline text-lg mr-1'/>See Details</button>                   
-              <button onClick={()=> handleAddToCart(meal)} className='block md:hidden py-1 px-4 w-full text-lg font-semibold bg-lime-700 text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50'><FaCartShopping className='inline text-lg mr-1'/>Add to Cart</button>               
+              <motion.button onClick={()=> handleSeeDetails(meal.id)} whileTap={{ scale: 1.1 }} className='block md:hidden py-1 px-4 mb-4 w-full text-lg font-semibold bg-lime-700 text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50'><FaEye className='inline text-lg mr-1'/>See Details</motion.button>                   
+              <motion.button onClick={()=> handleAddToCart(meal)} whileTap={{ scale: 1.1 }} className='block md:hidden py-1 px-4 w-full text-lg font-semibold bg-lime-700 text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50'><FaCartShopping className='inline text-lg mr-1'/>Add to Cart</motion.button>               
             </article>
             <div className="hidden md:block group absolute inset-0">
               <div className="invisible group-hover:visible absolute inset-0 bg-gray-500/85">
