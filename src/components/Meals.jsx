@@ -74,30 +74,32 @@ function Meals({isFiltered="", categoryTitle="All available Meals"}) {
     console.log(meal);
   }
 
+  const handleDiscount = (price) => {
+    const discountPrice = price - price * 0.2;
+    return currencyFormatting.format(discountPrice);
+  }
   return (
     <div className="container mx-auto pt-12 px-4">
-      <h2 className="text-6xl font-bold text-center my-18 font-Zain text-gray-800">{categoryTitle}</h2>      
+      <motion.h2 initial={{opacity:0, y:10}} whileInView={{opacity:100, y:0, transition:{ easeIn: "easeIn", duration:0.5}}} className="text-6xl font-bold text-center my-18 font-Zain text-gray-800">{categoryTitle}</motion.h2>      
       <ul className={`gap-8 mx-auto py-4 px-2 ${isFiltered != "" ? "grid grid-flow-col grid-rows-1 overflow-x-scroll" : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4"}`}>
         {isLoading && <img src={preloader} alt="Loading..." className="w-2xl"></img>}
         {error && <Error/>}
         {!isLoading && meals.map((meal) => (
           <li key={meal.id} className={`relative ${isFiltered != "" ? "w-3xs sm:w-2xs md:w-xs lg:w-sm" : "w-full"} text-center bg-stone-100 text-gray-700 rounded-md shadow-md`}>
             <img src={`https://food-ordering-website-backend-3mwk.onrender.com/${meal.image}`} alt={meal.name} />
-            <article className="pt-2 px-1">              
-              <h3 className="font-semibold text-xl line-clamp-1">{meal.name}</h3>
-              <p className="line-clamp-2">{meal.description}</p>
-              <p className="font-bold text-xl text-lime-700 mb-4">{currencyFormatting.format(meal.price)}</p>        
+            <article className="py-6 px-1">              
+              <h3 className="font-semibold text-xl line-clamp-1 mb-4">{meal.name}</h3>              
+              <p className="font-bold text-2xl text-lime-700 mb-4">{currencyFormatting.format(meal.price)}<span className="ml-2 font-semibold line-through text-xl text-lime-600 mb-4">{handleDiscount(meal.price)}</span> </p>                    
               <motion.button onClick={()=> handleSeeDetails(meal.id)} whileTap={{ scale: 1.1 }} className='block md:hidden py-1 px-4 mb-4 w-full text-lg font-semibold bg-lime-700 text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50'><FaEye className='inline text-lg mr-1'/>See Details</motion.button>                   
               <motion.button onClick={()=> handleAddToCart(meal)} whileTap={{ scale: 1.1 }} className='block md:hidden py-1 px-4 w-full text-lg font-semibold bg-lime-700 text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50'><FaCartShopping className='inline text-lg mr-1'/>Add to Cart</motion.button>               
-            </article>
-            <div className="hidden md:block group absolute inset-0">
-              <div className="invisible group-hover:visible absolute inset-0 bg-gray-500/85">
+            </article>            
+              <motion.div whileHover={{scale:1, opacity:100}} className="absolute hidden md:block opacity-0 inset-0 bg-gray-500/85 hover:cursor-pointer">
                 <div className="flex flex-col items-center justify-center h-full gap-4">
                   <motion.button onClick={()=> handleSeeDetails(meal.id)} whileHover={{ scale: 1.1 }} className="py-4 px-8 text-xl font-semibold bg-lime-700  text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 rounded-md"><FaEye className='inline text-lg mr-1'/>See Details</motion.button>             
                   <motion.button onClick={()=> handleAddToCart(meal)} whileHover={{ scale: 1.1 }} className="py-4 px-8 text-xl font-semibold bg-lime-700  text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 rounded-md"><FaCartShopping className='inline text-lg mr-1'/>Add to Cart</motion.button>
                 </div>
-              </div>              
-            </div>            
+              </motion.div>
+              <span className="absolute top-3 right-3 bg-lime-700 text-stone-50 text-semibold text-lg px-4 py-2 rounded-tl-full rounded-br-full">-20%</span>                         
           </li>
         ))}
       </ul>
