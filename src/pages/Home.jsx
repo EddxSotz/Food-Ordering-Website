@@ -13,11 +13,10 @@ function Home()  {
     return (
         <section className='h-auto pb-24'>
           <HeroSection />          
-          <Meals isFiltered={"favorites"} categoryTitle="Popular Meals"/>
-          <Meals isFiltered={"main"} categoryTitle="Main Dishes"/>
-          <Meals isFiltered={"salads"} categoryTitle="Salads"/>
-          <Meals isFiltered={"desserts"} categoryTitle="Desserts"/>
-          <Slider />                      
+          <Meals isFiltered={"favorites"} categoryTitle="Popular Meals" showAsSlider={true}/>
+          <Meals isFiltered={"main"} categoryTitle="Main Dishes" showAsSlider={true}/>
+          <Meals isFiltered={"salads"} categoryTitle="Salads" showAsSlider={true}/>
+          <Meals isFiltered={"desserts"} categoryTitle="Desserts" showAsSlider={true}/>                                
         </section>
     );
 }
