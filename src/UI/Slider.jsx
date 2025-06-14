@@ -83,8 +83,8 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
                 <button onClick={handlePrevSlide} className={`rounded-full p-4 bg-lime-700 border-2 border-transparent text-stone-50 ${(currentIndex === 0) ? "disabled opacity-50 cursor-not-allowed": "enabled hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 active:border-lime-800"}`} disabled={(currentIndex === 0)}><FaArrowLeft className='text-xl'/></button>
                 <button onClick={handleNextSlide} className={`rounded-full p-4 bg-lime-700 border-2 border-transparent text-stone-50 ${handleButtonDisable() ? "disabled opacity-50 cursor-not-allowed" : "enabled hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 active:border-lime-800"}`} disabled={handleButtonDisable()}><FaArrowRight className='text-xl'/></button>
             </div>            
-            <div className="overflow-x-auto w-full py-2">
-                <div className={`container flex flex-nowrap transform transition-transform duration-400 snap-x`} style={{ transform: `translateX(-${currentIndex * (100 / getgridtemplateColumns())}%)`}}>
+            <div className="md:overflow-x-hidden overflow-x-auto w-full py-2">
+                <div className={`container flex flex-nowrap transform transition-transform duration-400 snap-x snap-mandatory`} style={{ transform: `translateX(-${currentIndex * (100 / getgridtemplateColumns())}%)`}}>
                     {meals.map((meal, index) => (
                     <div key={index} className={` h-full w-full sm:w-1/2 lg:w-1/4 shrink-0 snap-start px-6`}>
                         <div className="relative rounded-md shadow-md text-center">
