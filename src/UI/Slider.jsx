@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import HeroImage from "../assets/HeroImage.png";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import currencyFormatting from "../utils/currency-formatting";
 import { motion } from "framer-motion";
 import { FaCartShopping, FaEye } from "react-icons/fa6";
+import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 
 const slidesExample = [
     { image: HeroImage, title: "Slide 1" },
@@ -17,7 +18,13 @@ const slidesExample = [
 
 export default function Slider({ meals = slidesExample, addToCart, seeDetails, categoryTitle = "All available Meals" }) {
     const [currentIndex, setCurrentIndex] = useState(0);    
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth);            
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    const [currentScrollPosition, setCurrentScrollPosition] = useState({x: 0, y: 0});
+    //const [previousScrollPosition, setPreviousScrollPosition] = useState({x: 0, y: 0});
+    const [sliderWidth, setSliderWidth] = useState(0);
+    const [containerWidth, setContainerWidth] = useState(0);
+    const elementRef = useRef();
+    const containerRef = useRef();          
     
    const handleNextSlide = () => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % meals.length);                        
@@ -41,7 +48,7 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
         if (meals.length % getgridtemplateColumns() != 0 && meals.length >= getgridtemplateColumns()) {
             switch (getgridtemplateColumns()) {
             case 4:
-            if (currentIndex >= (meals.length % 4)) {                
+            if (currentIndex >= ((meals.length - getgridtemplateColumns()))) {                
                 return true;
             }
             break;
@@ -69,12 +76,66 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
     return currencyFormatting.format(discountPrice);
   }   
 
+    useScrollPosition(
+    ({ currPos }) => {
+      //setPreviousScrollPosition(prevPos);
+      setCurrentScrollPosition(currPos)
+    }, [], elementRef, false, 300, containerRef
+  )    
+
     useEffect(() => {
         const handleResize = () => setScreenWidth(window.innerWidth);
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
-    }, []);
+    }, [ screenWidth]);
     
+    
+    useEffect(() => {
+        if (elementRef.current) {
+            setSliderWidth(elementRef.current.scrollWidth);
+        }
+        if (containerRef.current) {
+            setContainerWidth(containerRef.current.clientWidth);
+        }
+    }
+    , [meals, screenWidth]);
+
+/*
+     useEffect(() => {
+        changeIndexOnScroll();
+    }, [currentScrollPosition]);
+*/
+
+    const calculateScrollPercentage = () => {
+        if (sliderWidth > containerWidth) {
+            return Math.round((currentScrollPosition.x / (sliderWidth - containerWidth)) * 100);
+        } else {
+            return 0; // No scrolling needed if slider width is less than or equal to container width
+        }
+    }
+   
+    /*
+    const changeIndexOnScroll = () => {
+        const scrollPercentage = calculateScrollPercentage();
+        const totalItems = meals.length;        
+        const newIndex = Math.floor((scrollPercentage / 100) * totalItems);
+        if (newIndex <= meals.length - getgridtemplateColumns() && newIndex !== currentIndex && meals.length > getgridtemplateColumns()) {
+            setCurrentIndex(newIndex);
+        }
+        return newIndex;
+                 
+    }  
+    */
+
+    console.log("Current Scroll Position:", currentScrollPosition.x);
+    console.log("Slider Width:", sliderWidth);
+    console.log("Container Width:", containerWidth);
+    console.log("Scrolling percentage", calculateScrollPercentage());
+    console.log("Current Index:", currentIndex);
+    //console.log("Index on scroll:", changeIndexOnScroll());
+
+
+   
 
     return (
         <section className="container relative h-auto mx-auto py-12 px-6">
@@ -83,10 +144,10 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
                 <button onClick={handlePrevSlide} className={`rounded-full p-4 bg-lime-700 border-2 border-transparent text-stone-50 ${(currentIndex === 0) ? "disabled opacity-50 cursor-not-allowed": "enabled hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 active:border-lime-800"}`} disabled={(currentIndex === 0)}><FaArrowLeft className='text-xl'/></button>
                 <button onClick={handleNextSlide} className={`rounded-full p-4 bg-lime-700 border-2 border-transparent text-stone-50 ${handleButtonDisable() ? "disabled opacity-50 cursor-not-allowed" : "enabled hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 active:border-lime-800"}`} disabled={handleButtonDisable()}><FaArrowRight className='text-xl'/></button>
             </div>            
-            <div className="md:overflow-x-hidden overflow-x-auto w-full py-2">
-                <div className={`container flex flex-nowrap transform transition-transform duration-400 snap-x snap-mandatory`} style={{ transform: `translateX(-${currentIndex * (100 / getgridtemplateColumns())}%)`}}>
+            <div ref={containerRef} className="overflow-x-auto w-full py-2">
+                <div ref={elementRef} className={`container flex flex-nowrap transform transition-transform duration-400`} style={{ transform: `translateX(-${currentIndex * (100 / getgridtemplateColumns())}%)`}}>
                     {meals.map((meal, index) => (
-                    <div key={index} className={` h-full w-full sm:w-1/2 lg:w-1/4 shrink-0 snap-start px-6`}>
+                    <div key={index} className={` h-full w-full sm:w-1/2 lg:w-1/4 shrink-0 px-6`}>
                         <div className="relative rounded-md shadow-md text-center">
                             <img src={`https://food-ordering-website-backend-3mwk.onrender.com/${meal.image}`} alt={meal.name} />
                             <article className="py-6 px-1">              
