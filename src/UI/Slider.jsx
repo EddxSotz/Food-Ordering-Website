@@ -20,19 +20,35 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
     const [currentIndex, setCurrentIndex] = useState(0);    
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [currentScrollPosition, setCurrentScrollPosition] = useState({x: 0, y: 0});
-    //const [previousScrollPosition, setPreviousScrollPosition] = useState({x: 0, y: 0});
+    const [currentTranslateX, setCurrentTranslateX] = useState("translateX(0%)");
     const [sliderWidth, setSliderWidth] = useState(0);
     const [containerWidth, setContainerWidth] = useState(0);
     const elementRef = useRef();
     const containerRef = useRef();          
     
    const handleNextSlide = () => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % meals.length);                        
+        const maxIndex = meals.length - getgridtemplateColumns();
+
+        if (currentIndex < maxIndex && meals.length > getgridtemplateColumns() && meals.length > 0) {
+            setCurrentIndex((prevIndex) => (prevIndex + 1));                         
+        } else {
+            setCurrentIndex(maxIndex); 
+        }
+        handleTranslateX(currentIndex + 1);                                
     }
 
     const handlePrevSlide = () => {
-        setCurrentIndex((prevIndex) => (prevIndex - 1 + meals.length) % meals.length);        
-    }
+        const maxIndex = meals.length - getgridtemplateColumns();
+
+        if (currentIndex <= maxIndex && currentIndex > 0 && meals.length > getgridtemplateColumns() && meals.length > 0) {
+            setCurrentIndex((prevIndex) => (prevIndex - 1));           
+        } else if (currentIndex > maxIndex) { 
+            setCurrentIndex(maxIndex);            
+        } else {
+            setCurrentIndex(0); 
+        }
+        handleTranslateX( currentIndex - 1);
+   }
  
     const getgridtemplateColumns = () => {        
         if (screenWidth >= 1024) { 
@@ -44,27 +60,10 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
         }
     }
 
-    const handleButtonDisable = () => {        
-        if (meals.length % getgridtemplateColumns() != 0 && meals.length >= getgridtemplateColumns()) {
-            switch (getgridtemplateColumns()) {
-            case 4:
-            if (currentIndex >= ((meals.length - getgridtemplateColumns()))) {                
-                return true;
-            }
-            break;
+    const handleButtonDisable = () => {
+        const maxIndex = meals.length - getgridtemplateColumns();
 
-            case 2:
-            if (currentIndex+1  >= meals.length) {                
-                return true;
-            }
-            break;
-            default:                
-                return false;                        
-            } 
-
-        } else if(meals.length <= getgridtemplateColumns()) {
-            return true;            
-        } else if(currentIndex >= meals.length - getgridtemplateColumns()) {
+        if(currentIndex < 0 || currentIndex >= maxIndex || meals.length <= getgridtemplateColumns()) {
             return true;            
         } else {
             return false;            
@@ -75,12 +74,25 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
     const discountPrice = price - price * 0.2;
     return currencyFormatting.format(discountPrice);
   }   
+    
+    const handleTranslateX = (index) => {
+        const maxIndex = meals.length - getgridtemplateColumns();
+
+        if (index <= 0 || meals.length <= getgridtemplateColumns()) {
+            setCurrentTranslateX("translateX(0%)"); 
+        } else if (index > maxIndex) {
+            setCurrentTranslateX(`translateX(-${(maxIndex * 100) / getgridtemplateColumns()}%)`);
+        }        
+        else {
+            const translateValue = -((index * 100) / getgridtemplateColumns());
+            setCurrentTranslateX(`translateX(${translateValue}%)`);
+        }      
+    }
 
     useScrollPosition(
     ({ currPos }) => {
-      //setPreviousScrollPosition(prevPos);
       setCurrentScrollPosition(currPos)
-    }, [], elementRef, false, 300, containerRef
+    }, [], elementRef, false, 500, containerRef
   )    
 
     useEffect(() => {
@@ -100,43 +112,50 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
     }
     , [meals, screenWidth]);
 
-/*
+
      useEffect(() => {
         changeIndexOnScroll();
     }, [currentScrollPosition]);
-*/
+
 
     const calculateScrollPercentage = () => {
         if (sliderWidth > containerWidth) {
             return Math.round((currentScrollPosition.x / (sliderWidth - containerWidth)) * 100);
         } else {
-            return 0; // No scrolling needed if slider width is less than or equal to container width
+            return 0; 
         }
     }
    
-    /*
+    
     const changeIndexOnScroll = () => {
         const scrollPercentage = calculateScrollPercentage();
-        const totalItems = meals.length;        
-        const newIndex = Math.floor((scrollPercentage / 100) * totalItems);
-        if (newIndex <= meals.length - getgridtemplateColumns() && newIndex !== currentIndex && meals.length > getgridtemplateColumns()) {
-            setCurrentIndex(newIndex);
+        const maxIndex = meals.length - getgridtemplateColumns();               
+        const newIndex = Math.floor((scrollPercentage / 100) * (maxIndex)); // +1 to include the last item in the index calculation
+        
+
+        setTimeout(() => {
+            if (newIndex <= 0) {
+                setCurrentIndex(0);
+            } else if ( newIndex >= maxIndex) {
+                setCurrentIndex(maxIndex);
+                handleTranslateX(maxIndex);
+            }
+            else {
+                setCurrentIndex(newIndex);                
+            }
         }
-        return newIndex;
-                 
+        , 300); ;
+                     
     }  
-    */
+    
+   
 
     console.log("Current Scroll Position:", currentScrollPosition.x);
     console.log("Slider Width:", sliderWidth);
     console.log("Container Width:", containerWidth);
     console.log("Scrolling percentage", calculateScrollPercentage());
     console.log("Current Index:", currentIndex);
-    //console.log("Index on scroll:", changeIndexOnScroll());
-
-
-   
-
+    console.log("Current TranslateX:", currentTranslateX);
     return (
         <section className="container relative h-auto mx-auto py-12 px-6">
             <motion.h2 initial={{opacity:0, y:10}} whileInView={{opacity:100, y:0, transition:{ easeIn: "easeIn", duration:0.5}}} className="text-6xl font-bold text-center my-18 font-Zain text-gray-800">{categoryTitle}</motion.h2>      
@@ -145,9 +164,9 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
                 <button onClick={handleNextSlide} className={`rounded-full p-4 bg-lime-700 border-2 border-transparent text-stone-50 ${handleButtonDisable() ? "disabled opacity-50 cursor-not-allowed" : "enabled hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 active:border-lime-800"}`} disabled={handleButtonDisable()}><FaArrowRight className='text-xl'/></button>
             </div>            
             <div ref={containerRef} className="overflow-x-auto w-full py-2">
-                <div ref={elementRef} className={`container flex flex-nowrap transform transition-transform duration-400`} style={{ transform: `translateX(-${currentIndex * (100 / getgridtemplateColumns())}%)`}}>
+                <div ref={elementRef} className={`container flex flex-nowrap transform transition-transform duration-400`} style={{ transform: currentTranslateX}}>
                     {meals.map((meal, index) => (
-                    <div key={index} className={` h-full w-full sm:w-1/2 lg:w-1/4 shrink-0 px-6`}>
+                    <div key={index} className={` h-full w-full sm:w-1/2 lg:w-1/4 shrink-0 px-6`} >
                         <div className="relative rounded-md shadow-md text-center">
                             <img src={`https://food-ordering-website-backend-3mwk.onrender.com/${meal.image}`} alt={meal.name} />
                             <article className="py-6 px-1">              
