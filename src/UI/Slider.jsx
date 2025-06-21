@@ -22,7 +22,7 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
     const [currentScrollPosition, setCurrentScrollPosition] = useState({x: 0, y: 0});
     const [currentTranslateX, setCurrentTranslateX] = useState("translateX(0%)");
     const [sliderWidth, setSliderWidth] = useState(0);
-    const [containerWidth, setContainerWidth] = useState(0);   ; 
+    const [containerWidth, setContainerWidth] = useState(0);
     const elementRef = useRef();
     const containerRef = useRef();          
     
@@ -119,13 +119,13 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
 
      useEffect(() => {        
         changeIndexOnScroll();
-        //translateOnScroll();
+        translateOnScroll();
     }, [currentScrollPosition]); 
 
 
     const calculateScrollPercentage = () => {
         if (sliderWidth > containerWidth) {
-            return Math.round((currentScrollPosition.x / (sliderWidth - containerWidth)) * 100);
+            return Math.round((currentScrollPosition.x / (sliderWidth - containerWidth)) * 100 + 0.5);
         } else {
             return 0; 
         }
@@ -135,7 +135,7 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
     const changeIndexOnScroll = () => {
         const scrollPercentage = calculateScrollPercentage();
         const maxIndex = meals.length - getgridtemplateColumns();               
-        const newIndex = Math.floor((scrollPercentage / 100) * (maxIndex));         
+        const newIndex = Math.round((scrollPercentage / 100) * (maxIndex));         
 
         setTimeout(() => {
             if (newIndex <= 0) {
@@ -149,7 +149,7 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
         }
         , 300);                     
     }  
-  /*
+  
    const translateOnScroll = () => {
         const scrollPercentage = calculateScrollPercentage();
         const maxIndex = meals.length - getgridtemplateColumns();
@@ -163,21 +163,16 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
             setCurrentTranslateX(`translateX(-${currentScrollToTranslateRatio}%)`);
         }        
        
-        console.log("****Translate on Scroll Values****");
+        {/*console.log("****Translate on Scroll Values****");
         console.log("maximum Scroll Translate %: ", maxScrollTranslateX);
         console.log("Interval Scroll Translate %:", intervalScrollTranslateX);
         console.log("Current Scroll % to Translate x % Ratio:", currentScrollToTranslateRatio);
         console.log("Current Scroll Percentage:", scrollPercentage);
         console.log("Current Index after Scroll:", currentIndex);
-        console.log("Current TranslateX after Scroll:", currentTranslateX);
+        console.log("Current TranslateX after Scroll:", currentTranslateX);*/}
     }
-
-   useEffect(() => {
-    handleTranslateX(currentIndex);
-    translateOnScroll();
-   }, [currentIndex, screenWidth, meals]);
-
-    console.log("****Slider Values****");
+ 
+    {/*console.log("****Slider Values****");
     console.log("Screen Width:", screenWidth);
     console.log("current Scroll Position:", currentScrollPosition.x);
     console.log("Slider Width:", sliderWidth);
@@ -185,17 +180,17 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
     console.log("Scrollable Width:", sliderWidth - containerWidth);
     console.log("Scrolling percentage", calculateScrollPercentage());
     console.log("Current Index:", currentIndex);
-    console.log("Current TranslateX:", currentTranslateX);
-*/
+    console.log("Current TranslateX:", currentTranslateX);*/}
+
     return (
         <section className="container relative h-auto mx-auto py-12 px-6">
             <motion.h2 initial={{opacity:0, y:10}} whileInView={{opacity:100, y:0, transition:{ easeIn: "easeIn", duration:0.5}}} className="text-6xl font-bold text-center my-18 font-Zain text-gray-800">{categoryTitle}</motion.h2>      
             <div className="flex justify-between items-center py-4">            
-                <button onClick={handlePrevSlide} className={`rounded-full p-4 bg-lime-700 border-2 border-transparent text-stone-50 hidden md:block ${(currentIndex === 0) ? "disabled opacity-50 cursor-not-allowed": "enabled hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 active:border-lime-800"}`} disabled={currentIndex === 0 }><FaArrowLeft className='text-xl'/></button>
-                <button onClick={handleNextSlide} className={`rounded-full p-4 bg-lime-700 border-2 border-transparent text-stone-50 hidden md:block ${handleButtonDisable() ? "disabled opacity-50 cursor-not-allowed" : "enabled hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 active:border-lime-800"}`} disabled={handleButtonDisable()}><FaArrowRight className='text-xl'/></button>
+                <button onClick={handlePrevSlide} className={`rounded-full p-4 bg-lime-700 border-2 border-transparent text-stone-50 ${(currentIndex === 0) ? "disabled opacity-50 cursor-not-allowed": "enabled hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 active:border-lime-800"}`} disabled={currentIndex === 0 }><FaArrowLeft className='text-xl'/></button>
+                <button onClick={handleNextSlide} className={`rounded-full p-4 bg-lime-700 border-2 border-transparent text-stone-50 ${handleButtonDisable() ? "disabled opacity-50 cursor-not-allowed" : "enabled hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 active:border-lime-800"}`} disabled={handleButtonDisable()}><FaArrowRight className='text-xl'/></button>
             </div>            
             <div ref={containerRef} className="overflow-x-scroll md:overflow-hidden w-auto py-2 snap-x snap-mandatory">
-                <div ref={elementRef} className={`container flex flex-nowrap transform transition-transform duration-400`} style={{ transform: currentTranslateX }}>
+                <div ref={elementRef} className={`container flex flex-nowrap transform transition-transform duration-400`} style={{ transform: currentTranslateX}}>
                     {meals.map((meal, index) => (
                     <div key={index} className="h-full w-full sm:w-1/2 lg:w-1/4 shrink-0 px-6 snap-start snap-always">
                         <div className="relative rounded-md shadow-md text-center">
