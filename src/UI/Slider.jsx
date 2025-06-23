@@ -30,11 +30,12 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
         const maxIndex = meals.length - getgridtemplateColumns();
 
         if (currentIndex < maxIndex && meals.length > getgridtemplateColumns() && meals.length > 0) {
-            setCurrentIndex((prevIndex) => (prevIndex + 1));                         
-        } else {
-            setCurrentIndex(maxIndex); 
-        }
-        handleTranslateX(currentIndex + 1);                                
+            setCurrentIndex((prevIndex) => (prevIndex + 1));
+            handleTranslateX(currentIndex + 1);                         
+        } else if( currentIndex >= maxIndex) {
+            setCurrentIndex(0);
+            handleTranslateX(0); 
+        }                  
     }
 
     const handlePrevSlide = () => {
@@ -61,7 +62,7 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
     }
 
     const handleButtonDisable = () => {
-        const maxIndex = meals.length - getgridtemplateColumns();
+        const maxIndex = (meals.length - getgridtemplateColumns()) + 1;
 
         if(currentIndex < 0 || currentIndex >= maxIndex || meals.length <= getgridtemplateColumns()) {
             return true;            
@@ -172,7 +173,7 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
         console.log("Current TranslateX after Scroll:", currentTranslateX);*/}
     }
  
-    {/*console.log("****Slider Values****");
+    {console.log("****Slider Values****");
     console.log("Screen Width:", screenWidth);
     console.log("current Scroll Position:", currentScrollPosition.x);
     console.log("Slider Width:", sliderWidth);
@@ -180,7 +181,7 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
     console.log("Scrollable Width:", sliderWidth - containerWidth);
     console.log("Scrolling percentage", calculateScrollPercentage());
     console.log("Current Index:", currentIndex);
-    console.log("Current TranslateX:", currentTranslateX);*/}
+    console.log("Current TranslateX:", currentTranslateX);}
 
     return (
         <section className="container relative h-auto mx-auto py-12 px-6">
@@ -189,15 +190,15 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
                 <button onClick={handlePrevSlide} className={`rounded-full p-4 bg-lime-700 border-2 border-transparent text-stone-50 ${(currentIndex === 0) ? "disabled opacity-50 cursor-not-allowed": "enabled hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 active:border-lime-800"}`} disabled={currentIndex === 0 }><FaArrowLeft className='text-xl'/></button>
                 <button onClick={handleNextSlide} className={`rounded-full p-4 bg-lime-700 border-2 border-transparent text-stone-50 ${handleButtonDisable() ? "disabled opacity-50 cursor-not-allowed" : "enabled hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 active:border-lime-800"}`} disabled={handleButtonDisable()}><FaArrowRight className='text-xl'/></button>
             </div>            
-            <div ref={containerRef} className="overflow-x-scroll md:overflow-hidden w-auto py-2 snap-x snap-mandatory">
+            <div ref={containerRef} className="overflow-x-scroll w-auto py-2 snap-x snap-mandatory">
                 <div ref={elementRef} className={`container flex flex-nowrap transform transition-transform duration-400`} style={{ transform: currentTranslateX}}>
                     {meals.map((meal, index) => (
                     <div key={index} className="h-full w-full sm:w-1/2 lg:w-1/4 shrink-0 px-6 snap-start snap-always">
-                        <div className="relative rounded-md shadow-md text-center">
+                        <div className="relative rounded-md shadow-md text-center bg-[url(/src/assets/food-background.svg)] bg-center bg-cover border-1 border-gray-500/85">
                             <img src={`https://food-ordering-website-backend-3mwk.onrender.com/${meal.image}`} alt={meal.name} />
-                            <article className="py-6 px-1">              
-                                <h3 className="font-semibold text-xl line-clamp-1 mb-4">{meal.name}</h3>              
-                                <p className="font-bold text-2xl text-lime-700 mb-4">{currencyFormatting.format(meal.price)}<span className="ml-2 font-semibold line-through text-xl text-lime-600 mb-4">{handleDiscount(meal.price)}</span> </p>                    
+                            <article className="w-full py-6 px-1">              
+                                <h3 className="font-bold text-gray-800 text-2xl line-clamp-1 mb-4">{meal.name}</h3>              
+                                <p className="font-bold text-3xl text-lime-700 mb-4">{currencyFormatting.format(meal.price)}<span className="ml-2 font-semibold line-through text-2xl text-lime-600 mb-4">{handleDiscount(meal.price)}</span> </p>                    
                                 <motion.button onClick={()=> seeDetails(meal.id)} whileTap={{ scale: 1.1 }} className='block md:hidden py-1 px-4 mb-4 w-full text-lg font-semibold bg-lime-700 text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50'><FaEye className='inline text-lg mr-1'/>See Details</motion.button>                   
                                 <motion.button onClick={()=> addToCart(meal)} whileTap={{ scale: 1.1 }} className='block md:hidden py-1 px-4 w-full text-lg font-semibold bg-lime-700 text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50'><FaCartShopping className='inline text-lg mr-1'/>Add to Cart</motion.button>               
                             </article>            
