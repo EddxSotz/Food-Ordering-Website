@@ -20,35 +20,33 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
     const [currentIndex, setCurrentIndex] = useState(0);    
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [currentScrollPosition, setCurrentScrollPosition] = useState({x: 0, y: 0});
-    const [currentTranslateX, setCurrentTranslateX] = useState("translateX(0%)");
     const [sliderWidth, setSliderWidth] = useState(0);
     const [containerWidth, setContainerWidth] = useState(0);
+    const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(false);
+    //const [isPrevButtonDisabled, setIsPrevButtonDisabled] = useState(false);
     const elementRef = useRef();
     const containerRef = useRef();          
     
    const handleNextSlide = () => {
-        const maxIndex = meals.length - getgridtemplateColumns();
-
-        if (currentIndex < maxIndex && meals.length > getgridtemplateColumns() && meals.length > 0) {
-            setCurrentIndex((prevIndex) => (prevIndex + 1));
-            handleTranslateX(currentIndex + 1);                         
-        } else if( currentIndex >= maxIndex) {
-            setCurrentIndex(0);
-            handleTranslateX(0); 
-        }                  
+        const maxIndex = meals.length - getgridtemplateColumns();        
+            if (currentIndex < maxIndex && meals.length > getgridtemplateColumns() && meals.length > 0) {
+                setCurrentIndex((prevIndex) => (prevIndex + 1));                
+            } else if (currentIndex >= maxIndex) { 
+                setCurrentIndex(maxIndex);                
+            } else {
+                setCurrentIndex(0); 
+            }                                    
     }
 
     const handlePrevSlide = () => {
-        const maxIndex = meals.length - getgridtemplateColumns();
-
-        if (currentIndex <= maxIndex && currentIndex > 0 && meals.length > getgridtemplateColumns() && meals.length > 0) {
-            setCurrentIndex((prevIndex) => (prevIndex - 1));           
-        } else if (currentIndex > maxIndex) { 
-            setCurrentIndex(maxIndex);            
-        } else {
-            setCurrentIndex(0); 
-        }
-        handleTranslateX( currentIndex - 1);
+        const maxIndex = meals.length - getgridtemplateColumns();        
+            if (currentIndex > 0 && meals.length > getgridtemplateColumns() && meals.length > 0) {
+                setCurrentIndex((prevIndex) => (prevIndex - 1));                
+            } else if (currentIndex <= 0) { 
+                setCurrentIndex(0);                
+            } else {
+                setCurrentIndex(maxIndex); 
+            }                            
    }
  
     const getgridtemplateColumns = () => {        
@@ -61,34 +59,22 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
         }
     }
 
-    const handleButtonDisable = () => {
+    const handleNextButtonDisable = () => {
         const maxIndex = (meals.length - getgridtemplateColumns()) + 1;
-
-        if(currentIndex < 0 || currentIndex >= maxIndex || meals.length <= getgridtemplateColumns()) {
-            return true;            
-        } else {
-            return false;            
+        setIsNextButtonDisabled(true);
+        if(currentIndex <= maxIndex && meals.length > getgridtemplateColumns() && meals.length === 0){
+            setTimeout(() => {            
+                setIsNextButtonDisabled(false);            
         }
+        , 500); 
+        }               
     }
 
     const handleDiscount = (price) => {
     const discountPrice = price - price * 0.2;
     return currencyFormatting.format(discountPrice);
   }   
-    
-    const handleTranslateX = (index) => {
-        const maxIndex = meals.length - getgridtemplateColumns();
-
-        if (index <= 0 || meals.length <= getgridtemplateColumns()) {
-            setCurrentTranslateX("translateX(0%)"); 
-        } else if (index > maxIndex) {
-            setCurrentTranslateX(`translateX(-${(maxIndex * 100) / getgridtemplateColumns()}%)`);
-        }        
-        else {
-            const translateValue = -((index * 100) / getgridtemplateColumns());
-            setCurrentTranslateX(`translateX(${translateValue}%)`);
-        }      
-    }
+     
 
     useScrollPosition(
     ({ currPos }) => {
@@ -98,10 +84,9 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
 
     useEffect(() => {
         const handleResize = () => setScreenWidth(window.innerWidth);
-        window.addEventListener("resize", handleResize);        
+        window.addEventListener("resize", handleResize);               
         return () => window.removeEventListener("resize", handleResize);
-    }, [ screenWidth]);
-    
+    }, [ screenWidth]);  
     
     useEffect(() => {
         if (elementRef.current) {
@@ -110,19 +95,22 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
         if (containerRef.current) {
             setContainerWidth(containerRef.current.clientWidth);
         }
-
         setCurrentIndex(0);        
-        handleTranslateX(0);
-        
-    }
-    , [meals, screenWidth]);
+    }, [meals, screenWidth]);
 
 
+  
      useEffect(() => {        
-        changeIndexOnScroll();
-        translateOnScroll();
+        changeIndexOnScroll();        
     }, [currentScrollPosition]); 
+    
 
+    useEffect(() => {
+        scrollOnIndexChange();
+        //handleNextButtonDisable();
+    }, [currentIndex]);
+
+    
 
     const calculateScrollPercentage = () => {
         if (sliderWidth > containerWidth) {
@@ -131,8 +119,7 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
             return 0; 
         }
     }
-   
-   
+      
     const changeIndexOnScroll = () => {
         const scrollPercentage = calculateScrollPercentage();
         const maxIndex = meals.length - getgridtemplateColumns();               
@@ -141,57 +128,60 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
         setTimeout(() => {
             if (newIndex <= 0) {
                 setCurrentIndex(0);                
-            } else if ( newIndex > maxIndex) {
+            } else if ( newIndex >= maxIndex) {
                 setCurrentIndex(maxIndex);                                
-            }
-            else {
-                setCurrentIndex(newIndex);                                
-            }
+            } else if (newIndex > 0 && newIndex < maxIndex) {
+                setCurrentIndex(newIndex);
+            } else {
+                setCurrentIndex(0); 
+            }            
         }
         , 300);                     
     }  
   
-   const translateOnScroll = () => {
-        const scrollPercentage = calculateScrollPercentage();
+   const scrollOnIndexChange = () => {        
         const maxIndex = meals.length - getgridtemplateColumns();
-        const maxScrollTranslateX = ((maxIndex * 100) / getgridtemplateColumns());
-        const intervalScrollTranslateX = (maxScrollTranslateX / maxIndex);
-        const currentScrollToTranslateRatio = scrollPercentage * (maxScrollTranslateX / 100);
+        const scrollableWidth = sliderWidth - containerWidth;
+        const scrollInterval = scrollableWidth / maxIndex;
+        const scrollValue= currentIndex * scrollInterval;                
         
-        if(currentScrollToTranslateRatio <= 0 || meals.length <= getgridtemplateColumns()) {
-            handleTranslateX(0);
-        } else if (currentScrollToTranslateRatio >= intervalScrollTranslateX && currentScrollToTranslateRatio % intervalScrollTranslateX === 0) {
-            setCurrentTranslateX(`translateX(-${currentScrollToTranslateRatio}%)`);
-        }        
+        if(currentIndex > 0 && currentIndex <= maxIndex) {            
+            containerRef.current.scrollLeft = scrollValue;            
+        } else if (currentIndex === 0) {
+            containerRef.current.scrollLeft = 0;
+        } else if (currentIndex > maxIndex) {
+            containerRef.current.scrollLeft = scrollableWidth;
+        } else {
+            containerRef.current.scrollLeft = 0; 
+        }         
        
-        {/*console.log("****Translate on Scroll Values****");
-        console.log("maximum Scroll Translate %: ", maxScrollTranslateX);
-        console.log("Interval Scroll Translate %:", intervalScrollTranslateX);
-        console.log("Current Scroll % to Translate x % Ratio:", currentScrollToTranslateRatio);
-        console.log("Current Scroll Percentage:", scrollPercentage);
-        console.log("Current Index after Scroll:", currentIndex);
-        console.log("Current TranslateX after Scroll:", currentTranslateX);*/}
+        console.log("****Scroll Values****");
+        console.log("Max Index: ", maxIndex);
+        console.log("scrollable Width: ", scrollableWidth);        
+        console.log("Scroll Interval: ", scrollInterval);
+        console.log("Scroll Value: ", scrollValue);
+        console.log("Scroll percentage: ", calculateScrollPercentage());               
     }
  
-    {console.log("****Slider Values****");
-    console.log("Screen Width:", screenWidth);
-    console.log("current Scroll Position:", currentScrollPosition.x);
+    {console.log("****Slider Values****");    
     console.log("Slider Width:", sliderWidth);
     console.log("Container Width:", containerWidth);    
     console.log("Scrollable Width:", sliderWidth - containerWidth);
     console.log("Scrolling percentage", calculateScrollPercentage());
-    console.log("Current Index:", currentIndex);
-    console.log("Current TranslateX:", currentTranslateX);}
+    console.log("current Scroll Position:", currentScrollPosition.x);
+    console.log("Current Index:", currentIndex);   
+    console.log("isNextButtonDisabled:", isNextButtonDisabled); 
+    }
 
     return (
         <section className="container relative h-auto mx-auto py-12 px-6">
             <motion.h2 initial={{opacity:0, y:10}} whileInView={{opacity:100, y:0, transition:{ easeIn: "easeIn", duration:0.5}}} className="text-6xl font-bold text-center my-18 font-Zain text-gray-800">{categoryTitle}</motion.h2>      
             <div className="flex justify-between items-center py-4">            
                 <button onClick={handlePrevSlide} className={`rounded-full p-4 bg-lime-700 border-2 border-transparent text-stone-50 ${(currentIndex === 0) ? "disabled opacity-50 cursor-not-allowed": "enabled hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 active:border-lime-800"}`} disabled={currentIndex === 0 }><FaArrowLeft className='text-xl'/></button>
-                <button onClick={handleNextSlide} className={`rounded-full p-4 bg-lime-700 border-2 border-transparent text-stone-50 ${handleButtonDisable() ? "disabled opacity-50 cursor-not-allowed" : "enabled hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 active:border-lime-800"}`} disabled={handleButtonDisable()}><FaArrowRight className='text-xl'/></button>
+                <button onClick={handleNextSlide} className={`rounded-full p-4 bg-lime-700 border-2 border-transparent text-stone-50 ${isNextButtonDisabled ? "disabled opacity-50 cursor-not-allowed" : "enabled hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 active:border-lime-800"}`} disabled={isNextButtonDisabled}><FaArrowRight className='text-xl'/></button>
             </div>            
-            <div ref={containerRef} className="overflow-x-scroll w-auto py-2 snap-x snap-mandatory">
-                <div ref={elementRef} className={`container flex flex-nowrap transform transition-transform duration-400`} style={{ transform: currentTranslateX}}>
+            <div ref={containerRef} className="overflow-x-scroll w-full py-2 snap-x snap-mandatory scroll scroll-smooth">
+                <div ref={elementRef} className={`container flex flex-nowrap transform transition-transform duration-400`}>
                     {meals.map((meal, index) => (
                     <div key={index} className="h-full w-full sm:w-1/2 lg:w-1/4 shrink-0 px-6 snap-start snap-always">
                         <div className="relative rounded-md shadow-md text-center bg-[url(/src/assets/food-background.svg)] bg-center bg-cover border-1 border-gray-500/85">
@@ -213,8 +203,7 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
                     </div>
                     ))}
                 </div>            
-            </div>
-            
+            </div>            
         </section>
     );
     }
