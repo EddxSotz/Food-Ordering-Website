@@ -22,31 +22,39 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
     const [currentScrollPosition, setCurrentScrollPosition] = useState({x: 0, y: 0});
     const [sliderWidth, setSliderWidth] = useState(0);
     const [containerWidth, setContainerWidth] = useState(0);
-    const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(false);
-    //const [isPrevButtonDisabled, setIsPrevButtonDisabled] = useState(false);
+    //const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(false);
+    //const [isPrevButtonDisabled, setIsPrevButtonDisabled] = useState(true);
     const elementRef = useRef();
     const containerRef = useRef();          
     
    const handleNextSlide = () => {
-        const maxIndex = meals.length - getgridtemplateColumns();        
+        const maxIndex = meals.length - getgridtemplateColumns();
+        //setIsNextButtonDisabled(true);
+        //setIsPrevButtonDisabled(true);    
+        setTimeout(() => {
             if (currentIndex < maxIndex && meals.length > getgridtemplateColumns() && meals.length > 0) {
-                setCurrentIndex((prevIndex) => (prevIndex + 1));                
-            } else if (currentIndex >= maxIndex) { 
-                setCurrentIndex(maxIndex);                
-            } else {
-                setCurrentIndex(0); 
-            }                                    
+                setCurrentIndex((prevIndex) => (prevIndex + 1));
+                //setIsPrevButtonDisabled(false);                                
+            } else if(currentIndex >= maxIndex){ 
+                setCurrentIndex(0);
+                //setIsPrevButtonDisabled(true);                                
+            }
+            //setIsNextButtonDisabled(false);                       
+        }, 300)
     }
 
-    const handlePrevSlide = () => {
-        const maxIndex = meals.length - getgridtemplateColumns();        
-            if (currentIndex > 0 && meals.length > getgridtemplateColumns() && meals.length > 0) {
-                setCurrentIndex((prevIndex) => (prevIndex - 1));                
+    const handlePrevSlide = () => {                
+        //setIsPrevButtonDisabled(true)
+        setTimeout(() => {
+            if (currentIndex >= 1 && meals.length > getgridtemplateColumns() && meals.length > 0) {
+                setCurrentIndex((prevIndex) => (prevIndex - 1));
+                //setIsPrevButtonDisabled((currentIndex-1) === 0);                
             } else if (currentIndex <= 0) { 
-                setCurrentIndex(0);                
-            } else {
-                setCurrentIndex(maxIndex); 
-            }                            
+                setCurrentIndex(0);
+                //setIsPrevButtonDisabled(true)                
+            }
+        }, 300)
+                                        
    }
  
     const getgridtemplateColumns = () => {        
@@ -57,17 +65,6 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
         } else { 
             return 1         
         }
-    }
-
-    const handleNextButtonDisable = () => {
-        const maxIndex = (meals.length - getgridtemplateColumns()) + 1;
-        setIsNextButtonDisabled(true);
-        if(currentIndex <= maxIndex && meals.length > getgridtemplateColumns() && meals.length === 0){
-            setTimeout(() => {            
-                setIsNextButtonDisabled(false);            
-        }
-        , 500); 
-        }               
     }
 
     const handleDiscount = (price) => {
@@ -106,8 +103,7 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
     
 
     useEffect(() => {
-        scrollOnIndexChange();
-        //handleNextButtonDisable();
+        scrollOnIndexChange();        
     }, [currentIndex]);
 
     
@@ -155,30 +151,32 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
             containerRef.current.scrollLeft = 0; 
         }         
        
-        console.log("****Scroll Values****");
+        {/*console.log("****Scroll Values****");
         console.log("Max Index: ", maxIndex);
         console.log("scrollable Width: ", scrollableWidth);        
         console.log("Scroll Interval: ", scrollInterval);
         console.log("Scroll Value: ", scrollValue);
-        console.log("Scroll percentage: ", calculateScrollPercentage());               
+        console.log("Scroll percentage: ", calculateScrollPercentage());    */}           
     }
  
-    {console.log("****Slider Values****");    
+    {/*console.log("****Slider Values****");    
     console.log("Slider Width:", sliderWidth);
     console.log("Container Width:", containerWidth);    
     console.log("Scrollable Width:", sliderWidth - containerWidth);
     console.log("Scrolling percentage", calculateScrollPercentage());
     console.log("current Scroll Position:", currentScrollPosition.x);
+    console.log("max Index:", meals.length - getgridtemplateColumns())
     console.log("Current Index:", currentIndex);   
-    console.log("isNextButtonDisabled:", isNextButtonDisabled); 
-    }
+    //console.log("is Next Button Disabled:", isNextButtonDisabled);
+    //console.log("is Prev Button Disabled:", isPrevButtonDisabled);
+    */}
 
     return (
         <section className="container relative h-auto mx-auto py-12 px-6">
             <motion.h2 initial={{opacity:0, y:10}} whileInView={{opacity:100, y:0, transition:{ easeIn: "easeIn", duration:0.5}}} className="text-6xl font-bold text-center my-18 font-Zain text-gray-800">{categoryTitle}</motion.h2>      
             <div className="flex justify-between items-center py-4">            
-                <button onClick={handlePrevSlide} className={`rounded-full p-4 bg-lime-700 border-2 border-transparent text-stone-50 ${(currentIndex === 0) ? "disabled opacity-50 cursor-not-allowed": "enabled hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 active:border-lime-800"}`} disabled={currentIndex === 0 }><FaArrowLeft className='text-xl'/></button>
-                <button onClick={handleNextSlide} className={`rounded-full p-4 bg-lime-700 border-2 border-transparent text-stone-50 ${isNextButtonDisabled ? "disabled opacity-50 cursor-not-allowed" : "enabled hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 active:border-lime-800"}`} disabled={isNextButtonDisabled}><FaArrowRight className='text-xl'/></button>
+                <button onClick={handlePrevSlide} className={`rounded-full p-4 bg-lime-700 border-2 border-transparent text-stone-50 ${currentIndex === 0 ? "disabled opacity-50 cursor-not-allowed": "enabled hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 active:border-lime-800"}`} disabled={currentIndex === 0}><FaArrowLeft className='text-xl'/></button>
+                <button onClick={handleNextSlide} className={`rounded-full p-4 bg-lime-700 border-2 border-transparent text-stone-50 ${meals.length <= getgridtemplateColumns() ? "disabled opacity-50 cursor-not-allowed" : "enabled hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50 active:border-lime-800"}`} disabled={meals.length <= getgridtemplateColumns()}><FaArrowRight className='text-xl'/></button>
             </div>            
             <div ref={containerRef} className="overflow-x-scroll w-full py-2 snap-x snap-mandatory scroll scroll-smooth">
                 <div ref={elementRef} className={`container flex flex-nowrap transform transition-transform duration-400`}>
