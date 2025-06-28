@@ -24,7 +24,7 @@ function HeroSection() {
         <motion.div variants={animationItem} whileInView={{scale:1.05, transition: {type: "easeInOut", duration: 1.6, repeat: Infinity, repeatType: "reverse", repeatDelay: 0.15}}}>
           <img src={HeroImage} alt="Delicious food" className="w-full h-auto"/>
         </motion.div>
-        <motion.div className="absolute top-20 left-20 lg:w-48 md:w-34 w-18 h-auto z-10" variants={animationItem} whileInView={{rotate:12, transition: {type: "easeInOut", duration: 3, repeat: Infinity, repeatType: "reverse", repeatDelay: 0.25}}}>
+        <motion.div className="absolute top-20 left-20 lg:w-48 md:w-34 w-18 h-auto z-10" initial={{ opacity: 0, y:30 }} animate={{opacity: 1, y:0, transition:{ easeIn: "easeIn", type: "spring", stiffness: 50, duration:1}}} whileInView={{rotate:12, transition: {type: "easeInOut", duration: 3, repeat: Infinity, repeatType: "reverse", repeatDelay: 0.25}}}>
               <img src={DiscountImage} alt="Discount" className="w-full h-auto"/>
         </motion.div>                            
     </motion.div>

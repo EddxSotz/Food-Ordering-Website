@@ -61,18 +61,18 @@ function Header() {
           )}                
         </div>      
         <nav className='hidden md:block'>           
-            <ul className='flex flex-col md:flex-row gap-6 font-semibold items-center'>
-              <NavLink to="/" className={({ isActive }) => isActive ? "underline px-1.5 py-1" : "hover:cursor-pointer hover:text-lime-600 active:text-lime-800 px-1.5 py-1"}>Home</NavLink>
-              <div className='group'>
+            <ul className='grid grid-cols-6 md:flex-row gap-6 font-semibold items-center'>
+              <NavLink to="/" className={({ isActive }) => isActive ? "underline px-1.5 py-1 text-center" : "hover:cursor-pointer hover:text-lime-600 active:text-lime-800 text-center px-1.5 py-1"}>Home</NavLink>
+              <div className='relative group'>
                 <NavLink to="/shop" className={({ isActive }) => isActive ? "underline py-6 px-4" : "hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-6 px-4"}>Shop</NavLink>
-                <div className='absolute hidden group-hover:flex flex-col bg-emerald-950/85 text-stone-50 gap-2 top-16'>                  
+                <div className='absolute hidden group-hover:flex flex-col bg-emerald-950/85 text-stone-50 w-full gap-2 top-11'>                  
                   <a className="hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-1 px-2">Book an Event</a>
                   <a className="hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-1 px-2">Gift Cards</a>                  
                 </div>                
               </div>
-              <div className='group'>
+              <div className='relative group'>
               <NavLink to="/about" className={({ isActive }) => isActive ? "underline py-6 px-4" : "hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-6 px-4"}>About</NavLink>                
-                  <div className='absolute hidden group-hover:flex flex-col bg-emerald-950/85 text-stone-50 gap-2 top-16'>
+                  <div className='absolute hidden group-hover:flex flex-col bg-emerald-950/85 text-stone-50 w-full gap-2 top-11'>
                     <a className="hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-1 px-2">Blog</a>
                     <a className="hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-1 px-2">FAQs</a>                  
                 </div>

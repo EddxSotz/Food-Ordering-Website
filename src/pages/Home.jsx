@@ -15,7 +15,7 @@ function Home()  {
         <section className='h-auto pb-24'>
           <HeroSection />          
           <Meals isFiltered={"favorites"} categoryTitle="Popular Meals" showAsSlider={true}/>
-          <Banner offerDiscount="Save 20% off" productTitle="Broccolinni Special Pizza" productPrice="$12.99" imageUrl={BannerFeaturedMeal}/>
+          <Banner offerDiscount="Save 20% off" productTitle="Broccolinni Special Burger" productPrice="$12.99" imageUrl={BannerFeaturedMeal}/>
           <Meals isFiltered={"main"} categoryTitle="Main Dishes" showAsSlider={true}/>
           <Meals isFiltered={"salads"} categoryTitle="Salads" showAsSlider={true}/>
           <Meals isFiltered={"desserts"} categoryTitle="Desserts" showAsSlider={true}/>                                
