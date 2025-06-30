@@ -1,13 +1,22 @@
 import Meals from '../components/Meals';
-import { useEffect } from 'react';
+import FilterProducts from '../components/FilterProducts';
+import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 function Shop() {
+  const [activeFilter, setActiveFilter] = useState("");
+  const [activeTitle, setActiveTitle] = useState("");
+
+  const handleFilter = (category)=> {
+    setActiveFilter(category)
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0);
     document.title = "Shop - Broccolinni Restaurant";
   }, []);
+
+  console.log("active Filter", activeFilter);
 
   return (
     <div className='h-auto pb-24'>
@@ -23,8 +32,9 @@ function Shop() {
                         <p className='text-lime-600 font-semibold text-lg inline-block'>Shop</p>
                     </div> 
                 </div>                               
-        </div>      
-      <Meals />
+        </div>
+      <FilterProducts mealCategory ={handleFilter}/>      
+      <Meals isFiltered={activeFilter} categoryTitle={activeTitle}/>
     </div>
   );
 }
