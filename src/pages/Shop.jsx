@@ -9,6 +9,7 @@ function Shop() {
 
   const handleFilter = (category)=> {
     setActiveFilter(category)
+    setActiveTitle(category.charAt(0).toUpperCase() + category.slice(1));
   }
 
   useEffect(() => {
@@ -33,8 +34,8 @@ function Shop() {
                     </div> 
                 </div>                               
         </div>
-      <FilterProducts mealCategory ={handleFilter}/>      
-      <Meals isFiltered={activeFilter} categoryTitle={activeTitle}/>
+      <FilterProducts mealCategory ={handleFilter}/>            
+      <Meals isFiltered={activeFilter} categoryTitle={activeTitle} key={activeFilter}/>
     </div>
   );
 }
