@@ -88,9 +88,9 @@ function Meals({isFiltered="", showAsSlider=false, categoryTitle="All available 
         <Slider meals={meals} addToCart={handleAddToCart} seeDetails={handleSeeDetails} categoryTitle={categoryTitle}/>                
         ) : (
           <>
-          <div className="container mx-auto pt-12 px-4">
+          <div className="container mx-auto px-4 py-8">
             <motion.h2 initial={{opacity:0, y:10}} whileInView={{opacity:100, y:0, transition:{ easeIn: "easeIn", duration:0.5}}} className="text-6xl font-bold text-center my-18 font-Zain text-gray-800">{categoryTitle}</motion.h2>      
-            <ul className={`gap-8 mx-auto py-4 px-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4`}>                    
+            <ul className={`gap-8 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4`}>                    
               {!isLoading && meals.map((meal) => (
                 <li key={meal.id} className={`relative text-center bg-stone-100 text-gray-700 rounded-md shadow-md`}>
                   <img src={`https://food-ordering-website-backend-3mwk.onrender.com/${meal.image}`} alt={meal.name} />
