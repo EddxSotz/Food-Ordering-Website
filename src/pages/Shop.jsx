@@ -20,7 +20,7 @@ function Shop() {
   console.log("active Filter", activeFilter);
 
   return (
-    <div className='h-auto pb-24'>
+    <div className='h-auto pb-24 relative'>
       <div className="bg-emerald-950 pt-40 pb-16">
                 <div className='container mx-auto flex flex-row justify-between items-center'>
                     <div>
