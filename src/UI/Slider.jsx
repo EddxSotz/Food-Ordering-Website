@@ -21,37 +21,27 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [currentScrollPosition, setCurrentScrollPosition] = useState({x: 0, y: 0});
     const [sliderWidth, setSliderWidth] = useState(0);
-    const [containerWidth, setContainerWidth] = useState(0);
-    //const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(false);
-    //const [isPrevButtonDisabled, setIsPrevButtonDisabled] = useState(true);
-    const elementRef = useRef();
-    const containerRef = useRef();          
+    const [containerWidth, setContainerWidth] = useState(0);    
+    const containerRef = useRef();
+    const elementRef = useRef();          
     
    const handleNextSlide = () => {
-        const maxIndex = meals.length - getgridtemplateColumns();
-        //setIsNextButtonDisabled(true);
-        //setIsPrevButtonDisabled(true);    
+        const maxIndex = meals.length - getgridtemplateColumns();            
         setTimeout(() => {
             if (currentIndex < maxIndex && meals.length > getgridtemplateColumns() && meals.length > 0) {
-                setCurrentIndex((prevIndex) => (prevIndex + 1));
-                //setIsPrevButtonDisabled(false);                                
+                setCurrentIndex((prevIndex) => (prevIndex + 1));                                                
             } else if(currentIndex >= maxIndex){ 
-                setCurrentIndex(0);
-                //setIsPrevButtonDisabled(true);                                
-            }
-            //setIsNextButtonDisabled(false);                       
+                setCurrentIndex(0);                                               
+            }                                
         }, 300)
     }
 
-    const handlePrevSlide = () => {                
-        //setIsPrevButtonDisabled(true)
+    const handlePrevSlide = () => {                       
         setTimeout(() => {
             if (currentIndex >= 1 && meals.length > getgridtemplateColumns() && meals.length > 0) {
-                setCurrentIndex((prevIndex) => (prevIndex - 1));
-                //setIsPrevButtonDisabled((currentIndex-1) === 0);                
+                setCurrentIndex((prevIndex) => (prevIndex - 1));                                
             } else if (currentIndex <= 0) { 
-                setCurrentIndex(0);
-                //setIsPrevButtonDisabled(true)                
+                setCurrentIndex(0);                               
             }
         }, 300)
                                         
@@ -149,27 +139,8 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
             containerRef.current.scrollLeft = scrollableWidth;
         } else {
             containerRef.current.scrollLeft = 0; 
-        }         
-       
-        {/*console.log("****Scroll Values****");
-        console.log("Max Index: ", maxIndex);
-        console.log("scrollable Width: ", scrollableWidth);        
-        console.log("Scroll Interval: ", scrollInterval);
-        console.log("Scroll Value: ", scrollValue);
-        console.log("Scroll percentage: ", calculateScrollPercentage());    */}           
-    }
- 
-    {/*console.log("****Slider Values****");    
-    console.log("Slider Width:", sliderWidth);
-    console.log("Container Width:", containerWidth);    
-    console.log("Scrollable Width:", sliderWidth - containerWidth);
-    console.log("Scrolling percentage", calculateScrollPercentage());
-    console.log("current Scroll Position:", currentScrollPosition.x);
-    console.log("max Index:", meals.length - getgridtemplateColumns())
-    console.log("Current Index:", currentIndex);   
-    //console.log("is Next Button Disabled:", isNextButtonDisabled);
-    //console.log("is Prev Button Disabled:", isPrevButtonDisabled);
-    */}
+        }                                
+    }    
 
     return (
         <section className="container relative h-auto mx-auto py-12 px-6">
