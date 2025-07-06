@@ -2,6 +2,7 @@ import logo from '../assets/logo.png';
 import { FaCartShopping, FaUser, FaBurger } from "react-icons/fa6";
 import { useState, useRef, useContext } from "react";
 import { NavLink } from "react-router-dom"
+import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import CartContext from "../store/CartContext.jsx";
 import Modal from '../UI/Modal.jsx';
 import CartContents from '../components/CartContents.jsx';
@@ -10,6 +11,7 @@ import CartContents from '../components/CartContents.jsx';
 function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [navToggle, setNavToggle] = useState(false);
+  const [changeStyleOnScroll, setchangeStyleOnScroll] = useState(true)
   const mobileNavRef = useRef();
 
   const cartCtx = useContext(CartContext);
@@ -29,9 +31,15 @@ function Header() {
       return;
     }
   }
+useScrollPosition(({ prevPos, currPos }) => {
+  const isScrolledDown = currPos.y > prevPos.y
+  if (isScrolledDown !== changeStyleOnScroll) {
+    setchangeStyleOnScroll(isScrolledDown);
+  }
+}, [changeStyleOnScroll])
 
   return (
-    <section className='fixed top-0 flex flex-col items-center text-stone-50 w-full py-2 bg-emerald-950/85 z-40' >
+    <section className={`fixed top-0 flex flex-col items-center text-stone-50 w-full py-2 ${changeStyleOnScroll ? "bg-emerald-950/50" : "bg-emerald-950"} z-40`} >
       <header className='w-4/5 mx-auto flex flex-row justify-between items-center'>
         <div>
             <NavLink to="/" className='flex flex-row items-center'>
@@ -65,14 +73,14 @@ function Header() {
               <NavLink to="/" className={({ isActive }) => isActive ? "underline px-1.5 py-1 text-center" : "hover:cursor-pointer hover:text-lime-600 active:text-lime-800 text-center px-1.5 py-1"}>Home</NavLink>
               <div className='relative group'>
                 <NavLink to="/shop" className={({ isActive }) => isActive ? "underline py-6 px-4" : "hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-6 px-4"}>Shop</NavLink>
-                <div className='absolute hidden group-hover:flex flex-col bg-emerald-950/85 text-stone-50 w-full gap-2 top-11'>                  
+                <div className={`absolute hidden group-hover:flex flex-col text-stone-50 w-full gap-2 top-11 ${changeStyleOnScroll ? "bg-emerald-950/50" : "bg-emerald-950"}`}>                  
                   <a className="hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-1 px-2">Book an Event</a>
                   <a className="hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-1 px-2">Gift Cards</a>                  
                 </div>                
               </div>
               <div className='relative group'>
               <NavLink to="/about" className={({ isActive }) => isActive ? "underline py-6 px-4" : "hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-6 px-4"}>About</NavLink>                
-                  <div className='absolute hidden group-hover:flex flex-col bg-emerald-950/85 text-stone-50 w-full gap-2 top-11'>
+                  <div className={`absolute hidden group-hover:flex flex-col text-stone-50 w-full gap-2 top-11 ${changeStyleOnScroll ? "bg-emerald-950/50" : "bg-emerald-950"}`}>
                     <a className="hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-1 px-2">Blog</a>
                     <a className="hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-1 px-2">FAQs</a>                  
                 </div>

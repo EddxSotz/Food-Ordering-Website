@@ -4,7 +4,7 @@ const availableCategories =["favorites", "main", "salads", "desserts"]
 function FilterProducts ({mealCategory}) {        
 
     return (
-        <section className='flex flex-col items-start absolute left-1/2 mt-8 z-50 -translate-x-1/2'>            
+        <section className='flex flex-col items-start absolute left-1/2 mt-8 z-30 -translate-x-1/2'>            
             <details className='text-md font-semibold text-gray-800 bg-white border border-gray-300 rounded-lg'>
                 <summary className='px-4 py-2 hover:cursor-pointer'>Filter by Category</summary>
                 <div>
