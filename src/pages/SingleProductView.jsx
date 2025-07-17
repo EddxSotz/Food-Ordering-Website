@@ -52,8 +52,7 @@ export default function SingleProductView() {
         fetchProduct();
     }, [productId]);
 
-    const handleAddToCart = (product) => {
-    console.log(product);
+    const handleAddToCart = (product) => {    
     cartContext.addItem(product);
     setShowPopup(true);   
   }

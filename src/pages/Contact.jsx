@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Contact = () => {
     
@@ -9,6 +10,20 @@ const Contact = () => {
     , []);
     
     return (
+        <>
+        <div className="bg-emerald-950 pt-40 px-4 pb-16">
+                <div className='container mx-auto flex flex-row justify-between items-center'>
+                    <div>
+                        <p className='text-lime-600 font-semibold mb-4'>// Get in Touch</p>
+                        <h1 className="text-6xl font-bold text-white font-Zain">Shop</h1>
+                    </div>
+                    <div>
+                        <NavLink to="/" className="text-lime-600 font-semibold text-lg hover:underline">Home</NavLink>
+                        <span className="text-lime-600 font-semibold text-lg"> / </span>
+                        <p className='text-lime-700 font-semibold text-lg inline-block'>Contact Us</p>
+                    </div> 
+                </div>                               
+        </div>
         <div className="container h-auto md:h-full mx-auto p-4 pt-18 text-gray-800 text-center">
             <h1 className="text-6xl mb-6 mt-12 font-Charm">Contact Us</h1>
             <p className="text-xl mb-6">We'd love to hear from you! Reach out to us using the information below:</p>
@@ -43,6 +58,7 @@ const Contact = () => {
                 </p>
             </div>
         </div>
+        </>
     );
 };
 

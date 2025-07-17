@@ -3,6 +3,7 @@ import { FaCartShopping, FaUser, FaBurger } from "react-icons/fa6";
 import { useState, useRef, useContext } from "react";
 import { NavLink } from "react-router-dom"
 import { useScrollPosition } from '@n8tb1t/use-scroll-position'
+import { useLocation } from 'react-router-dom';
 import CartContext from "../store/CartContext.jsx";
 import Modal from '../UI/Modal.jsx';
 import CartContents from '../components/CartContents.jsx';
@@ -11,7 +12,7 @@ import CartContents from '../components/CartContents.jsx';
 function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [navToggle, setNavToggle] = useState(false);
-  const [changeStyleOnScroll, setchangeStyleOnScroll] = useState(true)
+  const [changeStyleOnScroll, setchangeStyleOnScroll] = useState(true);  
   const mobileNavRef = useRef();
 
   const cartCtx = useContext(CartContext);
@@ -31,15 +32,17 @@ function Header() {
       return;
     }
   }
-useScrollPosition(({ prevPos, currPos }) => {
-  const isScrolledDown = currPos.y > prevPos.y
-  if (isScrolledDown !== changeStyleOnScroll) {
-    setchangeStyleOnScroll(isScrolledDown);
+useScrollPosition(({ currPos }) => {
+  const isScrolledDown = currPos.y > 0;  
+  if (isScrolledDown) {
+    setchangeStyleOnScroll(false);
+  } else {
+    setchangeStyleOnScroll(true);
   }
-}, [changeStyleOnScroll])
+}, [changeStyleOnScroll], false, true, 300);
 
   return (
-    <section className={`fixed top-0 flex flex-col items-center text-stone-50 w-full py-2 ${changeStyleOnScroll ? "bg-emerald-950/50" : "bg-emerald-950"} z-40`} >
+    <section className={`fixed top-0 flex flex-col items-center text-stone-50 w-full py-2 transition-all duration-200 ${changeStyleOnScroll ? "bg-emerald-950/50" : "bg-emerald-950"} z-40`} >
       <header className='w-4/5 mx-auto flex flex-row justify-between items-center'>
         <div>
             <NavLink to="/" className='flex flex-row items-center'>
