@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 
 function About () {
 
@@ -8,7 +9,21 @@ function About () {
         }
         , []);
 
-    return (<>
+    return (
+    <>
+        <div className="bg-emerald-950 pt-40 px-4 pb-16">
+                <div className='container mx-auto flex flex-row justify-between items-center'>
+                    <div>
+                        <p className='text-lime-600 font-semibold mb-4'>// Get to know us</p>
+                        <h1 className="text-6xl font-bold text-white font-Zain">About</h1>
+                    </div>
+                    <div>
+                        <NavLink to="/" className="text-lime-600 font-semibold text-lg hover:underline">Home</NavLink>
+                        <span className="text-lime-600 font-semibold text-lg"> / </span>
+                        <p className='text-lime-700 font-semibold text-lg inline-block'>About</p>
+                    </div> 
+                </div>                               
+        </div>
         <div className="container h-auto mx-auto px-4 py-8 pt-18 text-gray-800 text-center">
             <h1 className="text-6xl font-bold text-center mb-4 mt-12 font-Charm">About Us</h1>
             <p className="text-lg text-center mb-8">

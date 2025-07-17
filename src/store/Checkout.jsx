@@ -1,5 +1,6 @@
 import {useContext, useState, useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 import { FaArrowLeft, FaArrowRight, FaTrashCan } from "react-icons/fa6";
 import CartContext from '../store/CartContext.jsx';
 import currencyFormatting from '../utils/currency-formatting.js';
@@ -49,6 +50,20 @@ export default function Checkout () {
     , [cartCtx.cartItems]);
 
     return (
+        <>
+        <div className="bg-emerald-950 pt-40 px-4 pb-16">
+                <div className='container mx-auto flex flex-row justify-between items-center'>
+                    <div>
+                        <p className='text-lime-600 font-semibold mb-4'>// Your Order</p>
+                        <h1 className="text-6xl font-bold text-white font-Zain">Checkout</h1>
+                    </div>
+                    <div>
+                        <NavLink to="/" className="text-lime-600 font-semibold text-lg hover:underline">Home</NavLink>
+                        <span className="text-lime-600 font-semibold text-lg"> / </span>
+                        <p className='text-lime-700 font-semibold text-lg inline-block'>Checkout</p>
+                    </div> 
+                </div>                               
+        </div>
         <section className='container lg:h-full h-auto mx-auto py-28 px-4 relative'>                                       
             {isFormVisible ? (
                 <>                
@@ -57,8 +72,7 @@ export default function Checkout () {
                 </>
             ): (
                 <div className='grid grid-cols-1 lg:grid-cols-3 lg:gap-4'>
-                    <div className='col-span-2'>
-                        <h1 className='text-6xl text-gray-700 mb-8 font-Charm font-semibold'>Checkout</h1>                         
+                    <div className='col-span-2'>                                                 
                         { !isCartEmpty ? (                        
                         <ul className='mb-12 overflow-y-scroll h-124 shadow-md'>
                             {cartCtx.cartItems.map((item) => (
@@ -94,5 +108,6 @@ export default function Checkout () {
                 </div>
             )}                                  
         </section>
+        </>
     );
 }

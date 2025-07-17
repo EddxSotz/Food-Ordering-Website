@@ -64,15 +64,13 @@ function Meals({isFiltered="", showAsSlider=false, categoryTitle="All available 
     , []);    
 
 
-  const handleAddToCart = (meal) => {
-    console.log(meal);
+  const handleAddToCart = (meal) => {    
     cartContext.addItem(meal);
     setShowPopup(true);   
   }
 
   const handleSeeDetails = (meal) => {
-    navigate(`/shop/${meal}`);
-    console.log(meal);
+    navigate(`/shop/${meal}`);    
   }
 
   const handleDiscount = (price) => {
