@@ -34,8 +34,7 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
                     modules={[Navigation, Autoplay]}
                     spaceBetween={20}
                     slidesPerView={1}
-                    navigation={{ nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }}                    
-                    autoplay={{ delay: 3000, disableOnInteraction: false }}                                                
+                    navigation={{ nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }}                                                                                      
                     speed={1000}
                     loop={false}
                     breakpoints={{
@@ -43,7 +42,7 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
                         slidesPerView: 2,
                         },
                         768: {
-                        slidesPerView: 3,
+                        slidesPerView: 3,                        
                         },
                         1024: {
                         slidesPerView: 4,

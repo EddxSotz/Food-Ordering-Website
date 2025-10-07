@@ -3,7 +3,6 @@ import { FaCartShopping, FaUser, FaBurger } from "react-icons/fa6";
 import { useState, useRef, useContext } from "react";
 import { NavLink } from "react-router-dom"
 import { useScrollPosition } from '@n8tb1t/use-scroll-position'
-import { useLocation } from 'react-router-dom';
 import CartContext from "../store/CartContext.jsx";
 import Modal from '../UI/Modal.jsx';
 import CartContents from '../components/CartContents.jsx';
@@ -77,7 +76,7 @@ useScrollPosition(({ currPos }) => {
               <div className='relative group'>
                 <NavLink to="/shop" className={({ isActive }) => isActive ? "underline py-6 px-4" : "hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-6 px-4"}>Shop</NavLink>
                 <div className={`absolute hidden group-hover:flex flex-col text-stone-50 w-full gap-2 top-11 ${changeStyleOnScroll ? "bg-emerald-950/50" : "bg-emerald-950"}`}>                  
-                  <a className="hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-1 px-2">Book an Event</a>
+                  <NavLink to="/book-event" className="hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-1 px-2">Book an Event</NavLink>
                   <a className="hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-1 px-2">Gift Cards</a>                  
                 </div>                
               </div>

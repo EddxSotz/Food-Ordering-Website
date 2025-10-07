@@ -11,6 +11,7 @@ const Checkout = lazy(() => import('./store/Checkout.jsx'));
 const Shop = lazy(() => import('./pages/Shop.jsx'));
 const Login = lazy(() => import('./pages/Login.jsx'));
 const SingleProductView = lazy(() => import('./pages/SingleProductView.jsx'));
+const BookEvent = lazy(() => import('./pages/BookEvent.jsx'));
 
 function App() {
  
@@ -27,6 +28,7 @@ function App() {
             <Route path="/checkout" element={<Checkout />}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/shop/:productId" element={<SingleProductView/>}/>
+            <Route path="/book-event" element={<BookEvent/>}/>
             <Route path="*" element={<h1 className='text-3xl text-center'>404 Not Found</h1>}/>     
         </Routes>
       </Suspense>
