@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "motion/react"
 import currencyFormatting from "../utils/currency-formatting";
 import CartContext from "../store/CartContext.jsx";
+// biome-ignore lint/suspicious/noShadowRestrictedNames: false positive
 import Error from "./Error.jsx";
 import preloader from "../assets/preloader.svg";
 import Popup from "./Popup.jsx";
@@ -18,12 +19,12 @@ function Meals({isFiltered="", showAsSlider=false, categoryTitle="All available 
     const navigate = useNavigate();
 
     useEffect(() => {
+        if (!showPopup) return;
         const timer = setTimeout(() => {
             setShowPopup(false);
         }, 3000); 
         return () => clearTimeout(timer);
-    }
-    , [showPopup]);  
+    }, [showPopup]);  
  
     useEffect(() => {      
         async function fetchMeals() {
@@ -61,7 +62,7 @@ function Meals({isFiltered="", showAsSlider=false, categoryTitle="All available 
            }        
     fetchMeals();    
     }
-    , []);    
+    , [isFiltered]);    
 
 
   const handleAddToCart = (meal) => {    
@@ -84,8 +85,7 @@ function Meals({isFiltered="", showAsSlider=false, categoryTitle="All available 
       {showPopup && <Popup message="Item added to cart!" />}
       {showAsSlider ? (
         <Slider meals={meals} addToCart={handleAddToCart} seeDetails={handleSeeDetails} categoryTitle={categoryTitle}/>                
-        ) : (
-          <>
+        ) : (          
           <div className="container mx-auto px-4 py-8">
             <motion.h2 initial={{opacity:0, y:10}} whileInView={{opacity:100, y:0, transition:{ easeIn: "easeIn", duration:0.5}}} className="text-6xl font-bold text-center my-18 font-Zain text-gray-800">{categoryTitle}</motion.h2>      
             <ul className={`gap-8 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4`}>                    
@@ -108,8 +108,7 @@ function Meals({isFiltered="", showAsSlider=false, categoryTitle="All available 
                 </li>
               ))}
             </ul>        
-          </div>
-          </>
+          </div>          
       )}            
     </section>
   );

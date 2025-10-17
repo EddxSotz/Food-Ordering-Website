@@ -12,14 +12,42 @@ function FilterProducts ({mealCategory}) {
         setIsFilterOpen(!isFilterOpen);
     };
     return (
-        <section className='flex flex-col items-start absolute left-1/2 mt-8 z-30 -translate-x-1/2' onClick={handleFilterToggle}>            
+        <section className='flex flex-col items-start absolute left-1/2 mt-8 z-30 -translate-x-1/2'>            
             <div className='text-md text-gray-800 bg-white border border-gray-300 rounded-lg'>
-                <p className='px-4 py-2 font-semibold hover:cursor-pointer'>Filter by Category</p>
+                <button
+                    type="button"
+                    aria-expanded={isFilterOpen}
+                    aria-controls="filter-list"
+                    className='px-4 py-2 font-semibold hover:cursor-pointer'
+                    onClick={handleFilterToggle}
+                >
+                    Filter by Category
+                </button>
                 {isFilterOpen && (
-                    <ul>
-                    <li className={`px-4 py-2 w-full border-b border-gray-200 list-none hover:bg-gray-200 hover:cursor-pointer`} onClick={() => handleCategoryClick("")}>All</li>
+// biome-ignore lint/correctness/useUniqueElementIds: <explanation>
+<ul id="filter-list">
+                    <li
+                        className={`px-4 py-2 w-full border-b border-gray-200 list-none hover:bg-gray-200 hover:cursor-pointer`}
+                        onClick={() => handleCategoryClick("")}
+                        onKeyUp={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                handleCategoryClick("");
+                            }
+                        }}
+                    >
+                        All
+                    </li>
                     {availableCategories.map((category) => (                    
-                            <li key={category} className={`px-4 py-2 w-full border-b border-gray-200 list-none hover:bg-gray-200 hover:cursor-pointer`}  onClick={ () => handleCategoryClick(category) }>                                
+                            <li
+                                key={category}
+                                className={`px-4 py-2 w-full border-b border-gray-200 list-none hover:bg-gray-200 hover:cursor-pointer`}
+                                onClick={() => handleCategoryClick(category)}
+                                onKeyUp={(e) => {
+                                    if (e.key === 'Enter' || e.key === ' ') {
+                                        handleCategoryClick(category);
+                                    }
+                                }}
+                            >                                
                                 {category}
                             </li>                    
                     ))}

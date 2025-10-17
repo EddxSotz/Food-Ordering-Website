@@ -50,7 +50,7 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
                     }}
                 >                
                         {meals.map((meal, index) => (
-                        <SwiperSlide key={index}>
+                        <SwiperSlide key={meal.id || index} className="mb-8">
                             <div className="relative rounded-md shadow-md text-center bg-[url(/src/assets/food-background.svg)] bg-center bg-cover border-1 border-gray-500/85">
                                 <img src={`https://food-ordering-website-backend-3mwk.onrender.com/${meal.image}`} alt={meal.name} />
                                 <article className="w-full py-6 px-1">              
