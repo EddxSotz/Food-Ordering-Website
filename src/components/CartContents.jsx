@@ -41,19 +41,19 @@ export default function CartContents({onCloseModal}) {
                             <div className='flex flex-col justify-center'>
                                 <span className='text-lg mb-2'>{item.name}</span>                     
                                 <div className='flex flex-row gap-4 justify-center items-center'>                            
-                                    <button onClick={()=> handleDecreaseItem(item.id)} className='text-lg text-gray-800 bg-gray-400 rounded-full py-1.5 px-4 hover:bg-lime-700 hover:text-stone-50 hover:cursor-pointer active:bg-lime-800 active:text-stone-50'> - </button>
+                                    <button type='button' onClick={()=> handleDecreaseItem(item.id)} className='text-lg text-gray-800 bg-gray-400 rounded-full py-1.5 px-4 hover:bg-lime-700 hover:text-stone-50 hover:cursor-pointer active:bg-lime-800 active:text-stone-50'> - </button>
                                     <span>{item.quantity}</span>
-                                    <button onClick={()=> handleIncreaseItem(item.id)} className='text-lg text-gray-800 bg-gray-400 rounded-full py-1.5 px-4 hover:bg-lime-700 hover:text-stone-50 hover:cursor-pointer active:bg-lime-800 active:text-stone-50'> + </button>
+                                    <button type='button' onClick={()=> handleIncreaseItem(item.id)} className='text-lg text-gray-800 bg-gray-400 rounded-full py-1.5 px-4 hover:bg-lime-700 hover:text-stone-50 hover:cursor-pointer active:bg-lime-800 active:text-stone-50'> + </button>
                                     <span>{currencyFormatting.format(item.price)}</span>
                                 </div>
                             </div>                                                
-                            <button onClick={()=> handleRemoveItem(item.id)} className='text-lg font-semibold rounded-full border border-gray-400 py-1.5 px-4 hover:bg-red-400 hover:border-red-400 hover:cursor-pointer active:bg-red-500 active:border-none'>X</button>
+                            <button type='button' onClick={()=> handleRemoveItem(item.id)} className='text-lg font-semibold rounded-full border border-gray-400 py-1.5 px-4 hover:bg-red-400 hover:border-red-400 hover:cursor-pointer active:bg-red-500 active:border-none'>X</button>
                         </li>               
                     ))}                                   
                 </ul>
                 <div className='w-full py-4 text-stone-50'>
                     <p className='text-lg px-4 mb-2'>Subtotal: <strong>{currencyFormatting.format(cartTotal)}</strong></p>
-                    <button onClick={handleIsCheckoutClicked} className='w-full py-2 px-4 mb-2 text-xl font-semibold bg-lime-700 text-stone-50 border-2 border-transparent hover:bg-stone-50 hover:text-lime-800 hover:border-lime-800 hover:cursor-pointer active:text-stone-50 active:bg-lime-800 active:border-lime-800'>Checkout</button>
+                    <button type='button' onClick={handleIsCheckoutClicked} className='w-full py-2 px-4 mb-2 text-xl font-semibold bg-lime-700 text-stone-50 border-2 border-transparent hover:bg-stone-50 hover:text-lime-800 hover:border-lime-800 hover:cursor-pointer active:text-stone-50 active:bg-lime-800 active:border-lime-800'>Checkout</button>
                     <p className='text-md text-wrap text-center mb-4'>Free Shipping on All Orders Over $100!</p>
                 </div>                
               </section>

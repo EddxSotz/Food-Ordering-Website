@@ -3,6 +3,7 @@ import { useEffect, useState, useContext } from 'react';
 import currencyFormatting from "../utils/currency-formatting";
 import { NavLink } from 'react-router-dom';
 import preloader from "../assets/preloader.svg";
+// biome-ignore lint/suspicious/noShadowRestrictedNames: false positive
 import Error from "../components/Error.jsx";
 import Popup from "../components/Popup.jsx";
 import { FaCartShopping } from "react-icons/fa6";
@@ -18,12 +19,12 @@ export default function SingleProductView() {
     const [showPopup, setShowPopup] = useState(false);
     
     useEffect(() => {
+        if (!showPopup) return;
         const timer = setTimeout(() => {
             setShowPopup(false);
-        }, 3000); 
+        }, 3000);
         return () => clearTimeout(timer);
-    }
-    , [showPopup]); 
+    }, [showPopup]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -40,14 +41,19 @@ export default function SingleProductView() {
                 if (!response.ok) {
                     throw new Error('Something went wrong!');
                 }                
-                setProduct(mealsData.find(meal => meal.id === productId));
-                if (!product) {
-                    throw new Error('Product not found!');
+
+                const found = mealsData.find(meal => String(meal.id) === String(productId));
+                if (!found) {
+                    console.error('Product not found!');
+                    setProduct(null);
+                } else {
+                    setProduct(found);
                 }                
             } catch (error) {
                 console.error(error);                
+            } finally {
+                setIsLoading(false);
             }
-            setIsLoading(false);
         }
         fetchProduct();
     }, [productId]);
@@ -63,7 +69,7 @@ export default function SingleProductView() {
             <div className="bg-emerald-950 pt-40 pb-16">
                 <div className='container mx-auto flex flex-row justify-between items-center'>
                     <div>
-                        <p className='text-lime-600 font-semibold mb-4'>// Welcome to our company</p>
+                        <p className='text-lime-600 font-semibold mb-4'>/ Welcome to our company</p>
                         <h1 className="text-6xl font-bold text-white font-Zain">Product Details</h1>
                     </div>
                     <div>
@@ -89,7 +95,7 @@ export default function SingleProductView() {
                         <p className="text-6xl font-bold text-lime-700">{currencyFormatting.format(product.price)}</p>
                         <p className='text-lg text-gray-600'><span>Categories: </span>{product.category}</p>
                         <p className="text-lg text-gray-600">{product.description}</p>                        
-                        <button onClick={()=> handleAddToCart(product)} className='py-2 px-4 mt-4 text-lg font-semibold bg-lime-700 text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50'><FaCartShopping className='inline text-lg mr-1'/>Add to Cart</button>                    
+                        <button type="button" onClick={()=> handleAddToCart(product)} className='py-2 px-4 mt-4 text-lg font-semibold bg-lime-700 text-stone-50 hover:bg-stone-50 hover:text-lime-700 hover:border-lime-700 hover:cursor-pointer active:bg-lime-800 active:text-stone-50'><FaCartShopping className='inline text-lg mr-1'/>Add to Cart</button>                    
                     </div>                    
                 </div>
              ) : (

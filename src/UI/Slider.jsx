@@ -34,8 +34,7 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
                     modules={[Navigation, Autoplay]}
                     spaceBetween={20}
                     slidesPerView={1}
-                    navigation={{ nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }}                    
-                    autoplay={{ delay: 3000, disableOnInteraction: false }}                                                
+                    navigation={{ nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }}                                                                                      
                     speed={1000}
                     loop={false}
                     breakpoints={{
@@ -43,7 +42,7 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
                         slidesPerView: 2,
                         },
                         768: {
-                        slidesPerView: 3,
+                        slidesPerView: 3,                        
                         },
                         1024: {
                         slidesPerView: 4,
@@ -51,7 +50,7 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
                     }}
                 >                
                         {meals.map((meal, index) => (
-                        <SwiperSlide key={index}>
+                        <SwiperSlide key={meal.id || index} className="mb-8">
                             <div className="relative rounded-md shadow-md text-center bg-[url(/src/assets/food-background.svg)] bg-center bg-cover border-1 border-gray-500/85">
                                 <img src={`https://food-ordering-website-backend-3mwk.onrender.com/${meal.image}`} alt={meal.name} />
                                 <article className="w-full py-6 px-1">              

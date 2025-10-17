@@ -16,7 +16,7 @@ const Contact = () => {
         <div className="bg-emerald-950 pt-40 px-4 pb-16">
                 <div className='container mx-auto flex flex-row justify-between items-center'>
                     <div>
-                        <p className='text-lime-600 font-semibold mb-4'>// Get in Touch</p>
+                        <p className='text-lime-600 font-semibold mb-4'>/ Get in Touch</p>
                         <h1 className="text-6xl font-bold text-white font-Zain">Contact</h1>
                     </div>
                     <div>
