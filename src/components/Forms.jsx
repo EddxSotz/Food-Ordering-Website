@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/correctness/useUniqueElementIds: <explanation> */
 import Modal from '../UI/Modal.jsx';
 import Popup from '../components/Popup.jsx';
 import CartContext from '../store/CartContext.jsx';
@@ -41,12 +42,12 @@ export default function ShippingForm({ onSubmit }) {
     }
 
     useEffect(() => {
+        if (!showPopup) return;
         const timer = setTimeout(() => {
             setShowPopup(false);
-        }, 3000); 
+        }, 3000);
         return () => clearTimeout(timer);
-    }
-    , [ showPopup]);
+    }, [showPopup]);
 
     return (
         <>

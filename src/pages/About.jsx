@@ -14,7 +14,7 @@ function About () {
         <div className="bg-emerald-950 pt-40 px-4 pb-16">
                 <div className='container mx-auto flex flex-row justify-between items-center'>
                     <div>
-                        <p className='text-lime-600 font-semibold mb-4'>// Get to know us</p>
+                        <p className='text-lime-600 font-semibold mb-4'>/ Get to know us</p>
                         <h1 className="text-6xl font-bold text-white font-Zain">About</h1>
                     </div>
                     <div>

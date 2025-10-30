@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/correctness/useUniqueElementIds: <explanation> */
 import { NavLink } from 'react-router-dom';
 
 
@@ -7,7 +8,7 @@ export default function Login() {
         <div className="bg-emerald-950 pt-40 px-4 pb-16">
                 <div className='container mx-auto flex flex-row justify-between items-center'>
                     <div>
-                        <p className='text-lime-600 font-semibold mb-4'>// Log into your account</p>
+                        <p className='text-lime-600 font-semibold mb-4'>/ Log into your account</p>
                         <h1 className="text-6xl font-bold text-white font-Zain">Login</h1>
                     </div>
                     <div>

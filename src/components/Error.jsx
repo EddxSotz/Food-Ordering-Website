@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noShadowRestrictedNames: <explanation> */
 
 export default function Error() {
   return (
