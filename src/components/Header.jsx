@@ -56,19 +56,8 @@ useScrollPosition(({ currPos }) => {
             <button type="button" onClick={() => setNavToggle(true)} className='text-stone-50 text-3xl p-1  active:text-lime-800'><FaBurger className='text-xl'/></button>
           }
           {navToggle && (
-            // biome-ignore lint/a11y/useSemanticElements: using a non-semantic div as a full-screen overlay to capture outside clicks; accessibility provided via role, tabIndex and aria-label
-<div
-              className='fixed inset-0 w-screen h-screen z-20'
-              role="button"
-              tabIndex={0}
-              aria-label="Dismiss mobile navigation"
-              onClick={handleTapOutside}
-              onKeyDown={(e) => {
-                if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') {
-                  setNavToggle(false);
-                }
-              }}
-            >
+            // biome-ignore lint/a11y/useSemanticElements: <explanation>
+<div role="button" aria-label="Close mobile menu" className='fixed inset-0 w-screen h-screenz-20' onClick={handleTapOutside} onKeyDown={handleTapOutside} tabIndex={0}>
               <nav className='absolute top-16 right-0 bg-emerald-950/85 w-1/2 sm:w-1/3 h-screen' ref={mobileNavRef}>           
                 <ul className='flex flex-col md:flex-row gap-4 font-semibold items-center py-4 text-center text-lg'>
                   <NavLink to="/" onClick={() => setNavToggle(false)} className={({ isActive }) => isActive ? "underline block w-full py-1.5" : "active:text-lime-800 block w-full py-1.5"}>Home</NavLink>
@@ -87,16 +76,20 @@ useScrollPosition(({ currPos }) => {
               <NavLink to="/" className={({ isActive }) => isActive ? "underline px-1.5 py-1 text-center" : "hover:cursor-pointer hover:text-lime-600 active:text-lime-800 text-center px-1.5 py-1"}>Home</NavLink>
               <div className='relative group'>
                 <NavLink to="/shop" className={({ isActive }) => isActive ? "underline py-6 px-4" : "hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-6 px-4"}>Shop</NavLink>
-                  <div className={`absolute hidden group-hover:flex flex-col text-stone-50 w-full gap-2 top-11 ${changeStyleOnScroll ? "bg-emerald-950/50" : "bg-emerald-950"}`}>                  
-                  <NavLink to="/book-event" className="hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-1 px-2">Book an Event</NavLink>
-                  <NavLink to="/gift-cards" className="hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-1 px-2">Gift Cards</NavLink>                  
+                <div className={`absolute hidden group-hover:flex flex-col text-stone-50 w-full gap-2 top-11 ${changeStyleOnScroll ? "bg-emerald-950/50" : "bg-emerald-950"}`}>                  
+                  {/** biome-ignore lint/a11y/useValidAnchor: <explanation> */}
+                  <a className="hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-1 px-2">Book an Event</a>
+                  {/** biome-ignore lint/a11y/useValidAnchor: <explanation> */}
+                  <a className="hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-1 px-2">Gift Cards</a>                  
                 </div>                
               </div>
               <div className='relative group'>
               <NavLink to="/about" className={({ isActive }) => isActive ? "underline py-6 px-4" : "hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-6 px-4"}>About</NavLink>                
                   <div className={`absolute hidden group-hover:flex flex-col text-stone-50 w-full gap-2 top-11 ${changeStyleOnScroll ? "bg-emerald-950/50" : "bg-emerald-950"}`}>
-                    <NavLink to="/blog" className="hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-1 px-2">Blog</NavLink>
-                    <NavLink to="/faqs" className="hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-1 px-2">FAQs</NavLink>                  
+                    {/** biome-ignore lint/a11y/useValidAnchor: <explanation> */}
+                    <a className="hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-1 px-2">Blog</a>
+                    {/** biome-ignore lint/a11y/useValidAnchor: <explanation> */}
+                    <a className="hover:cursor-pointer hover:text-lime-600 active:text-lime-800 py-1 px-2">FAQs</a>                  
                 </div>
               </div>              
               <NavLink to="/contact" className={({ isActive }) => isActive ? "underline px-1.5 py-1" : "hover:cursor-pointer hover:text-lime-600 active:text-lime-800 px-1.5 py-1"}>Contact</NavLink>

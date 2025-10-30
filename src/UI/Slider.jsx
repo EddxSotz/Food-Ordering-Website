@@ -1,8 +1,8 @@
-//import { useState, useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import {Navigation, Autoplay} from "swiper/modules";
+import { Navigation, Pagination} from 'swiper/modules';
 import "swiper/css";
-import "swiper/css/navigation";
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 import HeroImage from "../assets/HeroImage.png";
 import currencyFormatting from "../utils/currency-formatting";
 import { motion } from "framer-motion";
@@ -31,26 +31,28 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
             <motion.h2 initial={{opacity:0, y:10}} whileInView={{opacity:100, y:0, transition:{ easeIn: "easeIn", duration:0.5}}} className="text-6xl font-bold text-center my-18 font-Zain text-gray-800">{categoryTitle}</motion.h2>                              
             <div className='relative px-12'>
                 <Swiper
-                    modules={[Navigation, Autoplay]}
+                    className="mySwiper"                    
+                    modules={[Navigation, Pagination]}                    
+                    pagination={{clickable: true}}
+                    navigation = {false }                                 
                     spaceBetween={20}
-                    slidesPerView={1}
-                    navigation={{ nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }}                                                                                      
-                    speed={1000}
-                    loop={false}
+                    slidesPerView={1}                                                                                                                                                 
                     breakpoints={{
                         640: {
                         slidesPerView: 2,
                         },
                         768: {
-                        slidesPerView: 3,                        
+                        slidesPerView: 3,
+                        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }                                                
                         },
                         1024: {
                         slidesPerView: 4,
+                        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }                                                  
                         },
                     }}
                 >                
-                        {meals.map((meal, index) => (
-                        <SwiperSlide key={meal.id || index} className="mb-8">
+                        {meals.map((meal) => (
+                        <SwiperSlide key={meal.id ?? `${meal.name}-${meal.price}-${meal.category}`} className='pb-12'>
                             <div className="relative rounded-md shadow-md text-center bg-[url(/src/assets/food-background.svg)] bg-center bg-cover border-1 border-gray-500/85">
                                 <img src={`https://food-ordering-website-backend-3mwk.onrender.com/${meal.image}`} alt={meal.name} />
                                 <article className="w-full py-6 px-1">              
@@ -68,11 +70,12 @@ export default function Slider({ meals = slidesExample, addToCart, seeDetails, c
                                     <span className="absolute top-3 right-3 bg-lime-700 text-stone-50 text-semibold text-lg px-4 py-2 rounded-tl-full rounded-br-full">-20%</span>                         
                             </div>
                         </SwiperSlide>
-                        ))}
-                                
+                        ))}                                
                 </Swiper>
-                <div className="swiper-button-prev absolute -left-2 top-1/2 -translate-y-1/2 z-10 p-2  text-white rounded-full cursor-pointer"></div>
-                <div className="swiper-button-next absolute -right-2 top-1/2 -translate-y-1/2 z-10 p-2  text-white rounded-full cursor-pointer"></div> 
+                <div className='hidden md:block'>   
+                    <div className="swiper-button-prev absolute -left-2 top-1/2 -translate-y-1/2 z-10 p-2  text-white rounded-full cursor-pointer "></div>
+                    <div className="swiper-button-next absolute -right-2 top-1/2 -translate-y-1/2 z-10 p-2  text-white rounded-full cursor-pointer "></div>              
+                </div>
             </div>        
         </section>
     );
